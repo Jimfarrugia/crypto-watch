@@ -30,6 +30,18 @@ h1 {
   padding: 1.5rem 0;
 }
 
+a:link,
+a:visited {
+  color: var(--purple-bright);
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+a:hover,
+a:active {
+  color: var(--blue-bright);
+}
+
 .page-header {
 }
 
@@ -38,4 +50,33 @@ h1 {
 }
 
 .coin-nav {
+  overflow: auto;
+}
+
+.coin-nav ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  background: #e7dfdd20;
+}
+
+.coin-nav ul > li {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  /* background-color: var(--white); */
+  border-radius: 50%;
+}
+
+.coin-nav ul > li > a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  /* padding: 5px 0 0 0; */
+}
+
+.coin-nav img {
+  /* padding: 5px 0 0 0; */
 }

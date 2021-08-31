@@ -25,11 +25,19 @@ function App() {
         <h1>Cryptocurrency Tracker</h1>
       </header>
       <nav className="coin-nav">
+        <ul>
         {
           coinNavData.map(coin => {
-            return <li key={coin.symbol}><a href="#" title={coin.id}>{coin.id}</a></li>
+            return (
+              <li key={coin.symbol}>
+                <a href="#" title={coin.id}>
+                  <img src={coin.image} alt={`${coin.id} icon`} height="32" width="32" />
+                </a>
+              </li>
+            )
           })
         }
+        </ul>
       </nav>
       {/* Search bar */}
       {/* Price chart */}
