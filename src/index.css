@@ -1,5 +1,18 @@
+:root {
+  --black: #0e0b16;
+  --white: #e7dfdd;
+  --purple: #813772;
+  --purple-bright: #a239ca;
+  --blue: #062f4f;
+  --blue-bright: #4717f6;
+  --red: #b82601;
+}
+
 body {
+  background: var(--black);
+  color: var(--white);
   margin: 0;
+  padding: 0 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -12,6 +25,18 @@ code {
     monospace;
 }
 
+h1 {
+  margin: 0;
+  padding: 1.5rem 0;
+}
+
 .page-header {
-  background: limegreen;
+}
+
+.page-footer {
+  padding: 1.5rem 0;
+}
+
+.coin-nav {
+  background: green;
 }
