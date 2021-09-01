@@ -48,59 +48,80 @@ function App() {
     setSearchSuggestions(matches);
   }
 
+  const handleSuggestionSelect = suggestion => {
+    setSearchTerm(suggestion);
+    setSearchSuggestions([]);
+  }
+
   return (
     <div className="App">
-      <header className="page-header">
-        <h1>Cryptocurrency Tracker</h1>
-      </header>
-      <nav className="coin-nav">
-        <ul>
-        {
-          coinNavData.map(coin => {
-            return (
-              <li key={coin.symbol}>
-                <a href="#" title={coin.id}>
-                  <img
-                    src={coin.image}
-                    alt={`${coin.id} icon`}
-                    height="32"
-                    width="32"
-                  />
-                </a>
-              </li>
+      <div className="page-wrapper">
+        <header className="page-header">
+          <h1>Cryptocurrency Tracker</h1>
+        </header>
+        <nav className="coin-nav">
+          <ul>
+          {coinNavData.map(coin => (
+            <li key={coin.symbol}>
+              <a href="#" title={coin.id}>
+                <img
+                  src={coin.image}
+                  alt={`${coin.id} icon`}
+                  height="32"
+                  width="32"
+                />
+              </a>
+            </li>
+          ))}
+          </ul>
+        </nav>
+        <div className="search-section">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchTermChange}
+            onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
+          />
+          <button>Search</button>
+          {/* 
+          // TODO - onClick -> get price chart or display "could not find"
+          */}
+          <div className="search-suggestions-wrapper">
+          {/* If there are more than 10 suggestions 
+              then only show those which begin with the search term */}
+          {(searchSuggestions.length > 10 &&
+            searchSuggestions
+              .map((suggestion, i) => {
+                let regex = new RegExp(`^${searchTerm}`, "i");
+                return suggestion.match(regex)
+                  ? <div 
+                      key={i}
+                      className="search-suggestion"
+                      onClick={() => handleSuggestionSelect(suggestion)}
+                    >
+                      {suggestion}
+                    </div>
+                  : <></>
+              })
+          )||(
+            searchSuggestions.length > 0 &&
+            searchSuggestions.map((suggestion, i) =>
+              <div
+                key={i}
+                className="search-suggestion"
+                onClick={() => handleSuggestionSelect(suggestion)}
+              >
+                {suggestion}
+              </div>
             )
-          })
-        }
-        </ul>
-      </nav>
-      {/* Search bar */}
-      <div className="search-section">
-        <input type="text" value={searchTerm} onChange={handleSearchTermChange} />
-        <button>Search</button>
-        {/* 
-        // TODO - onClick -> get price chart or display "could not find"
-        */}
-        {/* If there are more than 10 suggestions 
-            then only show those which begin with the search term */}
-        {(searchSuggestions.length > 10 &&
-          searchSuggestions
-            .map((suggestion, i) => {
-              let regex = new RegExp(`^${searchTerm}`, "i");
-              return suggestion.match(regex)
-                ? <div key={i}>{suggestion}</div>
-                : <></>
-            })
-        )||(
-          searchSuggestions.length > 0 &&
-          searchSuggestions.map((suggestion, i) =>
-               <div key={i}>{suggestion}</div>
-            )
-        )}
+          )}
+          </div>
+        </div>
+        {/* Price chart goes here */}
+        <footer className="page-footer">
+          footer section
+        </footer>
       </div>
-      {/* Price chart goes here */}
-      <footer className="page-footer">
-        {coinList.map(coinName => <span>{coinName} - </span>)}
-      </footer>
     </div>
   );
 }

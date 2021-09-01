@@ -42,6 +42,11 @@ a:active {
   color: var(--blue-bright);
 }
 
+.page-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .page-header {
 }
 
@@ -58,7 +63,7 @@ a:active {
   margin: 0;
   list-style-type: none;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background: #e7dfdd20;
 }
 
@@ -66,7 +71,6 @@ a:active {
   padding: 0;
   margin: 0;
   list-style-type: none;
-  /* background-color: var(--white); */
   border-radius: 50%;
 }
 
@@ -74,14 +78,26 @@ a:active {
   display: block;
   height: 100%;
   width: 100%;
-  /* padding: 5px 0 0 0; */
-}
-
-.coin-nav img {
-  /* padding: 5px 0 0 0; */
 }
 
 .search-section {
   padding: 0;
   margin: 1.5rem 0;
+}
+.search-suggestions-wrapper {
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.search-suggestion {
+  cursor: pointer;
+  color: var(--black);
+  background: var(--white);
+  font-size: 1rem;
+  padding: 0.15rem;
+}
+
+.search-suggestion:hover {
+  background-color: var(--purple);
+  color: var(--white);
 }
