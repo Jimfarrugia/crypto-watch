@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
 
-// We must use the coin's ID in the query params to fetch coin data
+// We must use the coin's ID in the query params to fetch coin data.
 // Coin's id is just it's name in lowercase with dashes replacing spaces.
+// Make sure to remove any leading or trailing whitespace.
 
 function App() {
+  const coinNavLength = 10;
   const [coinNavData, setCoinNavData] = useState([]);
   const [coinList, setCoinList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,7 +32,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCoinNavData(10);
+    fetchCoinNavData(coinNavLength);
     fetchCoinList();
   }, []);
 
@@ -54,7 +56,9 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("form submitted!", searchTerm);
+    if (searchTerm.split(" ").join("").length > 0) {
+      console.log("form submitted", searchTerm);
+    }
   };
 
   return (
@@ -91,6 +95,7 @@ function App() {
                 className="search-field"
                 value={searchTerm}
                 onChange={handleSearchTermChange}
+                placeholder="Search..."
                 onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
               />
               <input type="submit" className="search-button" value="Search" />

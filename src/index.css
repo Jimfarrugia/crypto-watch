@@ -25,6 +25,33 @@ code {
     monospace;
 }
 
+::-webkit-scrollbar {
+  width: 0.5em;
+  background-color: var(--white);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--purple);
+  outline: none;
+  border-radius: 3px;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--white);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--white);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--white);
+}
+
 h1 {
   margin: 0;
   padding: 1.5rem 0;
@@ -89,7 +116,7 @@ a:active {
 .search-field-wrapper {
   background: blue;
   position: relative;
-  margin-right: 110px;
+  margin-right: 104px; /*  110px */
 }
 
 .search-field {
@@ -98,22 +125,38 @@ a:active {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
+  outline: none;
+  border: none;
+  background-color: var(--purple);
+  color: var(--white);
+}
+.search-field:focus {
+  background-color: var(--white);
+  color: var(--black);
 }
 
 .search-button {
   display: block;
-  width: 100px; /* this is the `button width` */
+  width: 100px;
   padding: 0.5rem 0;
-  margin-left: 0.5rem; /* this is the `button distance from search field` */
+  margin-left: 0.25rem;
   font-size: 1rem;
+  border: none;
   position: absolute;
   top: 0;
-  left: 100%; /* push to the right! */
+  left: 100%;
+  background-color: var(--purple);
+  color: var(--white);
+  cursor: pointer;
+}
+.search-button:hover {
+  background-color: var(--purple-bright);
 }
 
 .search-suggestions-wrapper {
   max-height: 30vh;
   overflow: auto;
+  margin-top: 1px;
 }
 
 .search-suggestion {
@@ -122,6 +165,7 @@ a:active {
   background: var(--white);
   font-size: 1rem;
   padding: 0.5rem;
+  border-bottom: 1px solid var(--black);
 }
 
 .search-suggestion:hover {
