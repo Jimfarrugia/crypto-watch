@@ -52,6 +52,11 @@ function App() {
     setSearchSuggestions([]);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("form submitted!", searchTerm);
+  };
+
   return (
     <div className="App">
       <div className="page-wrapper">
@@ -75,18 +80,22 @@ function App() {
           </ul>
         </nav>
         <div className="search-section">
-          <div className="search-field-wrapper">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchTermChange}
-              onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
-            />
-            <button>Search</button>
-          </div>
-          {/* 
-          // TODO - onClick -> get price chart or display "could not find"
-          */}
+          <form
+            onSubmit={handleSubmit}
+            className="search-form"
+            autoComplete="off"
+          >
+            <div className="search-field-wrapper">
+              <input
+                type="text"
+                className="search-field"
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+                onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
+              />
+              <input type="submit" className="search-button" value="Search" />
+            </div>
+          </form>
           <div className="search-suggestions-wrapper">
             {/* If there are more than 10 suggestions 
               then only show those which begin with the search term */}

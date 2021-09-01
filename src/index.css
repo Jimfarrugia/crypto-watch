@@ -44,6 +44,7 @@ a:active {
 
 .page-wrapper {
   max-width: 700px;
+  min-width: 260px;
   margin: 0 auto;
 }
 
@@ -86,6 +87,28 @@ a:active {
 }
 
 .search-field-wrapper {
+  background: blue;
+  position: relative;
+  margin-right: 110px;
+}
+
+.search-field {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.search-button {
+  display: block;
+  width: 100px; /* this is the `button width` */
+  padding: 0.5rem 0;
+  margin-left: 0.5rem; /* this is the `button distance from search field` */
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  left: 100%; /* push to the right! */
 }
 
 .search-suggestions-wrapper {
@@ -98,7 +121,7 @@ a:active {
   color: var(--black);
   background: var(--white);
   font-size: 1rem;
-  padding: 0.15rem;
+  padding: 0.5rem;
 }
 
 .search-suggestion:hover {
