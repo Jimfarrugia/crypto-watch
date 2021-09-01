@@ -4,10 +4,15 @@ import { default as axios } from 'axios';
 // TODO - fetchCoinList - get a list of coin names and symbols ("GET -> /coins/list")
 // TODO - store list of coin names and symbols in state (coinList)
 
+// We must use the coin's ID in the query params to fetch coin data
+// Coin's id is just it's name in lowercase with dashes replacing spaces.
+
 function App() {
   const [coinNavData, setCoinNavData] = useState([]);
+  const [coinList, setCoinList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("mysearchterm");
 
+  
   const fetchCoinNavData = n => {
     axios.get('https://api.coingecko.com/api/v3/coins/markets', {
       params: {
@@ -16,11 +21,19 @@ function App() {
       }
     })
     .then(response => setCoinNavData(response.data))
-    .catch(error => console.log(error)
-  )}
-
+    .catch(error => console.log(error))
+  }
+    
+  const fetchCoinList = () => {
+    axios
+      .get('https://api.coingecko.com/api/v3/coins/list', {})
+      .then(response => setCoinList(response.data.map(coin => coin.name)))
+      .catch(error => console.log(error))
+  }
+      
   useEffect(() => {
     fetchCoinNavData(10);
+    fetchCoinList()
   }, []);
 
   const handleSearchTermChange = e => {
@@ -63,7 +76,7 @@ function App() {
       </p>
       {/* Price chart */}
       <footer className="page-footer">
-        footer section
+        {coinList.map(coinName => <span>{coinName}</span>)}
       </footer>
     </div>
   );
