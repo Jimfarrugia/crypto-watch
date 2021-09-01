@@ -80,3 +80,8 @@ a:active {
 .coin-nav img {
   /* padding: 5px 0 0 0; */
 }
+
+.search-field {
+  padding: 0;
+  margin: 1.5rem 0;
+}
