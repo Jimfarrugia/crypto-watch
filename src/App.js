@@ -71,14 +71,19 @@ function App() {
           <ul>
             {coinNavData.map((coin) => (
               <li key={coin.symbol}>
-                <a href="#" title={coin.id}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // TODO - trigger function to get and display price chart data
+                  }}
+                >
                   <img
                     src={coin.image}
                     alt={`${coin.id} icon`}
                     height="32"
                     width="32"
                   />
-                </a>
+                </button>
               </li>
             ))}
           </ul>

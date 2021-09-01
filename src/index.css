@@ -76,6 +76,7 @@ a:active {
 }
 
 .page-header {
+  line-height: 1.35;
 }
 
 .page-footer {
@@ -102,10 +103,14 @@ a:active {
   border-radius: 50%;
 }
 
-.coin-nav ul > li > a {
+.coin-nav ul > li > button {
   display: block;
-  height: 100%;
-  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
 }
 
 .search-section {
