@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { default as axios } from 'axios';
 
-// TODO - fetchCoinList - get a list of coin names and symbols ("GET -> /coins/list")
-// TODO - store list of coin names and symbols in state (coinList)
-
 // We must use the coin's ID in the query params to fetch coin data
 // Coin's id is just it's name in lowercase with dashes replacing spaces.
 
 function App() {
   const [coinNavData, setCoinNavData] = useState([]);
   const [coinList, setCoinList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("mysearchterm");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
 
   
   const fetchCoinNavData = n => {
@@ -34,12 +32,30 @@ function App() {
       
   useEffect(() => {
     fetchCoinNavData(10);
-    fetchCoinList()
+    fetchCoinList();
   }, []);
 
   const handleSearchTermChange = e => {
-    setSearchTerm(e.target.value);
-    // TODO - update autocomplete suggestions here
+    const text = e.target.value;
+    setSearchTerm(text);
+    let matches = [];
+    if (text.length > 0) {
+      matches = coinList.filter(coinName => {
+        let regex = new RegExp(`${text}`, "gi");
+        return coinName.match(regex);
+      });
+    }
+    // TODO - if there are more than 10 suggestions,
+    // only show suggestions which begin with the searchTerm
+    //* do this in the render
+    // if (matches.length > 10) {
+    //   matches.filter(suggestion => {
+    //     let regex = new RegExp(`^${text}`, "i");
+    //     return suggestion.match(regex);
+    //   });
+    // }
+    console.log(matches.length);
+    setSearchSuggestions(matches);
   }
 
   return (
@@ -68,16 +84,32 @@ function App() {
         </ul>
       </nav>
       {/* Search bar */}
-      <p className="search-field">
+      <div className="search-section">
         <input type="text" value={searchTerm} onChange={handleSearchTermChange} />
         <button>Search</button>
         {/* 
         // TODO - onClick -> get price chart or display "could not find"
         */}
-      </p>
-      {/* Price chart */}
+        {/* If there are more than 10 suggestions 
+            then only show those which begin with the search term */}
+        {(searchSuggestions.length > 10 &&
+          searchSuggestions
+            .map((suggestion, i) => {
+              let regex = new RegExp(`^${searchTerm}`, "i");
+              return suggestion.match(regex)
+                ? <div key={i}>{suggestion}</div>
+                : <></>
+            })
+        )||(
+          searchSuggestions.length > 0 &&
+          searchSuggestions.map((suggestion, i) =>
+               <div key={i}>{suggestion}</div>
+            )
+        )}
+      </div>
+      {/* Price chart goes here */}
       <footer className="page-footer">
-        {coinList.map(coinName => <span>{coinName}</span>)}
+        {coinList.map(coinName => <span>{coinName} - </span>)}
       </footer>
     </div>
   );
