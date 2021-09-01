@@ -14,21 +14,22 @@ function App() {
 
   
   const fetchCoinNavData = n => {
-    axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-      params: {
-        vs_currency: 'usd',
-        per_page: n
-      }
-    })
-    .then(response => setCoinNavData(response.data))
-    .catch(error => console.log(error))
+    axios
+      .get('https://api.coingecko.com/api/v3/coins/markets', {
+        params: {
+          vs_currency: 'usd',
+          per_page: n
+        }
+      })
+      .then(response => setCoinNavData(response.data))
+      .catch(error => console.log(error));
   }
     
   const fetchCoinList = () => {
     axios
       .get('https://api.coingecko.com/api/v3/coins/list', {})
       .then(response => setCoinList(response.data.map(coin => coin.name)))
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   }
       
   useEffect(() => {
