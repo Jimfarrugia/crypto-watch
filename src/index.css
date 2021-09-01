@@ -113,6 +113,10 @@ a:active {
   margin: 0;
 }
 
+button > image {
+  pointer-events: none;
+}
+
 .search-section {
   padding: 0;
   margin: 1.5rem 0;

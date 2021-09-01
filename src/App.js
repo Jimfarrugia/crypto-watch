@@ -7,6 +7,8 @@ import { default as axios } from "axios";
 
 function App() {
   const coinNavLength = 10;
+  const [error, setError] = useState(undefined);
+  const [coinData, setCoinData] = useState(undefined);
   const [coinNavData, setCoinNavData] = useState([]);
   const [coinList, setCoinList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,6 +31,28 @@ function App() {
       .get("https://api.coingecko.com/api/v3/coins/list", {})
       .then((response) => setCoinList(response.data.map((coin) => coin.name)))
       .catch((error) => console.log(error));
+  };
+
+  const fetchCoinDataById = (id) => {
+    axios
+      .get(`https://api.coingecko.com/api/v3/coins/markets`, {
+        params: {
+          vs_currency: "usd",
+          ids: id,
+        },
+      })
+      .then((response) => {
+        if (response.data.length < 1)
+          throw new Error(
+            `Unable to find data for "${id}"...  Check the spelling or try a different search term.`
+          );
+        setSearchTerm(response.data[0].name);
+        setCoinData(response.data[0]);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -55,7 +79,7 @@ function App() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (searchTerm.split(" ").join("").length > 0) {
       console.log("form submitted", searchTerm);
     }
@@ -71,12 +95,7 @@ function App() {
           <ul>
             {coinNavData.map((coin) => (
               <li key={coin.symbol}>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // TODO - trigger function to get and display price chart data
-                  }}
-                >
+                <button onClick={() => fetchCoinDataById(coin.id)}>
                   <img
                     src={coin.image}
                     alt={`${coin.id} icon`}
@@ -136,7 +155,10 @@ function App() {
                 )))}
           </div>
         </div>
-        {/* Price chart goes here */}
+        <section className="chart">
+          {error || (coinData && coinData.name) || ""}
+          {coinData && coinData.name && " data found!"}
+        </section>
         <footer className="page-footer">footer section</footer>
       </div>
     </div>
