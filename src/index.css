@@ -181,3 +181,17 @@ button > image {
   background-color: var(--purple);
   color: var(--white);
 }
+.details header {
+  text-align: center;
+}
+.details header .current-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.text-red {
+  color: red;
+}
+.text-green {
+  color: lime;
+}

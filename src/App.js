@@ -8,7 +8,10 @@ import Details from "./components/Details";
 
 function App() {
   const coinNavLength = 10;
-  const defaultVsCurrency = "usd";
+  const defaultVsCurrency = {
+    name: "usd",
+    symbol: "$",
+  };
   const defaultPriceHistoryDays = 182;
   const [error, setError] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
@@ -17,18 +20,6 @@ function App() {
   const [coinPriceHistory, setCoinPriceHistory] = useState(undefined);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState(undefined);
-
-  const fetchCoinNavData = (n) => {
-    axios
-      .get("https://api.coingecko.com/api/v3/coins/markets", {
-        params: {
-          vs_currency: defaultVsCurrency,
-          per_page: n,
-        },
-      })
-      .then((response) => setCoinNavData(response.data)) // TODO - add error check
-      .catch((error) => console.log(error));
-  };
 
   const fetchCoinList = () => {
     axios
@@ -41,7 +32,7 @@ function App() {
     axios
       .get(`https://api.coingecko.com/api/v3/coins/markets`, {
         params: {
-          vs_currency: defaultVsCurrency,
+          vs_currency: defaultVsCurrency.name,
           ids: id,
         },
       })
@@ -53,7 +44,11 @@ function App() {
           );
         setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
-        fetchCoinPriceHistory(id, defaultVsCurrency, defaultPriceHistoryDays);
+        fetchCoinPriceHistory(
+          id,
+          defaultVsCurrency.name,
+          defaultPriceHistoryDays
+        );
       })
       .catch((error) => {
         setError(error.message);
@@ -87,9 +82,21 @@ function App() {
   };
 
   useEffect(() => {
+    const fetchCoinNavData = (n) => {
+      axios
+        .get("https://api.coingecko.com/api/v3/coins/markets", {
+          params: {
+            vs_currency: defaultVsCurrency.name,
+            per_page: n,
+          },
+        })
+        .then((response) => setCoinNavData(response.data)) // TODO - add error check
+        .catch((error) => console.log(error));
+    };
+
     fetchCoinNavData(coinNavLength);
     fetchCoinList();
-  }, []);
+  }, [defaultVsCurrency.name]);
 
   const handleSearchTermChange = (e) => {
     const text = e.target.value;
@@ -135,6 +142,7 @@ function App() {
         <Details
           coinData={coinData}
           coinPriceHistory={coinPriceHistory}
+          defaultVsCurrency={defaultVsCurrency}
           error={error}
         />
         <Footer />
