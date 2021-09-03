@@ -4,33 +4,36 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
-import PriceChart from "./components/PriceChart";
+import Details from "./components/Details";
 
 function App() {
   const coinNavLength = 10;
+  const defaultVsCurrency = "usd";
+  const defaultPriceHistoryDays = 182;
   const [error, setError] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
-  const [coinNavData, setCoinNavData] = useState([]);
-  const [coinList, setCoinList] = useState([]);
+  const [coinList, setCoinList] = useState(undefined);
+  const [coinNavData, setCoinNavData] = useState(undefined);
+  const [coinPriceHistory, setCoinPriceHistory] = useState(undefined);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [searchSuggestions, setSearchSuggestions] = useState(undefined);
 
   const fetchCoinNavData = (n) => {
     axios
       .get("https://api.coingecko.com/api/v3/coins/markets", {
         params: {
-          vs_currency: "usd",
+          vs_currency: defaultVsCurrency,
           per_page: n,
         },
       })
-      .then((response) => setCoinNavData(response.data))
+      .then((response) => setCoinNavData(response.data)) // TODO - add error check
       .catch((error) => console.log(error));
   };
 
   const fetchCoinList = () => {
     axios
-      .get("https://api.coingecko.com/api/v3/coins/list", {})
-      .then((response) => setCoinList(response.data.map((coin) => coin.name)))
+      .get("https://api.coingecko.com/api/v3/coins/list")
+      .then((response) => setCoinList(response.data.map((coin) => coin.name))) // TODO - add error check
       .catch((error) => console.log(error));
   };
 
@@ -38,18 +41,19 @@ function App() {
     axios
       .get(`https://api.coingecko.com/api/v3/coins/markets`, {
         params: {
-          vs_currency: "usd",
+          vs_currency: defaultVsCurrency,
           ids: id,
         },
       })
       .then((response) => {
-        if (response.data.length < 1)
+        if (!response || !response.data || response.data.length < 1)
           throw new Error(
             `Unable to find data for "${id}"...
             Check the spelling or try a different search term.`
           );
         setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
+        fetchCoinPriceHistory(id, defaultVsCurrency, defaultPriceHistoryDays);
       })
       .catch((error) => {
         setError(error.message);
@@ -128,7 +132,11 @@ function App() {
           searchSuggestions={searchSuggestions}
           handleSuggestionSelect={handleSuggestionSelect}
         />
-        <PriceChart coinData={coinData} error={error} />
+        <Details
+          coinData={coinData}
+          coinPriceHistory={coinPriceHistory}
+          error={error}
+        />
         <Footer />
       </div>
     </div>
