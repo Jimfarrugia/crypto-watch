@@ -55,6 +55,7 @@ code {
 h1 {
   margin: 0;
   padding: 1.5rem 0;
+  text-align: center;
 }
 
 a:link,
@@ -93,7 +94,7 @@ a:active {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  background: #e7dfdd20;
+  /* background: #e7dfdd20; */
 }
 
 .coin-nav ul > li {
