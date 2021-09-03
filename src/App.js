@@ -6,10 +6,6 @@ import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import PriceChart from "./components/PriceChart";
 
-// We must use the coin's ID in the query params to fetch coin data.
-// Coin's id is just it's name in lowercase with dashes replacing spaces.
-// Make sure to remove any leading or trailing whitespace.
-
 function App() {
   const coinNavLength = 10;
   const [error, setError] = useState(undefined);
@@ -61,6 +57,11 @@ function App() {
       });
   };
 
+  const fetchCoinDataByName = (name) => {
+    const id = name.trim().replace(/\s+/g, "-").toLowerCase();
+    fetchCoinDataById(id);
+  };
+
   useEffect(() => {
     fetchCoinNavData(coinNavLength);
     fetchCoinList();
@@ -86,8 +87,8 @@ function App() {
 
   const handleSearchSubmit = (e) => {
     if (e) e.preventDefault();
-    if (searchTerm.split(" ").join("").length > 0) {
-      console.log("form submitted", searchTerm);
+    if (searchTerm.trim().length > 0) {
+      fetchCoinDataByName(searchTerm);
     }
   };
 
