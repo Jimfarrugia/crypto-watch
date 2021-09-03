@@ -1,5 +1,8 @@
+import { Line } from "react-chartjs-2";
+
 // This function formats a number to a more readable format for currency.
 // 50123456 -> $50,123,456
+// 101.9 -> $101.90
 const formatPriceNumber = (number, currencySymbol) => {
   let result =
     number > 1000
@@ -18,7 +21,7 @@ const formatPriceNumber = (number, currencySymbol) => {
   return result;
 };
 
-const Details = ({ coinData, coinPriceHistory, defaultVsCurrency, error }) => {
+const Details = ({ coinData, chartData, defaultVsCurrency, error }) => {
   const { symbol } = defaultVsCurrency;
 
   if (error) {
@@ -55,16 +58,7 @@ const Details = ({ coinData, coinPriceHistory, defaultVsCurrency, error }) => {
           </p>
         </header>
       )}
-      {coinData &&
-        Object.keys(coinData).map((key) => (
-          <p key={key}>{`${key}: ${coinData[key]}`}</p>
-        ))}
-      {coinPriceHistory &&
-        coinPriceHistory.map((day, index) => (
-          <p
-            key={`coinPriceHistory${index}`}
-          >{`${index}: Mkt Cap = ${day[0]}; Price = ${day[1]}`}</p>
-        ))}
+      <Line data={chartData} />
     </section>
   );
 };

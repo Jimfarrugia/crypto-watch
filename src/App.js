@@ -17,9 +17,9 @@ function App() {
   const [coinData, setCoinData] = useState(undefined);
   const [coinList, setCoinList] = useState(undefined);
   const [coinNavData, setCoinNavData] = useState(undefined);
-  const [coinPriceHistory, setCoinPriceHistory] = useState(undefined);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState(undefined);
+  const [chartData, setChartData] = useState({});
 
   const fetchCoinList = () => {
     axios
@@ -72,8 +72,26 @@ function App() {
             `Error while fetching price history for "${id}"...
             Check the spelling or try a different search term.`
           );
-        console.log("setting price history");
-        setCoinPriceHistory(response.data.prices);
+        const {
+          data: { prices },
+        } = response;
+        setChartData({
+          labels: prices.map((price, index) => {
+            let date = new Date();
+            date.setDate(date.getDate() - (prices.length - index - 1));
+            const intlDate = new Intl.DateTimeFormat("en-UK").format(date);
+            return intlDate;
+          }),
+          datasets: [
+            {
+              label: "Price in USD",
+              data: prices.map((price) => price[1]),
+              borderColor: "#4717f6",
+              backgroundColor: "#062f4f",
+              fill: true,
+            },
+          ],
+        });
       })
       .catch((error) => {
         setError(error.message);
@@ -141,7 +159,7 @@ function App() {
         />
         <Details
           coinData={coinData}
-          coinPriceHistory={coinPriceHistory}
+          chartData={chartData}
           defaultVsCurrency={defaultVsCurrency}
           error={error}
         />
