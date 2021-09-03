@@ -62,6 +62,26 @@ function App() {
     fetchCoinDataById(id);
   };
 
+  const fetchCoinPriceHistory = (id, vs_currency, days) => {
+    axios
+      .get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart`, {
+        params: { vs_currency, days },
+      })
+      .then((response) => {
+        if (!response || !response.data || response.data.prices.length < 1)
+          throw new Error(
+            `Error while fetching price history for "${id}"...
+            Check the spelling or try a different search term.`
+          );
+        console.log("setting price history");
+        setCoinPriceHistory(response.data.prices);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     fetchCoinNavData(coinNavLength);
     fetchCoinList();
