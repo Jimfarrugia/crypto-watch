@@ -35,7 +35,11 @@ const Details = ({ coinData, coinPriceHistory, defaultVsCurrency, error }) => {
             height="64"
             width="64"
           />
-          <h2>{coinData.name}</h2>
+          <h2>
+            {coinData.name}
+            <br />
+            <small>{coinData.symbol}</small>
+          </h2>
           <p
             className={`current-price${
               (coinData.price_change_percentage_24h &&

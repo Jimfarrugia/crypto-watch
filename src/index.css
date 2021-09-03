@@ -188,6 +188,11 @@ button > image {
   font-size: 1.5rem;
   font-weight: bold;
 }
+.details h2 small {
+  font-size: 1rem;
+  font-weight: normal;
+  font-family: "Courier New", Courier, monospace;
+}
 
 .text-red {
   color: red;
