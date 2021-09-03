@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CoinNav from "./components/CoinNav";
+import SearchBar from "./components/SearchBar";
+import PriceChart from "./components/PriceChart";
 
 // We must use the coin's ID in the query params to fetch coin data.
 // Coin's id is just it's name in lowercase with dashes replacing spaces.
@@ -44,7 +49,8 @@ function App() {
       .then((response) => {
         if (response.data.length < 1)
           throw new Error(
-            `Unable to find data for "${id}"...  Check the spelling or try a different search term.`
+            `Unable to find data for "${id}"...
+            Check the spelling or try a different search term.`
           );
         setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
@@ -78,7 +84,7 @@ function App() {
     setSearchSuggestions([]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSearchSubmit = (e) => {
     if (e) e.preventDefault();
     if (searchTerm.split(" ").join("").length > 0) {
       console.log("form submitted", searchTerm);
@@ -88,78 +94,21 @@ function App() {
   return (
     <div className="App">
       <div className="page-wrapper">
-        <header className="page-header">
-          <h1>Cryptocurrency Tracker</h1>
-        </header>
-        <nav className="coin-nav">
-          <ul>
-            {coinNavData.map((coin) => (
-              <li key={coin.symbol}>
-                <button onClick={() => fetchCoinDataById(coin.id)}>
-                  <img
-                    src={coin.image}
-                    alt={`${coin.id} icon`}
-                    height="32"
-                    width="32"
-                  />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="search-section">
-          <form
-            onSubmit={handleSubmit}
-            className="search-form"
-            autoComplete="off"
-          >
-            <div className="search-field-wrapper">
-              <input
-                type="text"
-                className="search-field"
-                value={searchTerm}
-                onChange={handleSearchTermChange}
-                placeholder="Search..."
-                onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
-              />
-              <input type="submit" className="search-button" value="Search" />
-            </div>
-          </form>
-          <div className="search-suggestions-wrapper">
-            {/* If there are more than 10 suggestions 
-              then only show those which begin with the search term */}
-            {(searchSuggestions.length > 10 &&
-              searchSuggestions.map((suggestion, i) => {
-                let regex = new RegExp(`^${searchTerm}`, "i");
-                return suggestion.match(regex) ? (
-                  <div
-                    key={i}
-                    className="search-suggestion"
-                    onClick={() => handleSuggestionSelect(suggestion)}
-                  >
-                    {suggestion}
-                  </div>
-                ) : (
-                  <></>
-                );
-              })) ||
-              (searchSuggestions.length > 0 &&
-                searchSuggestions.map((suggestion, i) => (
-                  <div
-                    key={i}
-                    className="search-suggestion"
-                    onClick={() => handleSuggestionSelect(suggestion)}
-                  >
-                    {suggestion}
-                  </div>
-                )))}
-          </div>
-        </div>
-        <section className="chart">
-          {error || (coinData && coinData.name) || ""}
-          {coinData && coinData.name && " data found!"}
-        </section>
-        <footer className="page-footer">footer section</footer>
+        <Header />
+        <CoinNav
+          fetchCoinDataById={fetchCoinDataById}
+          coinNavData={coinNavData}
+        />
+        <SearchBar
+          handleSearchSubmit={handleSearchSubmit}
+          searchTerm={searchTerm}
+          handleSearchTermChange={handleSearchTermChange}
+          setSearchSuggestions={setSearchSuggestions}
+          searchSuggestions={searchSuggestions}
+          handleSuggestionSelect={handleSuggestionSelect}
+        />
+        <PriceChart coinData={coinData} error={error} />
+        <Footer />
       </div>
     </div>
   );
