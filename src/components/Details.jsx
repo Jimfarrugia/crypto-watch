@@ -19,9 +19,12 @@ const formatPriceNumber = (number, currencySymbol) => {
 };
 
 const Details = ({ coinData, coinPriceHistory, defaultVsCurrency, error }) => {
+  const { symbol } = defaultVsCurrency;
+
   if (error) {
     return <p>{error}</p>;
   }
+
   return (
     <section className="details">
       {coinData && coinData.name && (
@@ -34,16 +37,17 @@ const Details = ({ coinData, coinPriceHistory, defaultVsCurrency, error }) => {
           />
           <h2>{coinData.name}</h2>
           <p
-            className={`current-price ${
-              coinData.price_change_percentage_24h.toString().match(/^-/)
-                ? "text-red"
-                : "text-green"
+            className={`current-price${
+              (coinData.price_change_percentage_24h &&
+                coinData.price_change_percentage_24h.toString().match(/^-/) &&
+                " text-red") ||
+              (coinData.price_change_percentage_24h &&
+                !coinData.price_change_percentage_24h.toString().match(/^-/) &&
+                " text-green") ||
+              ""
             }`}
           >
-            {formatPriceNumber(
-              coinData.current_price,
-              defaultVsCurrency.symbol
-            )}
+            {formatPriceNumber(coinData.current_price, symbol)}
           </p>
         </header>
       )}
@@ -53,7 +57,9 @@ const Details = ({ coinData, coinPriceHistory, defaultVsCurrency, error }) => {
         ))}
       {coinPriceHistory &&
         coinPriceHistory.map((day, index) => (
-          <p>{`${index}: Mkt Cap = ${day[0]}; Price = ${day[1]}`}</p>
+          <p
+            key={`coinPriceHistory${index}`}
+          >{`${index}: Mkt Cap = ${day[0]}; Price = ${day[1]}`}</p>
         ))}
     </section>
   );
