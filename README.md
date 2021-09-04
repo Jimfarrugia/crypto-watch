@@ -4,15 +4,6 @@ React app to check the current and historical prices of cryptocurrencies.
 
 ---
 
-### Phase 1 - MVP
-
-1. I can see a list of popular cryptocurrencies.
-2. When I select an item from the list, I can see it's price chart.
-3. When I am viewing a price chart, it will live-update every 30 seconds.
-4. I can search for other cryptocurrencies by their name or symbol.
-
----
-
 # Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
