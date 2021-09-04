@@ -70,6 +70,13 @@ a:active {
   color: var(--blue-bright);
 }
 
+.text-red {
+  color: red;
+}
+.text-green {
+  color: lime;
+}
+
 .page-wrapper {
   max-width: 700px;
   min-width: 260px;
@@ -195,9 +202,21 @@ button > image {
   font-family: "Courier New", Courier, monospace;
 }
 
-.text-red {
-  color: red;
+.page-footer ul {
+  padding: 0;
+  position: relative;
+  font-size: 0.8rem;
 }
-.text-green {
-  color: lime;
+
+.page-footer li {
+  display: inline-block;
+  list-style: none;
+  padding-right: 1.5rem;
+}
+
+.page-footer li:last-child {
+  font-size: 0.8rem;
+  position: absolute;
+  right: 0;
+  padding: 0;
 }
