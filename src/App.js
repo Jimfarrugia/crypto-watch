@@ -117,7 +117,7 @@ function App() {
   }, [defaultVsCurrency.name]);
 
   const handleSearchTermChange = (e) => {
-    const text = e.target.value;
+    const text = e.target.value.replace("\\", "");
     setSearchTerm(text);
     let matches = [];
     if (text.length > 0) {
