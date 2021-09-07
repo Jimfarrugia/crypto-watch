@@ -145,18 +145,22 @@ function App() {
     <div className="App">
       <div className="page-wrapper">
         <Header />
-        <CoinNav
-          fetchCoinDataById={fetchCoinDataById}
-          coinNavData={coinNavData}
-        />
-        <SearchBar
-          handleSearchSubmit={handleSearchSubmit}
-          searchTerm={searchTerm}
-          handleSearchTermChange={handleSearchTermChange}
-          setSearchSuggestions={setSearchSuggestions}
-          searchSuggestions={searchSuggestions}
-          handleSuggestionSelect={handleSuggestionSelect}
-        />
+        {(coinNavData && coinList && (
+          <>
+            <CoinNav
+              fetchCoinDataById={fetchCoinDataById}
+              coinNavData={coinNavData}
+            />
+            <SearchBar
+              handleSearchSubmit={handleSearchSubmit}
+              searchTerm={searchTerm}
+              handleSearchTermChange={handleSearchTermChange}
+              setSearchSuggestions={setSearchSuggestions}
+              searchSuggestions={searchSuggestions}
+              handleSuggestionSelect={handleSuggestionSelect}
+            />
+          </>
+        )) || <div className="loader"></div>}
         <Details
           coinData={coinData}
           chartData={chartData}
