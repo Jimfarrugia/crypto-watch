@@ -13,6 +13,7 @@ function App() {
     symbol: "$",
   };
   const defaultPriceHistoryDays = 182;
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
   const [coinList, setCoinList] = useState(undefined);
@@ -29,6 +30,7 @@ function App() {
   };
 
   const fetchCoinDataById = (id) => {
+    setIsLoading(true);
     axios
       .get(`https://api.coingecko.com/api/v3/coins/markets`, {
         params: {
@@ -67,6 +69,7 @@ function App() {
         params: { vs_currency, days },
       })
       .then((response) => {
+        setIsLoading(false);
         if (!response || !response.data || response.data.prices.length < 1)
           throw new Error(
             `Error while fetching price history for "${id}"...
@@ -161,12 +164,14 @@ function App() {
             />
           </>
         )) || <div className="loader"></div>}
-        <Details
-          coinData={coinData}
-          chartData={chartData}
-          defaultVsCurrency={defaultVsCurrency}
-          error={error}
-        />
+        {(isLoading && <div className="loader"></div>) || (
+          <Details
+            coinData={coinData}
+            chartData={chartData}
+            defaultVsCurrency={defaultVsCurrency}
+            error={error}
+          />
+        )}
         <Footer />
       </div>
     </div>
