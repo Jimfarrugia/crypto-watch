@@ -64,9 +64,13 @@ function App() {
   };
 
   const fetchCoinPriceHistory = (id, vs_currency, days) => {
+    const params = { vs_currency, days };
+    if (days < 91) {
+      params["interval"] = "daily";
+    }
     axios
       .get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart`, {
-        params: { vs_currency, days },
+        params,
       })
       .then((response) => {
         setIsLoading(false);
@@ -144,6 +148,11 @@ function App() {
     }
   };
 
+  const handleChangePriceHistoryDays = (days) => {
+    setIsLoading(true);
+    fetchCoinPriceHistory(coinData.id, defaultVsCurrency.name, days);
+  };
+
   return (
     <div className="App">
       <div className="page-wrapper">
@@ -169,6 +178,7 @@ function App() {
             coinData={coinData}
             chartData={chartData}
             defaultVsCurrency={defaultVsCurrency}
+            handleChangePriceHistoryDays={handleChangePriceHistoryDays}
             error={error}
           />
         )}

@@ -202,6 +202,11 @@ button > image {
   font-family: "Courier New", Courier, monospace;
 }
 
+.settings {
+  text-align: right;
+  margin: 1rem 0;
+}
+
 .page-footer ul {
   padding: 0;
   position: relative;

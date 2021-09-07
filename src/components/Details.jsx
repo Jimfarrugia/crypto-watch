@@ -21,7 +21,13 @@ const formatPriceNumber = (number, currencySymbol) => {
   return result;
 };
 
-const Details = ({ coinData, chartData, defaultVsCurrency, error }) => {
+const Details = ({
+  coinData,
+  chartData,
+  defaultVsCurrency,
+  handleChangePriceHistoryDays,
+  error,
+}) => {
   const { symbol } = defaultVsCurrency;
 
   if (error) {
@@ -58,7 +64,28 @@ const Details = ({ coinData, chartData, defaultVsCurrency, error }) => {
           </p>
         </header>
       )}
-      <Line data={chartData} />
+      {chartData && coinData && (
+        <>
+          <div className="settings">
+            <button onClick={() => handleChangePriceHistoryDays(7)}>
+              7 Days
+            </button>
+            <button onClick={() => handleChangePriceHistoryDays(14)}>
+              14 Days
+            </button>
+            <button onClick={() => handleChangePriceHistoryDays(30)}>
+              30 Days
+            </button>
+            <button onClick={() => handleChangePriceHistoryDays(90)}>
+              3 Months
+            </button>
+            <button onClick={() => handleChangePriceHistoryDays(180)}>
+              6 Months
+            </button>
+          </div>
+          <Line data={chartData} />
+        </>
+      )}
     </section>
   );
 };
