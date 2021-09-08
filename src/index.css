@@ -203,8 +203,19 @@ button > image {
 }
 
 .settings {
-  text-align: right;
+  text-align: center;
   margin: 1rem 0;
+}
+.settings button {
+  border: 1px solid var(--purple);
+  color: var(--purple);
+  background: none;
+  margin-left: 0.125rem;
+}
+.settings button:hover {
+  color: var(--purple-bright);
+  background: none;
+  cursor: pointer;
 }
 
 .page-footer ul {
