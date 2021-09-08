@@ -212,7 +212,12 @@ button > image {
   background: none;
   margin-left: 0.125rem;
 }
+.settings button.active {
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
+}
 .settings button:hover {
+  border-color: var(--purple-bright);
   color: var(--purple-bright);
   background: none;
   cursor: pointer;

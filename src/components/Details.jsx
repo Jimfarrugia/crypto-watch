@@ -25,6 +25,7 @@ const Details = ({
   coinData,
   chartData,
   defaultVsCurrency,
+  priceHistoryDays,
   handleChangePriceHistoryDays,
   error,
 }) => {
@@ -67,19 +68,34 @@ const Details = ({
       {chartData && coinData && (
         <>
           <div className="settings">
-            <button onClick={() => handleChangePriceHistoryDays(7)}>
+            <button
+              className={priceHistoryDays === 7 ? "active" : ""}
+              onClick={() => handleChangePriceHistoryDays(7)}
+            >
               7 Days
             </button>
-            <button onClick={() => handleChangePriceHistoryDays(14)}>
+            <button
+              className={priceHistoryDays === 14 ? "active" : ""}
+              onClick={() => handleChangePriceHistoryDays(14)}
+            >
               14 Days
             </button>
-            <button onClick={() => handleChangePriceHistoryDays(30)}>
+            <button
+              className={priceHistoryDays === 30 ? "active" : ""}
+              onClick={() => handleChangePriceHistoryDays(30)}
+            >
               30 Days
             </button>
-            <button onClick={() => handleChangePriceHistoryDays(90)}>
+            <button
+              className={priceHistoryDays === 90 ? "active" : ""}
+              onClick={() => handleChangePriceHistoryDays(90)}
+            >
               3 Months
             </button>
-            <button onClick={() => handleChangePriceHistoryDays(180)}>
+            <button
+              className={priceHistoryDays === 180 ? "active" : ""}
+              onClick={() => handleChangePriceHistoryDays(180)}
+            >
               6 Months
             </button>
           </div>

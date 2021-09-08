@@ -12,7 +12,7 @@ function App() {
     name: "usd",
     symbol: "$",
   };
-  const defaultPriceHistoryDays = 182;
+  const [priceHistoryDays, setPriceHistoryDays] = useState(180);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
@@ -46,11 +46,7 @@ function App() {
           );
         setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
-        fetchCoinPriceHistory(
-          id,
-          defaultVsCurrency.name,
-          defaultPriceHistoryDays
-        );
+        fetchCoinPriceHistory(id, defaultVsCurrency.name, priceHistoryDays);
       })
       .catch((error) => {
         setError(error.message);
@@ -150,6 +146,7 @@ function App() {
 
   const handleChangePriceHistoryDays = (days) => {
     setIsLoading(true);
+    setPriceHistoryDays(days);
     fetchCoinPriceHistory(coinData.id, defaultVsCurrency.name, days);
   };
 
@@ -178,6 +175,7 @@ function App() {
             coinData={coinData}
             chartData={chartData}
             defaultVsCurrency={defaultVsCurrency}
+            priceHistoryDays={priceHistoryDays}
             handleChangePriceHistoryDays={handleChangePriceHistoryDays}
             error={error}
           />
