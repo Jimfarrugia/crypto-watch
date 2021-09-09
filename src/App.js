@@ -8,10 +8,7 @@ import Details from "./components/Details";
 
 function App() {
   const coinNavLength = 10;
-  const defaultVsCurrency = {
-    name: "usd",
-    symbol: "$",
-  };
+  const vsCurrency = useState("usd");
   const [priceHistoryDays, setPriceHistoryDays] = useState(180);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
@@ -34,7 +31,7 @@ function App() {
     axios
       .get(`https://api.coingecko.com/api/v3/coins/markets`, {
         params: {
-          vs_currency: defaultVsCurrency.name,
+          vs_currency: vsCurrency,
           ids: id,
         },
       })
@@ -46,7 +43,7 @@ function App() {
           );
         setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
-        fetchCoinPriceHistory(id, defaultVsCurrency.name, priceHistoryDays);
+        fetchCoinPriceHistory(id, vsCurrency, priceHistoryDays);
       })
       .catch((error) => {
         setError(error.message);
@@ -107,7 +104,7 @@ function App() {
       axios
         .get("https://api.coingecko.com/api/v3/coins/markets", {
           params: {
-            vs_currency: defaultVsCurrency.name,
+            vs_currency: vsCurrency,
             per_page: n,
           },
         })
@@ -117,7 +114,7 @@ function App() {
 
     fetchCoinNavData(coinNavLength);
     fetchCoinList();
-  }, [defaultVsCurrency.name]);
+  }, [vsCurrency]);
 
   const handleSearchTermChange = (e) => {
     const text = e.target.value.replace("\\", "");
@@ -147,7 +144,7 @@ function App() {
   const handleChangePriceHistoryDays = (days) => {
     setIsLoading(true);
     setPriceHistoryDays(days);
-    fetchCoinPriceHistory(coinData.id, defaultVsCurrency.name, days);
+    fetchCoinPriceHistory(coinData.id, vsCurrency, days);
   };
 
   return (
@@ -174,7 +171,7 @@ function App() {
           <Details
             coinData={coinData}
             chartData={chartData}
-            defaultVsCurrency={defaultVsCurrency}
+            vsCurrency={vsCurrency}
             priceHistoryDays={priceHistoryDays}
             handleChangePriceHistoryDays={handleChangePriceHistoryDays}
             error={error}

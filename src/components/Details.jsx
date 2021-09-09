@@ -3,7 +3,8 @@ import { Line } from "react-chartjs-2";
 // This function formats a number to a more readable format for currency.
 // 50123456 -> $50,123,456
 // 101.9 -> $101.90
-const formatPriceNumber = (number, currencySymbol) => {
+const formatPriceNumber = (number) => {
+  const symbol = vsCurrency === "usd" || vsCurrency === "aud" ? "$" : "";
   let result =
     number > 1000
       ? number
@@ -24,12 +25,12 @@ const formatPriceNumber = (number, currencySymbol) => {
 const Details = ({
   coinData,
   chartData,
-  defaultVsCurrency,
+  vsCurrency,
   priceHistoryDays,
   handleChangePriceHistoryDays,
   error,
 }) => {
-  const { symbol } = defaultVsCurrency;
+  const { symbol } = vsCurrency;
 
   if (error) {
     return <p>{error}</p>;
@@ -61,7 +62,7 @@ const Details = ({
               ""
             }`}
           >
-            {formatPriceNumber(coinData.current_price, symbol)}
+            {formatPriceNumber(coinData.current_price)}
           </p>
         </header>
       )}

@@ -58,6 +58,12 @@ h1 {
   text-align: center;
 }
 
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 a:link,
 a:visited {
   color: var(--purple-bright);
