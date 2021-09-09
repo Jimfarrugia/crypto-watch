@@ -3,15 +3,15 @@ import { Line } from "react-chartjs-2";
 // This function formats a number to a more readable format for currency.
 // 50123456 -> $50,123,456
 // 101.9 -> $101.90
-const formatPriceNumber = (number) => {
+const formatPriceNumber = (number, vsCurrency) => {
   const symbol = vsCurrency === "usd" || vsCurrency === "aud" ? "$" : "";
   let result =
     number > 1000
       ? number
           .toString()
-          .replace(/^/, currencySymbol)
+          .replace(/^/, symbol)
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-      : number.toString().replace(/^/, currencySymbol);
+      : number.toString().replace(/^/, symbol);
   // if there is a decimal point and it is in the 2nd last slot, append a "0"
   if (
     result.lastIndexOf(".") !== -1 &&
@@ -30,12 +30,9 @@ const Details = ({
   handleChangePriceHistoryDays,
   error,
 }) => {
-  const { symbol } = vsCurrency;
-
   if (error) {
     return <p>{error}</p>;
   }
-
   return (
     <section className="details">
       {coinData && coinData.name && (
@@ -62,7 +59,7 @@ const Details = ({
               ""
             }`}
           >
-            {formatPriceNumber(coinData.current_price)}
+            {formatPriceNumber(coinData.current_price, vsCurrency)}
           </p>
         </header>
       )}

@@ -8,7 +8,7 @@ import Details from "./components/Details";
 
 function App() {
   const coinNavLength = 10;
-  const vsCurrency = useState("usd");
+  const [vsCurrency, setVsCurrency] = useState("aud");
   const [priceHistoryDays, setPriceHistoryDays] = useState(180);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
@@ -84,7 +84,7 @@ function App() {
           }),
           datasets: [
             {
-              label: "Price in USD",
+              label: `Price in ${vsCurrency.toUpperCase()}`,
               data: prices.map((price) => price[1]),
               borderColor: "#4717f6",
               backgroundColor: "#062f4f",
