@@ -8,8 +8,8 @@ import Details from "./components/Details";
 
 function App() {
   const coinNavLength = 10;
-  const [vsCurrency, setVsCurrency] = useState("aud");
-  const [priceHistoryDays, setPriceHistoryDays] = useState(180);
+  const [vsCurrency, setVsCurrency] = useState("usd");
+  const [priceHistoryDays, setPriceHistoryDays] = useState(30);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
@@ -43,7 +43,7 @@ function App() {
           );
         setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
-        fetchCoinPriceHistory(id, vsCurrency, priceHistoryDays);
+        fetchCoinPriceHistory(id);
       })
       .catch((error) => {
         setError(error.message);
@@ -56,9 +56,9 @@ function App() {
     fetchCoinDataById(id);
   };
 
-  const fetchCoinPriceHistory = (id, vs_currency, days) => {
-    const params = { vs_currency, days };
-    if (days < 91) {
+  const fetchCoinPriceHistory = (id) => {
+    const params = { vs_currency: vsCurrency, days: priceHistoryDays };
+    if (params.days < 91) {
       params["interval"] = "daily";
     }
     axios
@@ -104,7 +104,7 @@ function App() {
       axios
         .get("https://api.coingecko.com/api/v3/coins/markets", {
           params: {
-            vs_currency: vsCurrency,
+            vs_currency: "usd",
             per_page: n,
           },
         })
@@ -114,7 +114,7 @@ function App() {
 
     fetchCoinNavData(coinNavLength);
     fetchCoinList();
-  }, [vsCurrency]);
+  }, []);
 
   const handleSearchTermChange = (e) => {
     const text = e.target.value.replace("\\", "");
@@ -144,7 +144,13 @@ function App() {
   const handleChangePriceHistoryDays = (days) => {
     setIsLoading(true);
     setPriceHistoryDays(days);
-    fetchCoinPriceHistory(coinData.id, vsCurrency, days);
+    fetchCoinPriceHistory(coinData.id);
+  };
+
+  const handleChangeVsCurrency = (c) => {
+    setIsLoading(true);
+    setVsCurrency(c);
+    fetchCoinDataById(coinData.id);
   };
 
   return (
@@ -158,11 +164,11 @@ function App() {
               coinNavData={coinNavData}
             />
             <SearchBar
-              handleSearchSubmit={handleSearchSubmit}
               searchTerm={searchTerm}
               handleSearchTermChange={handleSearchTermChange}
-              setSearchSuggestions={setSearchSuggestions}
+              handleSearchSubmit={handleSearchSubmit}
               searchSuggestions={searchSuggestions}
+              setSearchSuggestions={setSearchSuggestions}
               handleSuggestionSelect={handleSuggestionSelect}
             />
           </>
@@ -173,6 +179,7 @@ function App() {
             chartData={chartData}
             vsCurrency={vsCurrency}
             priceHistoryDays={priceHistoryDays}
+            handleChangeVsCurrency={handleChangeVsCurrency}
             handleChangePriceHistoryDays={handleChangePriceHistoryDays}
             error={error}
           />

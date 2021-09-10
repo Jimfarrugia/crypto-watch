@@ -210,7 +210,20 @@ button > image {
 
 .settings {
   text-align: center;
-  margin: 1rem 0;
+  margin: 0 0 1rem;
+}
+/* .settings select {
+  outline: none;
+  background: none;
+  border: 1px solid var(--purple);
+  color: var(--purple-bright);
+  margin-bottom: 1rem;
+}
+.settings select > option {
+  color: var(--black);
+} */
+.settings .timeframe {
+  margin-top: 1rem;
 }
 .settings button {
   border: 1px solid var(--purple);

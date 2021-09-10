@@ -28,6 +28,7 @@ const Details = ({
   vsCurrency,
   priceHistoryDays,
   handleChangePriceHistoryDays,
+  handleChangeVsCurrency,
   error,
 }) => {
   if (error) {
@@ -35,67 +36,106 @@ const Details = ({
   }
   return (
     <section className="details">
-      {coinData && coinData.name && (
-        <header>
-          <img
-            src={coinData.image}
-            alt={`${coinData.name} logo`}
-            height="64"
-            width="64"
-          />
-          <h2>
-            {coinData.name}
-            <br />
-            <small>{coinData.symbol}</small>
-          </h2>
-          <p
-            className={`current-price${
-              (coinData.price_change_percentage_24h &&
-                coinData.price_change_percentage_24h.toString().match(/^-/) &&
-                " text-red") ||
-              (coinData.price_change_percentage_24h &&
-                !coinData.price_change_percentage_24h.toString().match(/^-/) &&
-                " text-green") ||
-              ""
-            }`}
-          >
-            {formatPriceNumber(coinData.current_price, vsCurrency)}
-          </p>
-        </header>
-      )}
-      {chartData && coinData && (
+      {coinData && chartData && (
         <>
+          <header>
+            <img
+              src={coinData.image}
+              alt={`${coinData.name} logo`}
+              height="64"
+              width="64"
+            />
+            <h2>
+              {coinData.name}
+              <br />
+              <small>{coinData.symbol}</small>
+            </h2>
+            <p
+              className={`current-price${
+                (coinData.price_change_percentage_24h &&
+                  coinData.price_change_percentage_24h.toString().match(/^-/) &&
+                  " text-red") ||
+                (coinData.price_change_percentage_24h &&
+                  !coinData.price_change_percentage_24h
+                    .toString()
+                    .match(/^-/) &&
+                  " text-green") ||
+                ""
+              }`}
+            >
+              {coinData.current_price &&
+                formatPriceNumber(coinData.current_price, vsCurrency)}
+            </p>
+          </header>
           <div className="settings">
-            <button
-              className={priceHistoryDays === 7 ? "active" : ""}
-              onClick={() => handleChangePriceHistoryDays(7)}
+            {/* <select
+              name="currency"
+              value={vsCurrency}
+              onChange={(e) => handleChangeVsCurrency(e.target.value)}
             >
-              7 Days
-            </button>
-            <button
-              className={priceHistoryDays === 14 ? "active" : ""}
-              onClick={() => handleChangePriceHistoryDays(14)}
-            >
-              14 Days
-            </button>
-            <button
-              className={priceHistoryDays === 30 ? "active" : ""}
-              onClick={() => handleChangePriceHistoryDays(30)}
-            >
-              30 Days
-            </button>
-            <button
-              className={priceHistoryDays === 90 ? "active" : ""}
-              onClick={() => handleChangePriceHistoryDays(90)}
-            >
-              3 Months
-            </button>
-            <button
-              className={priceHistoryDays === 180 ? "active" : ""}
-              onClick={() => handleChangePriceHistoryDays(180)}
-            >
-              6 Months
-            </button>
+              <option value="usd">USD</option>
+              <option value="aud">AUD</option>
+              <option value="gbp">GBP</option>
+              <option value="eur">EUR</option>
+            </select> */}
+            <div className="currency">
+              <button
+                onClick={() => handleChangeVsCurrency("usd")}
+                className={vsCurrency === "usd" ? "active" : ""}
+              >
+                USD
+              </button>
+              <button
+                onClick={() => handleChangeVsCurrency("aud")}
+                className={vsCurrency === "aud" ? "active" : ""}
+              >
+                AUD
+              </button>
+              <button
+                onClick={() => handleChangeVsCurrency("gbp")}
+                className={vsCurrency === "gbp" ? "active" : ""}
+              >
+                GBP
+              </button>
+              <button
+                onClick={() => handleChangeVsCurrency("eur")}
+                className={vsCurrency === "eur" ? "active" : ""}
+              >
+                EUR
+              </button>
+            </div>
+            <div className="timeframe">
+              <button
+                className={priceHistoryDays === 7 ? "active" : ""}
+                onClick={() => handleChangePriceHistoryDays(7)}
+              >
+                7 Days
+              </button>
+              <button
+                className={priceHistoryDays === 14 ? "active" : ""}
+                onClick={() => handleChangePriceHistoryDays(14)}
+              >
+                14 Days
+              </button>
+              <button
+                className={priceHistoryDays === 30 ? "active" : ""}
+                onClick={() => handleChangePriceHistoryDays(30)}
+              >
+                30 Days
+              </button>
+              <button
+                className={priceHistoryDays === 90 ? "active" : ""}
+                onClick={() => handleChangePriceHistoryDays(90)}
+              >
+                3 Months
+              </button>
+              <button
+                className={priceHistoryDays === 180 ? "active" : ""}
+                onClick={() => handleChangePriceHistoryDays(180)}
+              >
+                6 Months
+              </button>
+            </div>
           </div>
           <Line data={chartData} />
         </>
