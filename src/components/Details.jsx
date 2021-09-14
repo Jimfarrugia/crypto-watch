@@ -47,7 +47,7 @@ const formatPriceNumber = (number, vsCurrency) => {
         symbol = "Kr";
         break;
       case "chf":
-        symbol = "Fr";
+        symbol = "Fr.";
         break;
       default:
         symbol = "";
