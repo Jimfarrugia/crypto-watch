@@ -1,5 +1,6 @@
 :root {
   --black: #0e0b16;
+  --gray: #777;
   --white: #e7dfdd;
   --purple: #813772;
   --purple-bright: #a239ca;
@@ -109,7 +110,6 @@ a:active {
   display: flex;
   justify-content: space-between;
 }
-
 .coin-nav ul > li {
   padding: 0 0.25rem;
   margin: 0;
@@ -119,10 +119,9 @@ a:active {
 .coin-nav ul > li:last-child {
   padding: 0;
 }
-
 .coin-nav ul > li > button {
   display: block;
-  color: var(--white);
+  color: var(--gray);
   background: none;
   border: none;
   outline: none;
@@ -131,14 +130,21 @@ a:active {
   margin: 0;
   text-align: center;
 }
-
-button > image {
+.coin-nav button > span {
+  display: inline-block;
+  padding: 0.25rem 0 0.5rem;
+}
+.coin-nav button:hover > span {
+  color: var(--purple-bright);
+}
+.coin-nav button > img {
   pointer-events: none;
+  display: inline-block;
 }
 
 .search-section {
   padding: 0;
-  margin: 1.75rem 0;
+  margin: 1.25rem 0 1.5rem;
 }
 
 .search-field-wrapper {
@@ -246,7 +252,7 @@ button > image {
   margin: 0;
   font-size: 0.8rem;
   color: var(--white);
-  color: #777;
+  color: var(--gray);
 }
 
 .page-footer li {
