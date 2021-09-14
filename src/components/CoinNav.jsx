@@ -12,6 +12,8 @@ const CoinNav = ({ fetchCoinDataById, coinNavData }) => {
                   height="32"
                   width="32"
                 />
+                <br />
+                <span>{coin.symbol}</span>
               </button>
             </li>
           ))}

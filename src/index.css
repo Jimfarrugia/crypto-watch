@@ -27,6 +27,7 @@ code {
 
 ::-webkit-scrollbar {
   width: 0.5em;
+  height: 0.25em;
   background-color: var(--white);
 }
 
@@ -107,24 +108,28 @@ a:active {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  /* background: #e7dfdd20; */
 }
 
 .coin-nav ul > li {
-  padding: 0;
+  padding: 0 0.25rem;
   margin: 0;
   list-style-type: none;
-  border-radius: 50%;
+}
+.coin-nav ul > li:first-child,
+.coin-nav ul > li:last-child {
+  padding: 0;
 }
 
 .coin-nav ul > li > button {
   display: block;
+  color: var(--white);
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 button > image {
