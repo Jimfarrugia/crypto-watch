@@ -4,15 +4,39 @@ import { Line } from "react-chartjs-2";
 // 50123456 -> $50,123,456
 // 101.9 -> $101.90
 const formatPriceNumber = (number, vsCurrency) => {
-  const symbol = vsCurrency === "usd" || vsCurrency === "aud" ? "$" : "";
+  let symbol = "";
+  if (vsCurrency.charAt(vsCurrency.length - 1) === "d") {
+    symbol = "$";
+  } else if (vsCurrency.charAt(vsCurrency.length - 1) === "y") {
+    symbol = "¥";
+  } else {
+    switch (vsCurrency) {
+      case "gbp":
+        symbol = "£";
+        break;
+      case "eur":
+        symbol = "€";
+        break;
+      case "krw":
+        symbol = "₩";
+        break;
+      case "nok":
+        symbol = "Kr";
+        break;
+      case "chf":
+        symbol = "Fr";
+        break;
+    }
+  }
   let result =
     number > 1000
-      ? number
+      ? number // commas
           .toString()
           .replace(/^/, symbol)
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-      : number.toString().replace(/^/, symbol);
-  // if there is a decimal point and it is in the 2nd last slot, append a "0"
+      : number.toString().replace(/^/, symbol); // no commas
+  if (
+    // if there is a decimal point and it is in the 2nd last slot, append a "0"
   if (
     result.lastIndexOf(".") !== -1 &&
     result.lastIndexOf(".") === result.length - 2
