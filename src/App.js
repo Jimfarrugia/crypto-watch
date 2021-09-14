@@ -116,6 +116,14 @@ function App() {
     fetchCoinList();
   }, []);
 
+  useEffect(() => {
+    if (coinData && coinData.id) fetchCoinDataById(coinData.id);
+  }, [vsCurrency]);
+
+  useEffect(() => {
+    if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
+  }, [priceHistoryDays]);
+
   const handleSearchTermChange = (e) => {
     const text = e.target.value.replace("\\", "");
     setSearchTerm(text);
@@ -144,13 +152,11 @@ function App() {
   const handleChangePriceHistoryDays = (days) => {
     setIsLoading(true);
     setPriceHistoryDays(days);
-    fetchCoinPriceHistory(coinData.id);
   };
 
   const handleChangeVsCurrency = (c) => {
     setIsLoading(true);
     setVsCurrency(c);
-    fetchCoinDataById(coinData.id);
   };
 
   return (

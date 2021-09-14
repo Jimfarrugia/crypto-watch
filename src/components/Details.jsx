@@ -68,16 +68,6 @@ const Details = ({
             </p>
           </header>
           <div className="settings">
-            {/* <select
-              name="currency"
-              value={vsCurrency}
-              onChange={(e) => handleChangeVsCurrency(e.target.value)}
-            >
-              <option value="usd">USD</option>
-              <option value="aud">AUD</option>
-              <option value="gbp">GBP</option>
-              <option value="eur">EUR</option>
-            </select> */}
             <div className="currency">
               <button
                 onClick={() => handleChangeVsCurrency("usd")}
