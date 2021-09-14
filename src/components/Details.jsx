@@ -14,6 +14,15 @@ const currencies = [
   "nzd",
 ];
 
+const timeframes = [
+  { label: "7 Days", value: 7 },
+  { label: "14 Days", value: 14 },
+  { label: "1 Month", value: 30 },
+  { label: "3 Months", value: 90 },
+  { label: "6 Months", value: 180 },
+  { label: "12 Months", value: 365 },
+];
+
 // This function formats a number to a more readable format for currency.
 // 50123456 -> $50,123,456
 // 101.9 -> $101.90
@@ -40,6 +49,8 @@ const formatPriceNumber = (number, vsCurrency) => {
       case "chf":
         symbol = "Fr";
         break;
+      default:
+        symbol = "";
     }
   }
   let result =
@@ -65,6 +76,20 @@ const CurrencyButton = ({ value, handleChangeVsCurrency, vsCurrency }) => (
     className={vsCurrency === value ? "active" : ""}
   >
     {value.toUpperCase()}
+  </button>
+);
+
+const TimeframeButton = ({
+  value,
+  label,
+  priceHistoryDays,
+  handleChangePriceHistoryDays,
+}) => (
+  <button
+    className={priceHistoryDays === value ? "active" : ""}
+    onClick={() => handleChangePriceHistoryDays(value)}
+  >
+    {label}
   </button>
 );
 
@@ -125,36 +150,14 @@ const Details = ({
               ))}
             </div>
             <div className="timeframe">
-              <button
-                className={priceHistoryDays === 7 ? "active" : ""}
-                onClick={() => handleChangePriceHistoryDays(7)}
-              >
-                7 Days
-              </button>
-              <button
-                className={priceHistoryDays === 14 ? "active" : ""}
-                onClick={() => handleChangePriceHistoryDays(14)}
-              >
-                14 Days
-              </button>
-              <button
-                className={priceHistoryDays === 30 ? "active" : ""}
-                onClick={() => handleChangePriceHistoryDays(30)}
-              >
-                30 Days
-              </button>
-              <button
-                className={priceHistoryDays === 90 ? "active" : ""}
-                onClick={() => handleChangePriceHistoryDays(90)}
-              >
-                3 Months
-              </button>
-              <button
-                className={priceHistoryDays === 180 ? "active" : ""}
-                onClick={() => handleChangePriceHistoryDays(180)}
-              >
-                6 Months
-              </button>
+              {timeframes.map((timeframe) => (
+                <TimeframeButton
+                  value={timeframe.value}
+                  label={timeframe.label}
+                  priceHistoryDays={priceHistoryDays}
+                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+                />
+              ))}
             </div>
           </div>
           <Line data={chartData} />
