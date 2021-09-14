@@ -1,26 +1,3 @@
-const currencies = [
-  "usd",
-  "aud",
-  "cad",
-  "chf",
-  "cny",
-  "eur",
-  "gbp",
-  "jpy",
-  "krw",
-  "nok",
-  "nzd",
-];
-
-const timeframes = [
-  { label: "7 Days", value: 7 },
-  { label: "14 Days", value: 14 },
-  { label: "1 Month", value: 30 },
-  { label: "3 Months", value: 90 },
-  { label: "6 Months", value: 180 },
-  { label: "12 Months", value: 365 },
-];
-
 // This function formats a number to a more readable format for currency.
 // 50123456 -> $50,123,456
 // 101.9 -> $101.90
@@ -68,38 +45,7 @@ const formatPriceNumber = (number, vsCurrency) => {
   return result;
 };
 
-const CurrencyButton = ({ value, handleChangeVsCurrency, vsCurrency }) => (
-  <button
-    onClick={() => handleChangeVsCurrency(value)}
-    className={vsCurrency === value ? "active" : ""}
-  >
-    {value.toUpperCase()}
-  </button>
-);
-
-const TimeframeButton = ({
-  value,
-  label,
-  priceHistoryDays,
-  handleChangePriceHistoryDays,
-}) => (
-  <button
-    className={priceHistoryDays === value ? "active" : ""}
-    onClick={() => handleChangePriceHistoryDays(value)}
-  >
-    {label}
-  </button>
-);
-
-const Details = ({
-  coinData,
-  chartData,
-  vsCurrency,
-  priceHistoryDays,
-  handleChangePriceHistoryDays,
-  handleChangeVsCurrency,
-  error,
-}) => {
+const Details = ({ coinData, chartData, vsCurrency, error }) => {
   if (error) {
     return <p>{error}</p>;
   }
@@ -136,28 +82,6 @@ const Details = ({
                 formatPriceNumber(coinData.current_price, vsCurrency)}
             </p>
           </header>
-          <div className="settings">
-            <div className="currency">
-              {currencies.map((currency) => (
-                <CurrencyButton
-                  key={currency}
-                  value={currency}
-                  handleChangeVsCurrency={handleChangeVsCurrency}
-                  vsCurrency={vsCurrency}
-                />
-              ))}
-            </div>
-            <div className="timeframe">
-              {timeframes.map((timeframe) => (
-                <TimeframeButton
-                  value={timeframe.value}
-                  label={timeframe.label}
-                  priceHistoryDays={priceHistoryDays}
-                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
-                />
-              ))}
-            </div>
-          </div>
         </>
       )}
     </section>

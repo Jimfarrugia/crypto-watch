@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
+import Settings from "./components/Settings";
 
 function App() {
   const coinNavLength = 10;
@@ -187,12 +188,19 @@ function App() {
               coinData={coinData}
               chartData={chartData}
               vsCurrency={vsCurrency}
-              priceHistoryDays={priceHistoryDays}
-              handleChangeVsCurrency={handleChangeVsCurrency}
-              handleChangePriceHistoryDays={handleChangePriceHistoryDays}
               error={error}
             />
-            {chartData && <Line data={chartData} />}
+            {chartData && (
+              <>
+                <Settings
+                  vsCurrency={vsCurrency}
+                  priceHistoryDays={priceHistoryDays}
+                  handleChangeVsCurrency={handleChangeVsCurrency}
+                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+                />
+                <Line data={chartData} />
+              </>
+            )}
           </>
         )}
         <Footer />
