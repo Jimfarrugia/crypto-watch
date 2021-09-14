@@ -13,7 +13,7 @@ body {
   background: var(--black);
   color: var(--white);
   margin: 0;
-  padding: 0 1rem;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -56,8 +56,11 @@ code {
 
 h1 {
   margin: 0;
-  padding: 1.5rem 0;
   text-align: center;
+  background: var(--purple);
+  padding: 0.75em 0;
+  font-size: 1.25rem;
+  text-shadow: 1px 1px 4px #00000088;
 }
 
 input {
@@ -89,10 +92,12 @@ a:active {
   max-width: 700px;
   min-width: 260px;
   margin: 0 auto;
+  padding: 0 0.75em;
 }
 
 .page-header {
   line-height: 1.35;
+  margin: 0 0 1.5em;
 }
 
 .page-footer {
@@ -132,7 +137,7 @@ a:active {
 }
 .coin-nav button > span {
   display: inline-block;
-  padding: 0.25rem 0 0.5rem;
+  padding: 0.25rem 0;
 }
 .coin-nav button:hover > span {
   color: var(--purple-bright);
@@ -199,7 +204,7 @@ a:active {
   color: var(--black);
   background: var(--white);
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.5em;
   border-bottom: 1px solid var(--black);
 }
 
@@ -210,14 +215,18 @@ a:active {
 .details header {
   text-align: center;
 }
-.details header .current-price {
-  font-size: 1.5rem;
-  font-weight: bold;
+.details h2 {
+  margin: 1em 0;
 }
 .details h2 small {
   font-size: 1rem;
   font-weight: normal;
   font-family: "Courier New", Courier, monospace;
+}
+.details header .current-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 0 0.25em;
 }
 
 .settings {

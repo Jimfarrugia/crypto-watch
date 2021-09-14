@@ -161,8 +161,8 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <div className="page-wrapper">
-        <Header />
         {(coinNavData && coinList && (
           <>
             <CoinNav
