@@ -138,7 +138,7 @@ button > image {
 
 .search-section {
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
 }
 
 .search-field-wrapper {
@@ -165,24 +165,25 @@ button > image {
 
 .search-button {
   display: block;
-  width: 100px;
-  padding: 0.5rem 0;
-  margin-left: 0.25rem;
+  width: 102px;
+  padding: 0.4375rem 0;
+  margin-left: 0.125rem;
   font-size: 1rem;
-  border: none;
+  border: 1px solid var(--purple);
   position: absolute;
   top: 0;
   left: 100%;
-  background-color: var(--purple);
-  color: var(--white);
+  background: none;
+  color: var(--purple);
   cursor: pointer;
 }
 .search-button:hover {
-  background-color: var(--purple-bright);
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
 }
 
 .search-suggestions-wrapper {
-  max-height: 30vh;
+  max-height: 50vh;
   overflow: auto;
   margin-top: 1px;
 }
@@ -217,19 +218,11 @@ button > image {
   text-align: center;
   margin: 0 0 1rem;
 }
-/* .settings select {
-  outline: none;
-  background: none;
-  border: 1px solid var(--purple);
-  color: var(--purple-bright);
-  margin-bottom: 1rem;
-}
-.settings select > option {
-  color: var(--black);
-} */
+
 .settings .timeframe {
   margin-top: 1rem;
 }
+
 .settings button {
   border: 1px solid var(--purple);
   color: var(--purple);
