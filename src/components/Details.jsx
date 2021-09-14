@@ -1,5 +1,19 @@
 import { Line } from "react-chartjs-2";
 
+const currencies = [
+  "usd",
+  "aud",
+  "cad",
+  "chf",
+  "cny",
+  "eur",
+  "gbp",
+  "jpy",
+  "krw",
+  "nok",
+  "nzd",
+];
+
 // This function formats a number to a more readable format for currency.
 // 50123456 -> $50,123,456
 // 101.9 -> $101.90
@@ -37,7 +51,6 @@ const formatPriceNumber = (number, vsCurrency) => {
       : number.toString().replace(/^/, symbol); // no commas
   if (
     // if there is a decimal point and it is in the 2nd last slot, append a "0"
-  if (
     result.lastIndexOf(".") !== -1 &&
     result.lastIndexOf(".") === result.length - 2
   ) {
@@ -45,6 +58,15 @@ const formatPriceNumber = (number, vsCurrency) => {
   }
   return result;
 };
+
+const CurrencyButton = ({ value, handleChangeVsCurrency, vsCurrency }) => (
+  <button
+    onClick={() => handleChangeVsCurrency(value)}
+    className={vsCurrency === value ? "active" : ""}
+  >
+    {value.toUpperCase()}
+  </button>
+);
 
 const Details = ({
   coinData,
@@ -93,30 +115,14 @@ const Details = ({
           </header>
           <div className="settings">
             <div className="currency">
-              <button
-                onClick={() => handleChangeVsCurrency("usd")}
-                className={vsCurrency === "usd" ? "active" : ""}
-              >
-                USD
-              </button>
-              <button
-                onClick={() => handleChangeVsCurrency("aud")}
-                className={vsCurrency === "aud" ? "active" : ""}
-              >
-                AUD
-              </button>
-              <button
-                onClick={() => handleChangeVsCurrency("gbp")}
-                className={vsCurrency === "gbp" ? "active" : ""}
-              >
-                GBP
-              </button>
-              <button
-                onClick={() => handleChangeVsCurrency("eur")}
-                className={vsCurrency === "eur" ? "active" : ""}
-              >
-                EUR
-              </button>
+              {currencies.map((currency) => (
+                <CurrencyButton
+                  key={currency}
+                  value={currency}
+                  handleChangeVsCurrency={handleChangeVsCurrency}
+                  vsCurrency={vsCurrency}
+                />
+              ))}
             </div>
             <div className="timeframe">
               <button
