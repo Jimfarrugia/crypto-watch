@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
+import { Line } from "react-chartjs-2";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
@@ -17,7 +19,7 @@ function App() {
   const [coinNavData, setCoinNavData] = useState(undefined);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState(undefined);
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState(undefined);
 
   const fetchCoinList = () => {
     axios
@@ -180,15 +182,18 @@ function App() {
           </>
         )) || <div className="loader"></div>}
         {(isLoading && <div className="loader"></div>) || (
-          <Details
-            coinData={coinData}
-            chartData={chartData}
-            vsCurrency={vsCurrency}
-            priceHistoryDays={priceHistoryDays}
-            handleChangeVsCurrency={handleChangeVsCurrency}
-            handleChangePriceHistoryDays={handleChangePriceHistoryDays}
-            error={error}
-          />
+          <>
+            <Details
+              coinData={coinData}
+              chartData={chartData}
+              vsCurrency={vsCurrency}
+              priceHistoryDays={priceHistoryDays}
+              handleChangeVsCurrency={handleChangeVsCurrency}
+              handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+              error={error}
+            />
+            {chartData && <Line data={chartData} />}
+          </>
         )}
         <Footer />
       </div>

@@ -1,5 +1,3 @@
-import { Line } from "react-chartjs-2";
-
 const currencies = [
   "usd",
   "aud",
@@ -160,7 +158,6 @@ const Details = ({
               ))}
             </div>
           </div>
-          <Line data={chartData} />
         </>
       )}
     </section>
