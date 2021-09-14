@@ -8,9 +8,11 @@ const Footer = () => {
             target="blank"
           >
             Source Code
-          </a>
+          </a>{" "}
+          on Github
         </li>
         <li>
+          Authored by{" "}
           <a href="https://www.jimfarrugia.com.au" target="blank">
             Jim Farrugia
           </a>

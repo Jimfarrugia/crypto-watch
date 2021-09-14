@@ -67,14 +67,14 @@ input {
 
 a:link,
 a:visited {
-  color: var(--purple-bright);
+  color: var(--purple);
   text-decoration: none;
   transition: 0.25s;
 }
 
 a:hover,
 a:active {
-  color: var(--blue-bright);
+  color: var(--purple-bright);
 }
 
 .text-red {
@@ -241,26 +241,23 @@ button > image {
 }
 
 .page-footer ul {
-  padding: 0;
-  position: relative;
+  border-top: 1px solid var(--purple);
+  padding: 0.75rem 0 0;
+  margin: 0;
   font-size: 0.8rem;
+  color: var(--white);
+  color: #777;
 }
 
 .page-footer li {
-  display: inline-block;
   list-style: none;
-  padding-right: 1.5rem;
-}
-
-.page-footer li:last-child {
-  font-size: 0.8rem;
-  position: absolute;
-  right: 0;
-  padding: 0;
+  display: block;
+  position: relative;
+  text-align: right;
+  padding: 0.5rem 0;
 }
 
 /* Loader */
-
 .loader {
   color: var(--purple-bright);
   font-size: 20px;
