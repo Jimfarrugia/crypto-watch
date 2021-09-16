@@ -1,15 +1,15 @@
 const currencies = [
-  "usd",
-  "aud",
-  "cad",
-  "chf",
-  "cny",
-  "eur",
-  "gbp",
-  "jpy",
-  "krw",
-  "nok",
-  "nzd",
+  { label: "USD", value: "usd" },
+  { label: "AUD", value: "aud" },
+  { label: "CAD", value: "cad" },
+  { label: "CHF", value: "chf" },
+  { label: "CNY", value: "cny" },
+  { label: "EUR", value: "eur" },
+  { label: "GBP", value: "gbp" },
+  { label: "JPY", value: "jpy" },
+  { label: "KRW", value: "krw" },
+  { label: "NOK", value: "nok" },
+  { label: "NZD", value: "nzd" },
 ];
 
 const timeframes = [
@@ -21,12 +21,17 @@ const timeframes = [
   { label: "12 Months", value: 365 },
 ];
 
-const CurrencyButton = ({ value, handleChangeVsCurrency, vsCurrency }) => (
+const CurrencyButton = ({
+  value,
+  label,
+  vsCurrency,
+  handleChangeVsCurrency,
+}) => (
   <button
     onClick={() => handleChangeVsCurrency(value)}
     className={vsCurrency === value ? "active" : ""}
   >
-    {value.toUpperCase()}
+    {label}
   </button>
 );
 
@@ -55,8 +60,9 @@ const Settings = ({
       <div className="currency">
         {currencies.map((currency) => (
           <CurrencyButton
-            key={currency}
-            value={currency}
+            key={currency.value}
+            value={currency.value}
+            label={currency.label}
             handleChangeVsCurrency={handleChangeVsCurrency}
             vsCurrency={vsCurrency}
           />
@@ -65,6 +71,7 @@ const Settings = ({
       <div className="timeframe">
         {timeframes.map((timeframe) => (
           <TimeframeButton
+            key={`${timeframe.value}days`}
             value={timeframe.value}
             label={timeframe.label}
             priceHistoryDays={priceHistoryDays}
