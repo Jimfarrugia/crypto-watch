@@ -50,6 +50,7 @@ function App() {
       })
       .catch((error) => {
         setIsLoading(false);
+        setChartData(undefined);
         setError(error.message);
         console.log(error);
       });
@@ -99,6 +100,7 @@ function App() {
       })
       .catch((error) => {
         setIsLoading(false);
+        setChartData(undefined);
         setError(error.message);
         console.log(error);
       });
@@ -145,6 +147,8 @@ function App() {
   const handleSuggestionSelect = (suggestion) => {
     setSearchTerm(suggestion);
     setSearchSuggestions([]);
+    setError(undefined);
+    fetchCoinDataByName(suggestion);
   };
 
   const handleSearchSubmit = (e) => {
