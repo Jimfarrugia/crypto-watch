@@ -12,7 +12,10 @@ import Settings from "./components/Settings";
 function App() {
   const coinNavLength = 10;
   const [vsCurrency, setVsCurrency] = useState("usd");
-  const [priceHistoryDays, setPriceHistoryDays] = useState(30);
+  const [priceHistoryDays, setPriceHistoryDays] = useState({
+    label: "1 Month",
+    value: 30,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
@@ -63,7 +66,7 @@ function App() {
   };
 
   const fetchCoinPriceHistory = (id) => {
-    const params = { vs_currency: vsCurrency, days: priceHistoryDays };
+    const params = { vs_currency: vsCurrency, days: priceHistoryDays.value };
     if (params.days < 91) {
       params["interval"] = "daily";
     }
@@ -161,14 +164,14 @@ function App() {
     }
   };
 
-  const handleChangePriceHistoryDays = (days) => {
+  const handleChangePriceHistoryDays = (selectedOption) => {
     setIsLoading(true);
-    setPriceHistoryDays(days);
+    setPriceHistoryDays(selectedOption);
   };
 
-  const handleChangeVsCurrency = (c) => {
+  const handleChangeVsCurrency = ({ value }) => {
     setIsLoading(true);
-    setVsCurrency(c);
+    setVsCurrency(value);
   };
 
   return (

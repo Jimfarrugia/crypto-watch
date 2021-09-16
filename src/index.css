@@ -231,29 +231,10 @@ a:active {
 }
 
 .settings {
-  text-align: center;
-  margin: 0 0 1rem;
-}
-
-.settings .timeframe {
-  margin-top: 1rem;
-}
-
-.settings button {
-  border: 1px solid var(--purple);
-  color: var(--purple);
-  background: none;
-  margin-left: 0.125rem;
-}
-.settings button.active {
-  color: var(--purple-bright);
-  border-color: var(--purple-bright);
-}
-.settings button:hover {
-  border-color: var(--purple-bright);
-  color: var(--purple-bright);
-  background: none;
-  cursor: pointer;
+  margin-bottom: 1.5em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.125em;
 }
 
 .page-footer ul {
