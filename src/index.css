@@ -95,6 +95,7 @@ a:active {
 }
 
 .page-header {
+  min-width: 285px;
   line-height: 1.35;
   margin: 0 0 1.5em;
   background: linear-gradient(var(--purple-bright), var(--purple));
