@@ -49,6 +49,7 @@ function App() {
         fetchCoinPriceHistory(id);
       })
       .catch((error) => {
+        setIsLoading(false);
         setError(error.message);
         console.log(error);
       });
@@ -97,6 +98,7 @@ function App() {
         });
       })
       .catch((error) => {
+        setIsLoading(false);
         setError(error.message);
         console.log(error);
       });
@@ -147,6 +149,7 @@ function App() {
 
   const handleSearchSubmit = (e) => {
     if (e) e.preventDefault();
+    setError(undefined);
     setSearchSuggestions([]);
     if (searchTerm.trim().length > 0) {
       fetchCoinDataByName(searchTerm);
