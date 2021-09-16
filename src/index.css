@@ -40,7 +40,7 @@ code {
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--white);
+  color: var(--purple);
   opacity: 1; /* Firefox */
 }
 
