@@ -39,9 +39,13 @@ const selectStyles = {
     fontSize: "0.9rem",
     backgroundColor: "#0e0b16",
     color: "#e7dfdd",
+    borderBottom: "1px solid #813772",
     "&:hover": {
       backgroundColor: "#a239ca",
       color: "#e7dfdd",
+    },
+    "&:last-child": {
+      borderBottom: "none",
     },
   }),
   input: (styles) => ({

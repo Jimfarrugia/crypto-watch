@@ -37,33 +37,33 @@ const SearchBar = ({
           <input type="submit" className="search-button" value="Search" />
         </div>
       </form>
-      <div className="search-suggestions-wrapper">
-        {/* If there are more than 10 suggestions 
+      {searchSuggestions && searchSuggestions.length > 0 && (
+        <div className="search-suggestions-wrapper">
+          {/* If there are more than 10 suggestions 
               then only show those which begin with the search term */}
-        {(searchSuggestions &&
-          searchSuggestions.length > 10 &&
-          searchSuggestions.map((suggestion, index) => {
-            let regex = new RegExp(`^${searchTerm}`, "i");
-            return suggestion.match(regex) ? (
-              <SearchSuggestion
-                index={index}
-                suggestion={suggestion}
-                handleSuggestionSelect={handleSuggestionSelect}
-              />
-            ) : (
-              <></>
-            );
-          })) ||
-          (searchSuggestions &&
-            searchSuggestions.length > 0 &&
-            searchSuggestions.map((suggestion, index) => (
-              <SearchSuggestion
-                index={index}
-                suggestion={suggestion}
-                handleSuggestionSelect={handleSuggestionSelect}
-              />
-            )))}
-      </div>
+          {(searchSuggestions.length > 10 &&
+            searchSuggestions.map((suggestion, index) => {
+              let regex = new RegExp(`^${searchTerm}`, "i");
+              return suggestion.match(regex) ? (
+                <SearchSuggestion
+                  index={index}
+                  suggestion={suggestion}
+                  handleSuggestionSelect={handleSuggestionSelect}
+                />
+              ) : (
+                <></>
+              );
+            })) ||
+            (searchSuggestions.length < 10 &&
+              searchSuggestions.map((suggestion, index) => (
+                <SearchSuggestion
+                  index={index}
+                  suggestion={suggestion}
+                  handleSuggestionSelect={handleSuggestionSelect}
+                />
+              )))}
+        </div>
+      )}
     </div>
   );
 };
