@@ -34,11 +34,11 @@ const selectStyles = {
       borderColor: "#a239ca",
     },
   }),
-  option: (styles, { isSelected }) => ({
+  option: (styles) => ({
     ...styles,
     fontSize: "0.9rem",
-    backgroundColor: isSelected ? "#813772" : "#e7dfdd",
-    color: isSelected ? "#e7dfdd" : "#0e0b16",
+    backgroundColor: "#0e0b16",
+    color: "#e7dfdd",
     "&:hover": {
       backgroundColor: "#a239ca",
       color: "#e7dfdd",
@@ -67,6 +67,9 @@ const selectStyles = {
   menu: (styles) => ({
     ...styles,
     margin: 0,
+    backgroundColor: "#0e0b16",
+    border: "1px solid #813772",
+    borderTop: "none",
   }),
 };
 
@@ -80,6 +83,7 @@ const Settings = ({
     <div className="settings">
       <div className="currency">
         <Select
+          isSearchable={false}
           options={currencies}
           styles={selectStyles}
           placeholder={vsCurrency.toUpperCase()}
@@ -88,6 +92,7 @@ const Settings = ({
       </div>
       <div className="timeframe">
         <Select
+          isSearchable={false}
           options={timeframes}
           styles={selectStyles}
           placeholder={priceHistoryDays.label}
