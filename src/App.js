@@ -147,6 +147,7 @@ function App() {
 
   const handleSearchSubmit = (e) => {
     if (e) e.preventDefault();
+    setSearchSuggestions([]);
     if (searchTerm.trim().length > 0) {
       fetchCoinDataByName(searchTerm);
     }
