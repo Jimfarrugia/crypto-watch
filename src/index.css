@@ -155,71 +155,9 @@ a:focus {
   display: inline-block;
 }
 
-.search-section {
+.search {
   padding: 0;
   margin: 1.25rem 0 1.5rem;
-}
-.search-field-wrapper {
-  position: relative;
-  margin-right: 104px; /* should match .search-button width */
-}
-.search-field {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  color: var(--purple);
-  outline: none;
-  border: 1px solid var(--purple);
-  background-color: var(--black);
-  border-radius: 5px 0 0 5px;
-}
-.search-field:focus,
-.search-field:hover {
-  color: var(--purple-bright);
-  border-color: var(--purple-bright);
-}
-.search-button {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 104px; /* should match .search-field-wrapper margin-right */
-  padding: 0.5rem 0;
-  margin-left: 0;
-  font-size: 1rem;
-  color: var(--purple);
-  background: none;
-  outline: none;
-  border: 1px solid var(--purple);
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-}
-.search-button:focus,
-.search-button:hover {
-  color: var(--purple-bright);
-  border-color: var(--purple-bright);
-  box-shadow: 0 0 0.25em #a239ca;
-}
-
-.search-suggestions-wrapper {
-  max-height: 50vh;
-  overflow: auto;
-  border: 1px solid var(--purple);
-  border-radius: 5px;
-}
-.search-suggestion {
-  font-size: 1rem;
-  color: var(--white);
-  cursor: pointer;
-  padding: 0.5em;
-  background: var(--black);
-  border-bottom: 1px solid var(--purple);
-}
-.search-suggestion:hover {
-  color: var(--white);
-  background-color: var(--purple-bright);
 }
 
 .details header {

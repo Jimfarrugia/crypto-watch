@@ -18,17 +18,17 @@ function App() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
+  const [searchTerm, setSearchTerm] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
   const [coinList, setCoinList] = useState(undefined);
   const [coinNavData, setCoinNavData] = useState(undefined);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchSuggestions, setSearchSuggestions] = useState(undefined);
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
 
   const fetchCoinList = () => {
     axios
       .get("https://api.coingecko.com/api/v3/coins/list")
-      .then((response) => setCoinList(response.data.map((coin) => coin.name))) // TODO - add error check
+      .then((response) => setCoinList(response.data))
       .catch((error) => console.log(error));
   };
 
@@ -48,7 +48,6 @@ function App() {
             `Unable to find data for "${id}"...
             Check the spelling or try a different search term.`
           );
-        setSearchTerm(response.data[0].name);
         setCoinData(response.data[0]);
         fetchCoinPriceHistory(id);
       })
@@ -58,11 +57,6 @@ function App() {
         setError(error.message);
         console.log(error);
       });
-  };
-
-  const fetchCoinDataByName = (name) => {
-    const id = name.trim().replace(/\s+/g, "-").toLowerCase();
-    fetchCoinDataById(id);
   };
 
   const fetchCoinPriceHistory = (id) => {
@@ -119,7 +113,7 @@ function App() {
             per_page: n,
           },
         })
-        .then((response) => setCoinNavData(response.data)) // TODO - add error check
+        .then((response) => setCoinNavData(response.data))
         .catch((error) => console.log(error));
     };
 
@@ -135,33 +129,30 @@ function App() {
     if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
   }, [priceHistoryDays]);
 
-  const handleSearchTermChange = (e) => {
-    const text = e.target.value.replace("\\", "");
-    setSearchTerm(text);
-    let matches = [];
-    if (text.length > 0) {
-      matches = coinList.filter((coinName) => {
-        let regex = new RegExp(`${text}`, "gi");
-        return coinName.match(regex);
-      });
+  const handleSearchInputChange = (input) => {
+    if (input.match(/[^A-Za-z0-9.!-]/, "g")) {
+      // disallow most symbols
+      return searchTerm;
     }
-    setSearchSuggestions(matches);
+    setSearchTerm(input);
+    if (input.length < 1) {
+      return setSearchSuggestions([]);
+    }
+    const matches = coinList.filter((coin) => {
+      let regex = new RegExp(`${input}`, "gi");
+      return coin.name.match(regex); // || coin.symbol.match(regex); //? symbol search isn't working
+    });
+    setSearchSuggestions(
+      matches.map((coin) => ({
+        label: coin.name,
+        value: coin.id,
+      }))
+    );
   };
 
-  const handleSuggestionSelect = (suggestion) => {
-    setSearchTerm(suggestion);
+  const handleSearchChange = (option) => {
     setSearchSuggestions([]);
-    setError(undefined);
-    fetchCoinDataByName(suggestion);
-  };
-
-  const handleSearchSubmit = (e) => {
-    if (e) e.preventDefault();
-    setError(undefined);
-    setSearchSuggestions([]);
-    if (searchTerm.trim().length > 0) {
-      fetchCoinDataByName(searchTerm);
-    }
+    fetchCoinDataById(option.value);
   };
 
   const handleChangePriceHistoryDays = (selectedOption) => {
@@ -186,11 +177,9 @@ function App() {
             />
             <SearchBar
               searchTerm={searchTerm}
-              handleSearchTermChange={handleSearchTermChange}
-              handleSearchSubmit={handleSearchSubmit}
               searchSuggestions={searchSuggestions}
-              setSearchSuggestions={setSearchSuggestions}
-              handleSuggestionSelect={handleSuggestionSelect}
+              handleSearchInputChange={handleSearchInputChange}
+              handleSearchChange={handleSearchChange}
             />
           </>
         )) || <div className="loader"></div>}
