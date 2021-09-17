@@ -130,13 +130,17 @@ function App() {
   }, [priceHistoryDays]);
 
   const handleSearchInputChange = (input) => {
+    if (input.match(/[^A-Za-z0-9.!-]/, "g")) {
+      // disallow most symbols
+      return searchTerm;
+    }
     setSearchTerm(input);
     if (input.length < 1) {
       return setSearchSuggestions([]);
     }
     const matches = coinList.filter((coin) => {
       let regex = new RegExp(`${input}`, "gi");
-      return coin.name.match(regex) || coin.symbol.match(regex); //? symbol search isn't working
+      return coin.name.match(regex); // || coin.symbol.match(regex); //? symbol search isn't working
     });
     setSearchSuggestions(
       matches.map((coin) => ({
