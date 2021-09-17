@@ -1,15 +1,3 @@
-const SearchSuggestion = ({ handleSuggestionSelect, suggestion, index }) => {
-  return (
-    <div
-      key={index}
-      className="search-suggestion"
-      onClick={() => handleSuggestionSelect(suggestion)}
-    >
-      {suggestion}
-    </div>
-  );
-};
-
 const SearchBar = ({
   handleSearchSubmit,
   searchTerm,
@@ -42,25 +30,29 @@ const SearchBar = ({
           {/* If there are more than 10 suggestions 
               then only show those which begin with the search term */}
           {(searchSuggestions.length > 10 &&
-            searchSuggestions.map((suggestion, index) => {
+            searchSuggestions.map((suggestion) => {
               let regex = new RegExp(`^${searchTerm}`, "i");
               return suggestion.match(regex) ? (
-                <SearchSuggestion
-                  index={index}
-                  suggestion={suggestion}
-                  handleSuggestionSelect={handleSuggestionSelect}
-                />
+                <div
+                  key={suggestion}
+                  className="search-suggestion"
+                  onClick={() => handleSuggestionSelect(suggestion)}
+                >
+                  {suggestion}
+                </div>
               ) : (
-                <></>
+                ""
               );
             })) ||
             (searchSuggestions.length < 10 &&
-              searchSuggestions.map((suggestion, index) => (
-                <SearchSuggestion
-                  index={index}
-                  suggestion={suggestion}
-                  handleSuggestionSelect={handleSuggestionSelect}
-                />
+              searchSuggestions.map((suggestion) => (
+                <div
+                  key={suggestion}
+                  className="search-suggestion"
+                  onClick={() => handleSuggestionSelect(suggestion)}
+                >
+                  {suggestion}
+                </div>
               )))}
         </div>
       )}
