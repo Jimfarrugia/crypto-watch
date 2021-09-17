@@ -32,6 +32,7 @@ const selectStyles = {
     boxShadow: "none",
     "&:hover": {
       borderColor: "#a239ca",
+      cursor: "pointer",
     },
   }),
   option: (styles) => ({
@@ -43,6 +44,7 @@ const selectStyles = {
     "&:hover": {
       backgroundColor: "#a239ca",
       color: "#e7dfdd",
+      cursor: "pointer",
     },
     "&:last-child": {
       borderBottom: "none",
