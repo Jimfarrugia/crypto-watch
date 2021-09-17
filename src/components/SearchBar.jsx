@@ -1,4 +1,6 @@
-import Select from "react-select";
+import Select, { components } from "react-select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = ({
   searchTerm,
@@ -58,6 +60,9 @@ const SearchBar = ({
     dropdownIndicator: (styles) => ({
       ...styles,
       color: "#813772",
+      "&:hover": {
+        color: "#813772",
+      },
     }),
     indicatorSeparator: (styles) => ({
       ...styles,
@@ -72,13 +77,22 @@ const SearchBar = ({
     }),
   };
 
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <FontAwesomeIcon icon={faSearch} />
+      </components.DropdownIndicator>
+    );
+  };
+
   return (
     <div className="search">
       <Select
         options={options}
         styles={selectStyles}
-        onInputChange={(e) => handleSearchInputChange(e)}
-        onChange={(e) => handleSearchChange(e)}
+        components={{ DropdownIndicator }}
+        onInputChange={(input) => handleSearchInputChange(input)}
+        onChange={(option) => handleSearchChange(option)}
         noOptionsMessage={() => null}
         placeholder="Search..."
         autoComplete="off"
