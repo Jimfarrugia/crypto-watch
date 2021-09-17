@@ -24,21 +24,21 @@ const timeframes = [
 ];
 
 const selectStyles = {
-  control: (styles) => ({
+  control: (styles, { isFocused }) => ({
     ...styles,
     fontSize: "0.9rem",
     background: "none",
-    borderColor: "#813772",
-    boxShadow: "none",
+    boxShadow: isFocused ? "0 0 0.25em #a239ca" : "none",
+    borderColor: isFocused ? "#a239ca" : "#813772",
     "&:hover": {
       borderColor: "#a239ca",
       cursor: "pointer",
     },
   }),
-  option: (styles) => ({
+  option: (styles, { isFocused }) => ({
     ...styles,
     fontSize: "0.9rem",
-    backgroundColor: "#0e0b16",
+    backgroundColor: isFocused ? "#a239ca" : "#0e0b16",
     color: "#e7dfdd",
     borderBottom: "1px solid #813772",
     "&:hover": {
