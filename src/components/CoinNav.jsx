@@ -5,10 +5,13 @@ const CoinNav = ({ fetchCoinDataById, coinNavData }) => {
         {coinNavData &&
           coinNavData.map((coin) => (
             <li key={coin.symbol}>
-              <button onClick={() => fetchCoinDataById(coin.id)}>
+              <button
+                title={coin.name}
+                onClick={() => fetchCoinDataById(coin.id)}
+              >
                 <img
                   src={coin.image}
-                  alt={`${coin.id} icon`}
+                  alt={`${coin.name} icon`}
                   height="32"
                   width="32"
                 />
