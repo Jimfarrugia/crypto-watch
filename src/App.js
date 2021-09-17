@@ -8,7 +8,9 @@ import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
-import { currencies, timeframes, coinNavLength } from "./constants";
+import { currencies, timeframes, coinNavLength, color } from "./constants";
+
+const { blue, blueBright } = color;
 
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
@@ -86,8 +88,8 @@ function App() {
             {
               label: `Price in ${vsCurrency.toUpperCase()}`,
               data: prices.map((price) => price[1]),
-              borderColor: "#4717f6",
-              backgroundColor: "#062f4f",
+              borderColor: blueBright,
+              backgroundColor: blue,
               fill: true,
             },
           ],

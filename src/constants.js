@@ -23,4 +23,13 @@ export const timeframes = [
   { label: "12 Months", value: 365 },
 ];
 
-// TODO - Add colors
+export const color = {
+  black: "#0e0b16",
+  gray: "#777777",
+  white: "#e7dfdd",
+  purple: "#813772",
+  purpleBright: "#a239ca",
+  blue: "#062f4f",
+  blueBright: "#4717f6",
+  red: "#b82601",
+};

@@ -1,6 +1,9 @@
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { color } from "../constants";
+
+const { black, white, purple, purpleBright } = color;
 
 const SearchBar = ({
   searchTerm,
@@ -23,22 +26,22 @@ const SearchBar = ({
       ...styles,
       fontSize: "1rem",
       background: "none",
-      boxShadow: isFocused ? "0 0 0.25em #a239ca" : "none",
-      borderColor: isFocused ? "#a239ca" : "#813772",
+      boxShadow: isFocused ? `0 0 0.25em ${purpleBright}` : "none",
+      borderColor: isFocused ? purpleBright : purple,
       "&:hover": {
-        borderColor: "#a239ca",
+        borderColor: purpleBright,
         cursor: "text",
       },
     }),
     option: (styles, { isFocused }) => ({
       ...styles,
       fontSize: "1rem",
-      backgroundColor: isFocused ? "#a239ca" : "#0e0b16",
-      color: "#e7dfdd",
-      borderBottom: "1px solid #813772",
+      backgroundColor: isFocused ? purpleBright : black,
+      color: white,
+      borderBottom: `1px solid ${purpleBright}`,
       "&:hover": {
-        backgroundColor: "#a239ca",
-        color: "#e7dfdd",
+        backgroundColor: purpleBright,
+        color: white,
         cursor: "pointer",
       },
       "&:last-child": {
@@ -47,32 +50,32 @@ const SearchBar = ({
     }),
     input: (styles) => ({
       ...styles,
-      color: "#a239ca",
+      color: purpleBright,
     }),
     placeholder: (styles) => ({
       ...styles,
-      color: "#813772",
+      color: purple,
     }),
     singleValue: (styles) => ({
       ...styles,
-      color: "#813772",
+      color: purple,
     }),
     dropdownIndicator: (styles) => ({
       ...styles,
-      color: "#813772",
+      color: purple,
       "&:hover": {
-        color: "#813772",
+        color: purple,
       },
     }),
     indicatorSeparator: (styles) => ({
       ...styles,
-      backgroundColor: "#813772",
+      backgroundColor: purple,
     }),
     menu: (styles) => ({
       ...styles,
       margin: 0,
-      backgroundColor: "#0e0b16",
-      border: "1px solid #813772",
+      backgroundColor: black,
+      border: `1px solid ${purpleBright}`,
       borderTop: "none",
     }),
   };

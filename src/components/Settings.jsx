@@ -1,27 +1,29 @@
 import Select from "react-select";
-import { currencies, timeframes } from "../constants";
+import { currencies, timeframes, color } from "../constants";
+
+const { black, white, purple, purpleBright } = color;
 
 const selectStyles = {
   control: (styles, { isFocused }) => ({
     ...styles,
     fontSize: "0.9rem",
     background: "none",
-    boxShadow: isFocused ? "0 0 0.25em #a239ca" : "none",
-    borderColor: isFocused ? "#a239ca" : "#813772",
+    boxShadow: isFocused ? `0 0 0.25em ${purpleBright}` : "none",
+    borderColor: isFocused ? purpleBright : purple,
     "&:hover": {
-      borderColor: "#a239ca",
+      borderColor: purpleBright,
       cursor: "pointer",
     },
   }),
   option: (styles, { isFocused }) => ({
     ...styles,
     fontSize: "0.9rem",
-    backgroundColor: isFocused ? "#a239ca" : "#0e0b16",
-    color: "#e7dfdd",
-    borderBottom: "1px solid #813772",
+    backgroundColor: isFocused ? purpleBright : black,
+    color: white,
+    borderBottom: `1px solid ${purple}`,
     "&:hover": {
-      backgroundColor: "#a239ca",
-      color: "#e7dfdd",
+      backgroundColor: purpleBright,
+      color: white,
       cursor: "pointer",
     },
     "&:last-child": {
@@ -30,29 +32,29 @@ const selectStyles = {
   }),
   input: (styles) => ({
     ...styles,
-    color: "#a239ca",
+    color: purpleBright,
   }),
   placeholder: (styles) => ({
     ...styles,
-    color: "#813772",
+    color: purple,
   }),
   singleValue: (styles) => ({
     ...styles,
-    color: "#813772",
+    color: purple,
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
-    color: "#813772",
+    color: purple,
   }),
   indicatorSeparator: (styles) => ({
     ...styles,
-    backgroundColor: "#813772",
+    backgroundColor: purple,
   }),
   menu: (styles) => ({
     ...styles,
     margin: 0,
-    backgroundColor: "#0e0b16",
-    border: "1px solid #813772",
+    backgroundColor: black,
+    border: `1px solid ${purple}`,
     borderTop: "none",
   }),
 };
