@@ -8,11 +8,7 @@ const SearchBar = ({
 }) => {
   return (
     <div className="search-section">
-      <form
-        onSubmit={handleSearchSubmit}
-        className="search-form"
-        autoComplete="off"
-      >
+      <form onSubmit={handleSearchSubmit} className="search-form">
         <div className="search-field-wrapper">
           <input
             type="text"
@@ -21,6 +17,9 @@ const SearchBar = ({
             onChange={handleSearchTermChange}
             placeholder="Search..."
             onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck="false"
           />
           <input type="submit" className="search-button" value="Search" />
         </div>
