@@ -8,14 +8,11 @@ import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
+import { currencies, timeframes, coinNavLength } from "./constants";
 
 function App() {
-  const coinNavLength = 10;
-  const [vsCurrency, setVsCurrency] = useState("usd");
-  const [priceHistoryDays, setPriceHistoryDays] = useState({
-    label: "1 Month",
-    value: 30,
-  });
+  const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
+  const [priceHistoryDays, setPriceHistoryDays] = useState(timeframes[2]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [searchTerm, setSearchTerm] = useState(undefined);
