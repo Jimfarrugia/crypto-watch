@@ -18,10 +18,11 @@ function App() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
+  const [searchTerm, setSearchTerm] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
   const [coinList, setCoinList] = useState(undefined);
   const [coinNavData, setCoinNavData] = useState(undefined);
-  const [searchSuggestions, setSearchSuggestions] = useState(undefined);
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
 
   const fetchCoinList = () => {
@@ -129,6 +130,10 @@ function App() {
   }, [priceHistoryDays]);
 
   const handleSearchInputChange = (input) => {
+    setSearchTerm(input);
+    if (input.length < 1) {
+      return setSearchSuggestions([]);
+    }
     const matches = coinList.filter((coin) => {
       let regex = new RegExp(`${input}`, "gi");
       return coin.name.match(regex) || coin.symbol.match(regex); //? symbol search isn't working
@@ -167,6 +172,7 @@ function App() {
               coinNavData={coinNavData}
             />
             <SearchBar
+              searchTerm={searchTerm}
               searchSuggestions={searchSuggestions}
               handleSearchInputChange={handleSearchInputChange}
               handleSearchChange={handleSearchChange}
