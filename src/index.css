@@ -155,13 +155,13 @@ a:focus {
   display: inline-block;
 }
 
-.search-section {
+.search {
   padding: 0;
   margin: 1.25rem 0 1.5rem;
 }
-.search-field-wrapper {
+/* .search-field-wrapper {
   position: relative;
-  margin-right: 104px; /* should match .search-button width */
+  margin-right: 104px; 
 }
 .search-field {
   box-sizing: border-box;
@@ -185,7 +185,7 @@ a:focus {
   position: absolute;
   top: 0;
   left: 100%;
-  width: 104px; /* should match .search-field-wrapper margin-right */
+  width: 104px; 
   padding: 0.5rem 0;
   margin-left: 0;
   font-size: 1rem;
@@ -220,7 +220,7 @@ a:focus {
 .search-suggestion:hover {
   color: var(--white);
   background-color: var(--purple-bright);
-}
+} */
 
 .details header {
   text-align: center;

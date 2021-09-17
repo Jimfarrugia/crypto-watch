@@ -1,60 +1,25 @@
+import Select from "react-select";
+
 const SearchBar = ({
-  handleSearchSubmit,
-  searchTerm,
-  handleSearchTermChange,
-  setSearchSuggestions,
   searchSuggestions,
-  handleSuggestionSelect,
+  handleSearchInputChange,
+  handleSearchChange,
 }) => {
+  // create styles object for react-select field
+
+  // remember to preserve attributes from the old search-field
+
   return (
-    <div className="search-section">
-      <form onSubmit={handleSearchSubmit} className="search-form">
-        <div className="search-field-wrapper">
-          <input
-            type="text"
-            className="search-field"
-            value={searchTerm}
-            onChange={handleSearchTermChange}
-            placeholder="Search..."
-            onBlur={() => setTimeout(() => setSearchSuggestions([]), 100)}
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck="false"
-          />
-          <input type="submit" className="search-button" value="Search" />
-        </div>
-      </form>
-      {searchSuggestions && searchSuggestions.length > 0 && (
-        <div className="search-suggestions-wrapper">
-          {/* If there are more than 10 suggestions 
-              then only show those which begin with the search term */}
-          {(searchSuggestions.length > 10 &&
-            searchSuggestions.map((suggestion) => {
-              let regex = new RegExp(`^${searchTerm}`, "i");
-              return suggestion.match(regex) ? (
-                <div
-                  key={suggestion}
-                  className="search-suggestion"
-                  onClick={() => handleSuggestionSelect(suggestion)}
-                >
-                  {suggestion}
-                </div>
-              ) : (
-                ""
-              );
-            })) ||
-            (searchSuggestions.length < 10 &&
-              searchSuggestions.map((suggestion) => (
-                <div
-                  key={suggestion}
-                  className="search-suggestion"
-                  onClick={() => handleSuggestionSelect(suggestion)}
-                >
-                  {suggestion}
-                </div>
-              )))}
-        </div>
-      )}
+    <div className="search">
+      <Select
+        options={searchSuggestions}
+        onInputChange={(e) => handleSearchInputChange(e)}
+        onChange={(e) => handleSearchChange(e)}
+        placeholder="Search..."
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck="false"
+      />
     </div>
   );
 };
