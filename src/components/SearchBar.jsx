@@ -26,6 +26,7 @@ const SearchBar = ({
         options={options}
         onInputChange={(e) => handleSearchInputChange(e)}
         onChange={(e) => handleSearchChange(e)}
+        noOptionsMessage={() => null}
         placeholder="Search..."
         autoComplete="off"
         autoCorrect="off"
