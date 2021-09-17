@@ -113,7 +113,7 @@ function App() {
             per_page: n,
           },
         })
-        .then((response) => setCoinNavData(response.data)) // TODO - add error check
+        .then((response) => setCoinNavData(response.data))
         .catch((error) => console.log(error));
     };
 
