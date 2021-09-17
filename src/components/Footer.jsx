@@ -6,6 +6,7 @@ const Footer = () => {
           <a
             href="https://github.com/Jimfarrugia/cryptocurrency-tracker"
             target="blank"
+            title="Source Code"
           >
             Source Code
           </a>{" "}
@@ -13,7 +14,11 @@ const Footer = () => {
         </li>
         <li>
           Authored by{" "}
-          <a href="https://www.jimfarrugia.com.au" target="blank">
+          <a
+            href="https://www.jimfarrugia.com.au"
+            target="blank"
+            title="Jim Farrugia"
+          >
             Jim Farrugia
           </a>
         </li>
@@ -22,6 +27,7 @@ const Footer = () => {
           <a
             href="https://www.coingecko.com/en/api/documentation"
             target="blank"
+            title="CoinGecko API"
           >
             CoinGecko API
           </a>
