@@ -257,8 +257,8 @@ a:active {
 /* Loader */
 .loader {
   color: var(--purple-bright);
-  font-size: 20px;
-  margin: 100px auto;
+  font-size: 1rem;
+  margin: 5em auto;
   width: 1em;
   height: 1em;
   border-radius: 50%;
