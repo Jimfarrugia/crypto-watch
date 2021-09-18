@@ -30,26 +30,6 @@ const selectStyles = {
       borderBottom: "none",
     },
   }),
-  input: (styles) => ({
-    ...styles,
-    color: purpleBright,
-  }),
-  placeholder: (styles) => ({
-    ...styles,
-    color: purple,
-  }),
-  singleValue: (styles) => ({
-    ...styles,
-    color: purple,
-  }),
-  dropdownIndicator: (styles) => ({
-    ...styles,
-    color: purple,
-  }),
-  indicatorSeparator: (styles) => ({
-    ...styles,
-    backgroundColor: purple,
-  }),
   menu: (styles) => ({
     ...styles,
     margin: 0,
@@ -57,6 +37,11 @@ const selectStyles = {
     border: `1px solid ${purple}`,
     borderTop: "none",
   }),
+  input: (styles) => ({ ...styles, color: purpleBright }),
+  placeholder: (styles) => ({ ...styles, color: purple }),
+  singleValue: (styles) => ({ ...styles, color: purple }),
+  dropdownIndicator: (styles) => ({ ...styles, color: purple }),
+  indicatorSeparator: (styles) => ({ ...styles, backgroundColor: purple }),
 };
 
 const Settings = ({
