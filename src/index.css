@@ -6,7 +6,8 @@
   --purple-bright: #a239ca;
   --blue: #062f4f;
   --blue-bright: #4717f6;
-  --red: #b82601;
+  --red: #ff0a0a;
+  --green: #1aff1a;
 }
 
 body {
@@ -85,10 +86,10 @@ a:focus {
 }
 
 .text-red {
-  color: red;
+  color: var(--red);
 }
 .text-green {
-  color: lime;
+  color: var(--green);
 }
 
 .page-wrapper {

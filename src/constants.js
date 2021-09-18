@@ -33,5 +33,6 @@ export const color = {
   purpleBright: "#a239ca",
   blue: "#062f4f",
   blueBright: "#4717f6",
-  red: "#b82601",
+  red: "#ff0a0a",
+  green: "#1aff1a",
 };
