@@ -8,7 +8,13 @@ import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
-import { currencies, timeframes, coinNavLength, color } from "./constants";
+import {
+  currencies,
+  timeframes,
+  coinNavLength,
+  color,
+  API_BASE_URL,
+} from "./constants";
 
 const { blue, blueBright } = color;
 
@@ -24,9 +30,11 @@ function App() {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
 
+  axios.defaults.baseURL = API_BASE_URL;
+
   const fetchCoinList = () => {
     axios
-      .get("https://api.coingecko.com/api/v3/coins/list")
+      .get(`/coins/list`)
       .then((response) => setCoinList(response.data))
       .catch((error) => console.log(error));
   };
@@ -35,7 +43,7 @@ function App() {
     setError(undefined);
     setIsLoading(true);
     axios
-      .get(`https://api.coingecko.com/api/v3/coins/markets`, {
+      .get(`/coins/markets`, {
         params: {
           vs_currency: vsCurrency,
           ids: id,
@@ -64,7 +72,7 @@ function App() {
       params["interval"] = "daily";
     }
     axios
-      .get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart`, {
+      .get(`/coins/${id}/market_chart`, {
         params,
       })
       .then((response) => {
@@ -106,7 +114,7 @@ function App() {
   useEffect(() => {
     const fetchCoinNavData = (n) => {
       axios
-        .get("https://api.coingecko.com/api/v3/coins/markets", {
+        .get(`/coins/markets`, {
           params: {
             vs_currency: "usd",
             per_page: n,
