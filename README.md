@@ -57,4 +57,4 @@ You will need Node.js which can be downloaded [here](https://nodejs.org/).
 
 Please feel free to submit issues and pull requests via Github if you'd like to contribute.
 
-Any known bugs or publicly planned features can be found and can be found in the issues page of this repository.
+Any known bugs or publicly planned features can be found and can be found in the [issues page](https://github.com/Jimfarrugia/cryptocurrency-tracker/issues) of this repository.
