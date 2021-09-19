@@ -1,4 +1,4 @@
-import { formatPriceNumber } from "../helpers";
+import { currencySymbol, formatPriceNumber } from "../helpers";
 
 const Details = ({ coinData, chartData, vsCurrency, error }) => {
   if (error) {
@@ -34,7 +34,8 @@ const Details = ({ coinData, chartData, vsCurrency, error }) => {
               }`}
             >
               {coinData.current_price &&
-                formatPriceNumber(coinData.current_price, vsCurrency)}
+                currencySymbol(vsCurrency) +
+                  formatPriceNumber(coinData.current_price)}
             </p>
           </header>
         </>
