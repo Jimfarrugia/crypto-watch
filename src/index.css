@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&family=Ubuntu:wght@400;700&display=swap");
+
 :root {
   --black: #0e0b16;
   --gray: #777;
@@ -17,16 +19,14 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Ubuntu", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: "Ubuntu Mono", "Courier New", monospace;
 }
 
 ::-webkit-scrollbar {
@@ -141,6 +141,7 @@ a:focus {
   text-align: center;
 }
 .coin-nav button > span {
+  font-family: "Ubuntu Mono", "Courier New", monospace;
   display: inline-block;
   padding: 0.25rem 0;
 }
@@ -170,7 +171,7 @@ a:focus {
 .details h2 small {
   font-size: 1rem;
   font-weight: normal;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Ubuntu Mono", "Courier New", monospace;
 }
 .details header .current-price {
   font-size: 1.5rem;
