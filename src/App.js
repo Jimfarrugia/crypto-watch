@@ -18,6 +18,12 @@ import {
 
 const { blue, blueBright } = color;
 
+const RefreshButton = () => (
+  <button className="button-link" onClick={() => window.location.reload()}>
+    refresh
+  </button>
+);
+
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
   const [priceHistoryDays, setPriceHistoryDays] = useState(timeframes[2]);
@@ -36,7 +42,22 @@ function App() {
     axios
       .get(`/coins/list`)
       .then((response) => setCoinList(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setError(
+          <>
+            <p>Error connecting to the data server.</p>
+            <p>
+              Please <RefreshButton /> the page.
+            </p>
+            <p>
+              Please note that the data server can handle up to ~50 requests per
+              minute so you may need to wait up to one minute.
+            </p>
+          </>
+        );
+        console.error(error);
+        setIsLoading(false);
+      });
   };
 
   const fetchCoinDataById = (id) => {
@@ -51,10 +72,7 @@ function App() {
       })
       .then((response) => {
         if (!response || !response.data || response.data.length < 1)
-          throw new Error(
-            `Unable to find data for "${id}"...
-            Check the spelling or try a different search term.`
-          );
+          throw new Error(`Unable to find data for "${id}"...`);
         setCoinData(response.data[0]);
         fetchCoinPriceHistory(id);
       })
@@ -62,7 +80,7 @@ function App() {
         setIsLoading(false);
         setChartData(undefined);
         setError(error.message);
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -78,10 +96,7 @@ function App() {
       .then((response) => {
         setIsLoading(false);
         if (!response || !response.data || response.data.prices.length < 1)
-          throw new Error(
-            `Error while fetching price history for "${id}"...
-            Check the spelling or try a different search term.`
-          );
+          throw new Error(`Unable to fetch price history for "${id}"...`);
         const {
           data: { prices },
         } = response;
@@ -107,7 +122,7 @@ function App() {
         setIsLoading(false);
         setChartData(undefined);
         setError(error.message);
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -189,7 +204,8 @@ function App() {
               handleSearchChange={handleSearchChange}
             />
           </>
-        )) || <div className="loader"></div>}
+        )) ||
+          (isLoading && <div className="loader"></div>)}
         {(isLoading && <div className="loader"></div>) || (
           <>
             <Details

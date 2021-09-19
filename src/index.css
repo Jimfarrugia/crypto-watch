@@ -92,6 +92,21 @@ a:focus {
   color: var(--green);
 }
 
+.button-link {
+  font-size: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--purple);
+  cursor: pointer;
+}
+.button-link:hover {
+  color: var(--purple-bright);
+}
+.button-link:focus {
+  outline: 0.125rem solid var(--purple-bright);
+}
+
 .page-wrapper {
   max-width: 700px;
   min-width: 260px;

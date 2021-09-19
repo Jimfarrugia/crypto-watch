@@ -2,7 +2,7 @@ import { currencySymbol, formatPriceNumber } from "../helpers";
 
 const Details = ({ coinData, chartData, vsCurrency, error }) => {
   if (error) {
-    return <p>{error}</p>;
+    return <div>{error}</div>;
   }
   return (
     <section className="details">
