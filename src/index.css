@@ -166,7 +166,7 @@ a:focus {
   text-align: center;
 }
 .details h2 {
-  margin: 1em 0;
+  margin: 1em 0 0;
 }
 .details h2 small {
   font-size: 1rem;
@@ -174,9 +174,10 @@ a:focus {
   font-family: "Ubuntu Mono", "Courier New", monospace;
 }
 .details header .current-price {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  padding: 0 0 0.25em;
+  padding: 0;
+  margin: 0.5em 0 1em;
 }
 
 .settings {
