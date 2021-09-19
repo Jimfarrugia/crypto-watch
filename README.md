@@ -10,9 +10,9 @@ View the current and historical price of any cryptocurrency.
 
 ## Description
 
-Built with React.js and using data from [CoinGecko](https://www.coingecko.com/)'s API.
+Built with React.js and using data from [CoinGecko](https://www.coingecko.com/)'s [API](https://www.coingecko.com/api/documentations/v3).
 
-The current top 10 cryptocurrencies (by market cap) are displayed at the top of the page.
+The current top 10 [cryptocurrencies](https://en.wikipedia.org/wiki/Cryptocurrency) (by market cap) are displayed at the top of the page.
 
 You can click one of the top 10 to see current it's current & historical price or search for
 any other cryptocurrency by name using the search bar.
