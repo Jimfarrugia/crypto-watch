@@ -20,7 +20,7 @@ export const currencySymbol = (currency) => {
 };
 
 // Formats a number to a more readable format for currency.
-// 50123456 -> 50,123,456 ....... 101.9 -> 101.90
+// 50123456 -> "50,123,456" ....... 101.9 -> "101.90"
 export const formatPriceNumber = (number) => {
   let result =
     number > 1000

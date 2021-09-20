@@ -31,3 +31,17 @@ describe("currencySymbol helper returns the correct symbol", () => {
     expect(currencySymbol("")).toBe("");
   });
 });
+
+describe("formatPriceNumber returns an appropriately formatted string", () => {
+  // 50123456 -> 50,123,456 ....... 101.9 -> 101.90
+  test("Commas are added to large numbers", () => {
+    expect(formatPriceNumber(50123456)).toBe("50,123,456");
+    expect(formatPriceNumber(1250123456)).toBe("1,250,123,456");
+    expect(formatPriceNumber(1250)).toBe("1,250");
+  });
+  test("Show either zero or at least two decimal places", () => {
+    expect(formatPriceNumber(101.9)).toBe("101.90");
+    expect(formatPriceNumber(1.000009)).toBe("1.000009");
+    expect(formatPriceNumber(69.0)).toBe("69");
+  });
+});
