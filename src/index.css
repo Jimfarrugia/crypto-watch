@@ -159,6 +159,7 @@ a:focus {
   font-family: "Ubuntu Mono", "Courier New", monospace;
   display: inline-block;
   padding: 0.25rem 0;
+  transition: ease 0.25s;
 }
 .coin-nav button:hover > span,
 .coin-nav button:focus > span {
