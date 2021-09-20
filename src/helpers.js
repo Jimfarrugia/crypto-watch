@@ -1,6 +1,8 @@
 // Receives a 3-letter currency string and returns the appropriate currency symbol.
 export const currencySymbol = (currency) => {
-  return currency.charAt(currency.length - 1) === "d"
+  return !currency
+    ? ""
+    : currency.charAt(currency.length - 1) === "d"
     ? "$"
     : currency.charAt(currency.length - 1) === "y"
     ? "¥"
