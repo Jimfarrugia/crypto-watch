@@ -145,10 +145,12 @@ function App() {
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinDataById(coinData.id);
+    // eslint-disable-next-line
   }, [vsCurrency]);
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
+    // eslint-disable-next-line
   }, [priceHistoryDays]);
 
   const handleSearchInputChange = (input) => {
