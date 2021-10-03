@@ -1,6 +1,15 @@
+import { useAuth } from "../contexts/AuthContext";
+
 const Footer = () => {
+  const { currentUser } = useAuth();
+
   return (
     <footer className="page-footer">
+      {currentUser && (
+        <p>
+          You are logged in as <strong>{currentUser.displayName}</strong>
+        </p>
+      )}
       <ul>
         <li>
           <a
