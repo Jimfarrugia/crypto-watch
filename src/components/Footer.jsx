@@ -17,7 +17,7 @@ const Footer = () => {
         <p>
           You are logged in as <strong>{currentUser.displayName}</strong>.
           &nbsp;
-          <button type="button" onClick={handleLogout}>
+          <button type="button" title="Logout" onClick={handleLogout}>
             Logout
           </button>
         </p>
