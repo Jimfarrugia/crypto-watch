@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
 import { Line } from "react-chartjs-2";
-
+import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
@@ -189,46 +189,48 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <div className="page-wrapper">
-        {(coinNavData && coinList && (
-          <>
-            <CoinNav
-              fetchCoinDataById={fetchCoinDataById}
-              coinNavData={coinNavData}
-            />
-            <SearchBar
-              searchTerm={searchTerm}
-              searchSuggestions={searchSuggestions}
-              handleSearchInputChange={handleSearchInputChange}
-              handleSearchChange={handleSearchChange}
-            />
-          </>
-        )) ||
-          (isLoading && <div className="loader"></div>)}
-        {(isLoading && <div className="loader"></div>) || (
-          <>
-            <Details
-              coinData={coinData}
-              chartData={chartData}
-              vsCurrency={vsCurrency}
-              error={error}
-            />
-            {chartData && (
-              <>
-                <Settings
-                  vsCurrency={vsCurrency}
-                  priceHistoryDays={priceHistoryDays}
-                  handleChangeVsCurrency={handleChangeVsCurrency}
-                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
-                />
-                <Line data={chartData} />
-              </>
-            )}
-          </>
-        )}
-        <Footer />
-      </div>
+      <AuthProvider>
+        <Header />
+        <div className="page-wrapper">
+          {(coinNavData && coinList && (
+            <>
+              <CoinNav
+                fetchCoinDataById={fetchCoinDataById}
+                coinNavData={coinNavData}
+              />
+              <SearchBar
+                searchTerm={searchTerm}
+                searchSuggestions={searchSuggestions}
+                handleSearchInputChange={handleSearchInputChange}
+                handleSearchChange={handleSearchChange}
+              />
+            </>
+          )) ||
+            (isLoading && <div className="loader"></div>)}
+          {(isLoading && <div className="loader"></div>) || (
+            <>
+              <Details
+                coinData={coinData}
+                chartData={chartData}
+                vsCurrency={vsCurrency}
+                error={error}
+              />
+              {chartData && (
+                <>
+                  <Settings
+                    vsCurrency={vsCurrency}
+                    priceHistoryDays={priceHistoryDays}
+                    handleChangeVsCurrency={handleChangeVsCurrency}
+                    handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+                  />
+                  <Line data={chartData} />
+                </>
+              )}
+            </>
+          )}
+          <Footer />
+        </div>
+      </AuthProvider>
     </div>
   );
 }
