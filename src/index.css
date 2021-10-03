@@ -114,11 +114,46 @@ a:focus {
   padding: 0 0.75em;
 }
 
-.page-header {
-  min-width: 285px;
-  line-height: 1.35;
+.page-header-wrapper {
   margin: 0 0 1.5em;
   background: linear-gradient(var(--purple-bright), var(--purple));
+}
+
+.page-header {
+  min-width: 285px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 0.75em;
+  position: relative;
+  line-height: 1.35;
+}
+
+.signin-button {
+  position: absolute;
+  top: 0;
+  right: 0.75em;
+  margin: 0.9em 0 0;
+  padding: 0.5em 0.75em;
+  color: var(--white);
+  background: none;
+  outline: none;
+  border: 1px solid white;
+  border-radius: 100%;
+}
+.signin-button:hover {
+  color: var(--blue-bright);
+  border-color: var(--blue-bright);
+  cursor: pointer;
+}
+.signin-button:focus {
+  outline: 0.25rem solid var(--blue-bright);
+  border-color: var(--blue-bright);
+}
+.signin-button:focus svg {
+  color: var(--blue-bright);
+}
+.signin-button svg {
+  font-size: 1rem;
 }
 
 .page-footer {
