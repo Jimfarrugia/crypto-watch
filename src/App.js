@@ -41,8 +41,8 @@ function App() {
   const fetchCoinList = () => {
     axios
       .get(`/coins/list`)
-      .then((response) => setCoinList(response.data))
-      .catch((error) => {
+      .then(response => setCoinList(response.data))
+      .catch(error => {
         setError(
           <>
             <p>Error connecting to the data server.</p>
@@ -60,7 +60,7 @@ function App() {
       });
   };
 
-  const fetchCoinDataById = (id) => {
+  const fetchCoinDataById = id => {
     setError(undefined);
     setIsLoading(true);
     axios
@@ -70,13 +70,13 @@ function App() {
           ids: id,
         },
       })
-      .then((response) => {
+      .then(response => {
         if (!response || !response.data || response.data.length < 1)
           throw new Error(`Unable to find data for "${id}"...`);
         setCoinData(response.data[0]);
         fetchCoinPriceHistory(id);
       })
-      .catch((error) => {
+      .catch(error => {
         setIsLoading(false);
         setChartData(undefined);
         setError(error.message);
@@ -84,7 +84,7 @@ function App() {
       });
   };
 
-  const fetchCoinPriceHistory = (id) => {
+  const fetchCoinPriceHistory = id => {
     const params = { vs_currency: vsCurrency, days: priceHistoryDays.value };
     if (params.days < 91) {
       params["interval"] = "daily";
@@ -93,7 +93,7 @@ function App() {
       .get(`/coins/${id}/market_chart`, {
         params,
       })
-      .then((response) => {
+      .then(response => {
         setIsLoading(false);
         if (!response || !response.data || response.data.prices.length < 1)
           throw new Error(`Unable to fetch price history for "${id}"...`);
@@ -110,7 +110,7 @@ function App() {
           datasets: [
             {
               label: `Price in ${vsCurrency.toUpperCase()}`,
-              data: prices.map((price) => price[1]),
+              data: prices.map(price => price[1]),
               borderColor: blueBright,
               backgroundColor: blue,
               fill: true,
@@ -118,7 +118,7 @@ function App() {
           ],
         });
       })
-      .catch((error) => {
+      .catch(error => {
         setIsLoading(false);
         setChartData(undefined);
         setError(error.message);
@@ -127,7 +127,7 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchCoinNavData = (n) => {
+    const fetchCoinNavData = n => {
       axios
         .get(`/coins/markets`, {
           params: {
@@ -135,8 +135,8 @@ function App() {
             per_page: n,
           },
         })
-        .then((response) => setCoinNavData(response.data))
-        .catch((error) => console.log(error));
+        .then(response => setCoinNavData(response.data))
+        .catch(error => console.log(error));
     };
 
     fetchCoinNavData(coinNavLength);
@@ -145,15 +145,13 @@ function App() {
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinDataById(coinData.id);
-    // eslint-disable-next-line
-  }, [vsCurrency]);
+  }, [vsCurrency]); // eslint-disable-line
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
-    // eslint-disable-next-line
-  }, [priceHistoryDays]);
+  }, [priceHistoryDays]); // eslint-disable-line
 
-  const handleSearchInputChange = (input) => {
+  const handleSearchInputChange = input => {
     if (input.match(/[^A-Za-z0-9.!-]/, "g")) {
       // disallow most symbols
       return searchTerm;
@@ -162,24 +160,24 @@ function App() {
     if (input.length < 1) {
       return setSearchSuggestions([]);
     }
-    const matches = coinList.filter((coin) => {
+    const matches = coinList.filter(coin => {
       let regex = new RegExp(`${input}`, "gi");
       return coin.name.match(regex); // || coin.symbol.match(regex); //? symbol search isn't working
     });
     setSearchSuggestions(
-      matches.map((coin) => ({
+      matches.map(coin => ({
         label: coin.name,
         value: coin.id,
       }))
     );
   };
 
-  const handleSearchChange = (option) => {
+  const handleSearchChange = option => {
     setSearchSuggestions([]);
     fetchCoinDataById(option.value);
   };
 
-  const handleChangePriceHistoryDays = (selectedOption) => {
+  const handleChangePriceHistoryDays = selectedOption => {
     setIsLoading(true);
     setPriceHistoryDays(selectedOption);
   };
