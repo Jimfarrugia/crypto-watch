@@ -1,13 +1,25 @@
 import { useAuth } from "../contexts/AuthContext";
 
 const Footer = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <footer className="page-footer">
       {currentUser && (
         <p>
-          You are logged in as <strong>{currentUser.displayName}</strong>
+          You are logged in as <strong>{currentUser.displayName}</strong>.
+          &nbsp;
+          <button type="button" onClick={handleLogout}>
+            Logout
+          </button>
         </p>
       )}
       <ul>
