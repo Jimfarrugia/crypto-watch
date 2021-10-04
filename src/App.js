@@ -45,7 +45,7 @@ function App() {
       .catch(error => {
         setError(
           <>
-            <p>Error connecting to the data server.</p>
+            <p>Unable to connect to the data server right now.</p>
             <p>
               Please <RefreshButton /> the page.
             </p>
@@ -79,7 +79,7 @@ function App() {
       .catch(error => {
         setIsLoading(false);
         setChartData(undefined);
-        setError(error.message);
+        setError(<p>{error.message}</p>);
         console.error(error);
       });
   };
@@ -121,7 +121,7 @@ function App() {
       .catch(error => {
         setIsLoading(false);
         setChartData(undefined);
-        setError(error.message);
+        setError(<p>{error.message}</p>);
         console.error(error);
       });
   };
@@ -207,7 +207,8 @@ function App() {
             </>
           )) ||
             (isLoading && <div className="loader"></div>)}
-          {(isLoading && <div className="loader"></div>) || (
+        {(isLoading && <div className="loader"></div>) ||
+          (error && <div>{error}</div>) || (
             <>
               <Details
                 coinData={coinData}
