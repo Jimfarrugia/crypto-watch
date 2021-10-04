@@ -226,6 +226,25 @@ function App() {
     }
   };
 
+  const handleRemoveFavorite = async coinId => {
+    if (!currentUser) return window.alert("Error:  You are not signed in.");
+    try {
+      const id = currentUser.uid;
+      const payload = { favorites: arrayRemove(coinId) };
+      const docRef = doc(db, "favorites", id);
+      await setDoc(docRef, payload, { merge: true });
+      console.log(`${coinId} is no longer a favorite`); //! debugging
+    } catch (error) {
+      setError(
+        <p>
+          There was an error while communicating with the database. Please{" "}
+          <RefreshButton /> the page and try again.
+        </p>
+      );
+      console.error(error);
+    }
+  };
+
   return (
     <div className="App">
       <Header />
@@ -255,6 +274,7 @@ function App() {
                 error={error}
                 favorites={favorites}
                 handleNewFavorite={handleNewFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
               />
               {chartData && (
                 <>
