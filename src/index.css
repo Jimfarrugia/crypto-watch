@@ -97,14 +97,15 @@ a:focus {
   background: none;
   border: none;
   padding: 0;
-  color: var(--purple);
+  color: var(--purple-bright);
   cursor: pointer;
+  text-decoration: underline;
 }
 .button-link:hover {
-  color: var(--purple-bright);
+  color: var(--purple);
 }
 .button-link:focus {
-  outline: 0.125rem solid var(--purple-bright);
+  outline: 0.125rem solid var(--purple);
 }
 
 .page-wrapper {
