@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
 import { Line } from "react-chartjs-2";
-import { setDoc, doc, arrayRemove, arrayUnion } from "@firebase/firestore";
+import {
+  setDoc,
+  doc,
+  arrayRemove,
+  arrayUnion,
+  onSnapshot,
+} from "@firebase/firestore";
 import { db } from "./firebase";
 import { useAuth } from "./contexts/AuthContext";
 import Header from "./components/Header";
@@ -37,6 +43,7 @@ function App() {
   const [coinNavData, setCoinNavData] = useState(undefined);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
+  const [favorites, setFavorites] = useState([]);
   const { currentUser } = useAuth();
 
   axios.defaults.baseURL = API_BASE_URL;
@@ -154,6 +161,13 @@ function App() {
     if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
   }, [priceHistoryDays]); // eslint-disable-line
 
+  useEffect(() => {
+    if (currentUser) {
+      const docRef = doc(db, "favorites", currentUser.uid);
+      onSnapshot(docRef, doc => setFavorites(doc.data().favorites));
+    }
+  }, [currentUser]);
+
   const handleSearchInputChange = input => {
     if (input.match(/[^A-Za-z0-9.!-]/, "g")) {
       // disallow most symbols
@@ -191,9 +205,7 @@ function App() {
   };
 
   const handleNewFavorite = async coinId => {
-    if (!currentUser) {
-      return window.alert("Error:  You are not signed in.");
-    }
+    if (!currentUser) return window.alert("Error:  You are not signed in.");
     try {
       const id = currentUser.uid;
       const payload = {
@@ -241,6 +253,7 @@ function App() {
                 chartData={chartData}
                 vsCurrency={vsCurrency}
                 error={error}
+                favorites={favorites}
                 handleNewFavorite={handleNewFavorite}
               />
               {chartData && (
