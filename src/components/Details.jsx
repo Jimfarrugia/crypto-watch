@@ -1,9 +1,9 @@
 import { currencySymbol, formatPriceNumber } from "../helpers";
+import { useAuth } from "../contexts/AuthContext";
 
-const Details = ({ coinData, chartData, vsCurrency, error }) => {
-  if (error) {
-    return <div>{error}</div>;
-  }
+const Details = ({ coinData, chartData, vsCurrency, handleNewFavorite }) => {
+  const { currentUser } = useAuth();
+
   return (
     <section className="details">
       {coinData && chartData && (
@@ -15,6 +15,17 @@ const Details = ({ coinData, chartData, vsCurrency, error }) => {
               height="64"
               width="64"
             />
+            {currentUser && (
+              <p>
+                <button
+                  type="button"
+                  title="favorite"
+                  onClick={() => handleNewFavorite(coinData.id)}
+                >
+                  Favorite
+                </button>
+              </p>
+            )}
             <h2>
               {coinData.name}
               <br />

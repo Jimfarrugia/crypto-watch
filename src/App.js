@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
 import { Line } from "react-chartjs-2";
-import { AuthProvider } from "./contexts/AuthContext";
+import { setDoc, doc } from "@firebase/firestore";
+import { db } from "./firebase";
+import { useAuth } from "./contexts/AuthContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
@@ -35,6 +37,7 @@ function App() {
   const [coinNavData, setCoinNavData] = useState(undefined);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
+  const { currentUser } = useAuth();
 
   axios.defaults.baseURL = API_BASE_URL;
 
@@ -187,26 +190,49 @@ function App() {
     setVsCurrency(value);
   };
 
+  const handleNewFavorite = async coinId => {
+    if (!currentUser) {
+      return window.alert("Error:  You are not signed in.");
+    }
+    try {
+      const id = currentUser.uid;
+      const payload = {
+        user: currentUser.uid,
+        coin: coinId,
+      };
+      const docRef = doc(db, "favorites", id);
+      await setDoc(docRef, payload);
+      console.log(`fave is now ${coinId}`); //! debug
+    } catch (error) {
+      setError(
+        <p>
+          There was an error while communicating with the database. Please{" "}
+          <RefreshButton /> the page and try again.
+        </p>
+      );
+      console.error(error);
+    }
+  };
+
   return (
     <div className="App">
-      <AuthProvider>
-        <Header />
-        <div className="page-wrapper">
-          {(coinNavData && coinList && (
-            <>
-              <CoinNav
-                fetchCoinDataById={fetchCoinDataById}
-                coinNavData={coinNavData}
-              />
-              <SearchBar
-                searchTerm={searchTerm}
-                searchSuggestions={searchSuggestions}
-                handleSearchInputChange={handleSearchInputChange}
-                handleSearchChange={handleSearchChange}
-              />
-            </>
-          )) ||
-            (isLoading && <div className="loader"></div>)}
+      <Header />
+      <div className="page-wrapper">
+        {(coinNavData && coinList && (
+          <>
+            <CoinNav
+              fetchCoinDataById={fetchCoinDataById}
+              coinNavData={coinNavData}
+            />
+            <SearchBar
+              searchTerm={searchTerm}
+              searchSuggestions={searchSuggestions}
+              handleSearchInputChange={handleSearchInputChange}
+              handleSearchChange={handleSearchChange}
+            />
+          </>
+        )) ||
+          (isLoading && <div className="loader"></div>)}
         {(isLoading && <div className="loader"></div>) ||
           (error && <div>{error}</div>) || (
             <>
@@ -215,6 +241,7 @@ function App() {
                 chartData={chartData}
                 vsCurrency={vsCurrency}
                 error={error}
+                handleNewFavorite={handleNewFavorite}
               />
               {chartData && (
                 <>
@@ -229,9 +256,8 @@ function App() {
               )}
             </>
           )}
-          <Footer />
-        </div>
-      </AuthProvider>
+        <Footer />
+      </div>
     </div>
   );
 }
