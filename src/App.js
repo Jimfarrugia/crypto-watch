@@ -214,7 +214,6 @@ function App() {
       };
       const docRef = doc(db, "favorites", id);
       await setDoc(docRef, payload, { merge: true });
-      console.log(`${coinId} is now a favorite`); //! debugging
     } catch (error) {
       setError(
         <p>
@@ -233,7 +232,6 @@ function App() {
       const payload = { favorites: arrayRemove(coinId) };
       const docRef = doc(db, "favorites", id);
       await setDoc(docRef, payload, { merge: true });
-      console.log(`${coinId} is no longer a favorite`); //! debugging
     } catch (error) {
       setError(
         <p>
