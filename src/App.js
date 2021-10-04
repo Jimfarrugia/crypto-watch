@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
 import { Line } from "react-chartjs-2";
-import { setDoc, doc } from "@firebase/firestore";
+import { setDoc, doc, arrayRemove, arrayUnion } from "@firebase/firestore";
 import { db } from "./firebase";
 import { useAuth } from "./contexts/AuthContext";
 import Header from "./components/Header";
@@ -198,11 +198,11 @@ function App() {
       const id = currentUser.uid;
       const payload = {
         user: currentUser.uid,
-        coin: coinId,
+        favorites: arrayUnion(coinId),
       };
       const docRef = doc(db, "favorites", id);
-      await setDoc(docRef, payload);
-      console.log(`fave is now ${coinId}`); //! debug
+      await setDoc(docRef, payload, { merge: true });
+      console.log(`${coinId} is now a favorite`); //! debugging
     } catch (error) {
       setError(
         <p>
