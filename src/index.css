@@ -225,6 +225,43 @@ a:focus {
 .details header {
   text-align: center;
 }
+.details .logo-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+.details .logo-wrapper button {
+  display: inline-block;
+  cursor: pointer;
+  background: none;
+  outline: none;
+  width: 1.5em;
+  height: 1.5em;
+  border: 0.125rem solid var(--yellow);
+  border-radius: 100%;
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: -0.75em;
+  right: -1.25em;
+}
+.details .logo-wrapper button:hover {
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
+}
+.details .logo-wrapper button:hover svg {
+  color: var(--purple-bright);
+}
+.details .logo-wrapper button:focus {
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
+}
+.details .logo-wrapper button:focus svg {
+  color: var(--purple-bright);
+}
+.details .star {
+  margin-left: -0.125em;
+  color: var(--yellow);
+}
 .details h2 {
   margin: 1em 0 0;
 }

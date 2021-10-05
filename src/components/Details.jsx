@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import { currencySymbol, formatPriceNumber } from "../helpers";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -10,58 +13,48 @@ const Details = ({
   handleRemoveFavorite,
 }) => {
   const { currentUser } = useAuth();
+
   const isFavorite =
     coinData &&
     favorites &&
     favorites.find(favorite => favorite.id === coinData.id);
+
+  const handleFavorite = (isFavorite, coinData) => {
+    const data = {
+      id: coinData.id,
+      name: coinData.name,
+      symbol: coinData.symbol,
+      image: coinData.image,
+    };
+    return isFavorite ? handleRemoveFavorite(data) : handleNewFavorite(data);
+  };
 
   return (
     <section className="details">
       {coinData && chartData && (
         <>
           <header>
-            <img
-              src={coinData.image}
-              alt={`${coinData.name} logo`}
-              height="64"
-              width="64"
-            />
-            {currentUser && !isFavorite && (
-              <p>
+            <div className="logo-wrapper">
+              {currentUser && (
                 <button
                   type="button"
-                  title="Add Favorite"
-                  onClick={() =>
-                    handleNewFavorite({
-                      id: coinData.id,
-                      name: coinData.name,
-                      symbol: coinData.symbol,
-                      image: coinData.image,
-                    })
-                  }
+                  title={isFavorite ? "Remove Favorite" : "Add Favorite"}
+                  onClick={() => handleFavorite(isFavorite, coinData)}
                 >
-                  Add Favorite
+                  {isFavorite ? (
+                    <FontAwesomeIcon icon={faStarSolid} className="star" />
+                  ) : (
+                    <FontAwesomeIcon icon={faStarOutline} className="star" />
+                  )}
                 </button>
-              </p>
-            )}
-            {currentUser && isFavorite && (
-              <p>
-                <button
-                  type="button"
-                  title="Remove Favorite"
-                  onClick={() =>
-                    handleRemoveFavorite({
-                      id: coinData.id,
-                      name: coinData.name,
-                      symbol: coinData.symbol,
-                      image: coinData.image,
-                    })
-                  }
-                >
-                  Remove Favorite
-                </button>
-              </p>
-            )}
+              )}
+              <img
+                src={coinData.image}
+                alt={`${coinData.name} logo`}
+                height="64"
+                width="64"
+              />
+            </div>
             <h2>
               {coinData.name}
               <br />
