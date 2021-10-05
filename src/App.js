@@ -160,7 +160,7 @@ function App() {
         })
         .catch(error => console.error(error));
     };
-    fetchCoinNavData(coinNavLength);
+    fetchCoinNavData(coinNavLength - favorites.length + 1);
     fetchCoinList();
   }, [favorites]);
 
