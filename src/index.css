@@ -190,6 +190,7 @@ a:focus {
   padding: 0;
 }
 .coin-nav ul > li > .star {
+  pointer-events: none;
   color: var(--yellow);
   position: absolute;
   top: 0px;
