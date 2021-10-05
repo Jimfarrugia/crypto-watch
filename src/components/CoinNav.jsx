@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+
 const CoinNav = ({ fetchCoinDataById, coinNavData, favorites }) => {
   const favoritesToRender = favorites.filter(
     favorite => !coinNavData.find(coin => coin.id === favorite.id)
@@ -9,6 +12,9 @@ const CoinNav = ({ fetchCoinDataById, coinNavData, favorites }) => {
         {navItems &&
           navItems.map(item => (
             <li key={item.symbol}>
+              {item.isFavorite && (
+                <FontAwesomeIcon className="star" icon={faStar} />
+              )}
               <button
                 title={item.name}
                 onClick={() => fetchCoinDataById(item.id)}
