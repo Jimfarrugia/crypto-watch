@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { default as axios } from "axios";
 import { Line } from "react-chartjs-2";
-import { AuthProvider } from "./contexts/AuthContext";
+import {
+  setDoc,
+  doc,
+  arrayRemove,
+  arrayUnion,
+  onSnapshot,
+} from "@firebase/firestore";
+import { db } from "./firebase";
+import { useAuth } from "./contexts/AuthContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
@@ -35,6 +43,8 @@ function App() {
   const [coinNavData, setCoinNavData] = useState(undefined);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
+  const [favorites, setFavorites] = useState([]);
+  const { currentUser } = useAuth();
 
   axios.defaults.baseURL = API_BASE_URL;
 
@@ -45,7 +55,7 @@ function App() {
       .catch(error => {
         setError(
           <>
-            <p>Error connecting to the data server.</p>
+            <p>Unable to connect to the data server right now.</p>
             <p>
               Please <RefreshButton /> the page.
             </p>
@@ -79,7 +89,7 @@ function App() {
       .catch(error => {
         setIsLoading(false);
         setChartData(undefined);
-        setError(error.message);
+        setError(<p>{error.message}</p>);
         console.error(error);
       });
   };
@@ -121,7 +131,7 @@ function App() {
       .catch(error => {
         setIsLoading(false);
         setChartData(undefined);
-        setError(error.message);
+        setError(<p>{error.message}</p>);
         console.error(error);
       });
   };
@@ -135,13 +145,24 @@ function App() {
             per_page: n,
           },
         })
-        .then(response => setCoinNavData(response.data))
-        .catch(error => console.log(error));
+        .then(response => {
+          // any favorites in the result should be given the 'favorite' property
+          const favoritesInResult = response.data
+            .filter(item => favorites.find(favorite => favorite.id === item.id))
+            .map(item => ({ isFavorite: true, ...item }));
+          // reorder the array to put any favorites at the start
+          setCoinNavData([
+            ...favoritesInResult,
+            ...response.data.filter(
+              item => !favorites.find(favorite => favorite.id === item.id)
+            ),
+          ]);
+        })
+        .catch(error => console.error(error));
     };
-
-    fetchCoinNavData(coinNavLength);
+    fetchCoinNavData(coinNavLength - favorites.length + 1);
     fetchCoinList();
-  }, []);
+  }, [favorites]);
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinDataById(coinData.id);
@@ -150,6 +171,21 @@ function App() {
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
   }, [priceHistoryDays]); // eslint-disable-line
+
+  useEffect(() => {
+    if (currentUser) {
+      const docRef = doc(db, "favorites", currentUser.uid);
+      onSnapshot(
+        docRef,
+        doc =>
+          setFavorites(
+            doc.data() &&
+              doc.data().favorites &&
+              doc.data().favorites.map(item => ({ isFavorite: true, ...item }))
+          ) || []
+      );
+    }
+  }, [currentUser]);
 
   const handleSearchInputChange = input => {
     if (input.match(/[^A-Za-z0-9.!-]/, "g")) {
@@ -187,33 +223,76 @@ function App() {
     setVsCurrency(value);
   };
 
+  const handleNewFavorite = async data => {
+    if (!currentUser) return window.alert("Error:  You are not signed in.");
+    try {
+      const id = currentUser.uid;
+      const payload = {
+        user: currentUser.uid,
+        favorites: arrayUnion(data),
+      };
+      const docRef = doc(db, "favorites", id);
+      await setDoc(docRef, payload, { merge: true });
+    } catch (error) {
+      setError(
+        <p>
+          There was an error while communicating with the database. Please{" "}
+          <RefreshButton /> the page and try again.
+        </p>
+      );
+      console.error(error);
+    }
+  };
+
+  const handleRemoveFavorite = async data => {
+    if (!currentUser) return window.alert("Error:  You are not signed in.");
+    try {
+      const id = currentUser.uid;
+      const payload = { favorites: arrayRemove(data) };
+      const docRef = doc(db, "favorites", id);
+      await setDoc(docRef, payload, { merge: true });
+    } catch (error) {
+      setError(
+        <p>
+          There was an error while communicating with the database. Please{" "}
+          <RefreshButton /> the page and try again.
+        </p>
+      );
+      console.error(error);
+    }
+  };
+
   return (
     <div className="App">
-      <AuthProvider>
-        <Header />
-        <div className="page-wrapper">
-          {(coinNavData && coinList && (
-            <>
-              <CoinNav
-                fetchCoinDataById={fetchCoinDataById}
-                coinNavData={coinNavData}
-              />
-              <SearchBar
-                searchTerm={searchTerm}
-                searchSuggestions={searchSuggestions}
-                handleSearchInputChange={handleSearchInputChange}
-                handleSearchChange={handleSearchChange}
-              />
-            </>
-          )) ||
-            (isLoading && <div className="loader"></div>)}
-          {(isLoading && <div className="loader"></div>) || (
+      <Header />
+      <div className="page-wrapper">
+        {(coinNavData && coinList && (
+          <>
+            <CoinNav
+              favorites={favorites}
+              coinNavData={coinNavData}
+              fetchCoinDataById={fetchCoinDataById}
+            />
+            <SearchBar
+              searchTerm={searchTerm}
+              searchSuggestions={searchSuggestions}
+              handleSearchChange={handleSearchChange}
+              handleSearchInputChange={handleSearchInputChange}
+            />
+          </>
+        )) ||
+          (isLoading && <div className="loader"></div>)}
+        {(isLoading && <div className="loader"></div>) ||
+          (error && <div>{error}</div>) || (
             <>
               <Details
                 coinData={coinData}
                 chartData={chartData}
                 vsCurrency={vsCurrency}
                 error={error}
+                favorites={favorites}
+                handleNewFavorite={handleNewFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
               />
               {chartData && (
                 <>
@@ -228,9 +307,8 @@ function App() {
               )}
             </>
           )}
-          <Footer />
-        </div>
-      </AuthProvider>
+        <Footer />
+      </div>
     </div>
   );
 }

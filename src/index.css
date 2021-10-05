@@ -10,6 +10,7 @@
   --blue-bright: #4717f6;
   --red: #ff0a0a;
   --green: #1aff1a;
+  --yellow: #feff01;
 }
 
 body {
@@ -97,14 +98,15 @@ a:focus {
   background: none;
   border: none;
   padding: 0;
-  color: var(--purple);
+  color: var(--purple-bright);
   cursor: pointer;
+  text-decoration: underline;
 }
 .button-link:hover {
-  color: var(--purple-bright);
+  color: var(--purple);
 }
 .button-link:focus {
-  outline: 0.125rem solid var(--purple-bright);
+  outline: 0.125rem solid var(--purple);
 }
 
 .page-wrapper {
@@ -128,7 +130,8 @@ a:focus {
   line-height: 1.35;
 }
 
-.signin-button {
+.signin-button,
+.logout-button {
   position: absolute;
   top: 0;
   right: 0.75em;
@@ -137,22 +140,25 @@ a:focus {
   color: var(--white);
   background: none;
   outline: none;
-  border: 1px solid white;
+  border: 0.125rem solid white;
   border-radius: 100%;
 }
-.signin-button:hover {
-  color: var(--blue-bright);
-  border-color: var(--blue-bright);
+.signin-button:hover,
+.logout-button:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
   cursor: pointer;
 }
-.signin-button:focus {
-  outline: 0.25rem solid var(--blue-bright);
-  border-color: var(--blue-bright);
+.signin-button:focus,
+.logout-button:focus {
+  border-color: var(--yellow);
 }
-.signin-button:focus svg {
-  color: var(--blue-bright);
+.signin-button:focus svg,
+.logout-button:focus svg {
+  color: var(--yellow);
 }
-.signin-button svg {
+.signin-button svg,
+.logout-button svg {
   font-size: 1rem;
 }
 
@@ -174,10 +180,17 @@ a:focus {
   padding: 0 0.25rem;
   margin: 0;
   list-style-type: none;
+  position: relative;
 }
 .coin-nav ul > li:first-child,
 .coin-nav ul > li:last-child {
   padding: 0;
+}
+.coin-nav ul > li > .star {
+  color: var(--yellow);
+  position: absolute;
+  top: 0px;
+  right: -2px;
 }
 .coin-nav ul > li > button {
   display: block;
@@ -215,6 +228,43 @@ a:focus {
 
 .details header {
   text-align: center;
+}
+.details .logo-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+.details .logo-wrapper button {
+  display: inline-block;
+  cursor: pointer;
+  background: none;
+  outline: none;
+  width: 1.5em;
+  height: 1.5em;
+  border: 0.125rem solid var(--yellow);
+  border-radius: 100%;
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: -0.75em;
+  right: -1.25em;
+}
+.details .logo-wrapper button:hover {
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
+}
+.details .logo-wrapper button:hover svg {
+  color: var(--purple-bright);
+}
+.details .logo-wrapper button:focus {
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
+}
+.details .logo-wrapper button:focus svg {
+  color: var(--purple-bright);
+}
+.details .star {
+  margin-left: -0.125em;
+  color: var(--yellow);
 }
 .details h2 {
   margin: 1em 0 0;
