@@ -16,6 +16,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      window.location.reload();
     } catch (e) {
       console.error(e);
     }
