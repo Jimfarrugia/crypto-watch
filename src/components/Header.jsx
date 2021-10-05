@@ -30,7 +30,10 @@ const Header = () => {
           type="button"
           title={currentUser ? "Logout" : "Sign In"}
           className={currentUser ? "logout-button" : "signin-button"}
-          onClick={currentUser ? handleLogout : handleSignIn}
+          onClick={e => {
+            currentUser ? handleLogout() : handleSignIn();
+            e.currentTarget.blur();
+          }}
         >
           <FontAwesomeIcon icon={currentUser ? faSignOutAlt : faUser} />
         </button>

@@ -39,7 +39,10 @@ const Details = ({
                 <button
                   type="button"
                   title={isFavorite ? "Remove Favorite" : "Add Favorite"}
-                  onClick={() => handleFavorite(isFavorite, coinData)}
+                  onClick={e => {
+                    handleFavorite(isFavorite, coinData);
+                    e.currentTarget.blur();
+                  }}
                 >
                   {isFavorite ? (
                     <FontAwesomeIcon icon={faStarSolid} className="star" />

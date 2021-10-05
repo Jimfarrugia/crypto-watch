@@ -18,7 +18,10 @@ const CoinNav = ({ fetchCoinDataById, coinNavData, favorites }) => {
               <button
                 type="button"
                 title={item.name}
-                onClick={() => fetchCoinDataById(item.id)}
+                onClick={e => {
+                  fetchCoinDataById(item.id);
+                  e.currentTarget.blur();
+                }}
               >
                 <img
                   src={item.image}
