@@ -136,6 +136,8 @@ function App() {
       });
   };
 
+  useEffect(() => fetchCoinList(), []);
+
   useEffect(() => {
     const fetchCoinNavData = n => {
       axios
@@ -161,7 +163,6 @@ function App() {
         .catch(error => console.error(error));
     };
     fetchCoinNavData(coinNavLength - favorites.length + 1);
-    fetchCoinList();
   }, [favorites]);
 
   useEffect(() => {
