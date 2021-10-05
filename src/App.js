@@ -162,7 +162,10 @@ function App() {
         })
         .catch(error => console.error(error));
     };
-    fetchCoinNavData(coinNavLength - favorites.length + 1);
+    const totalNavItemsToFetch = coinNavLength - favorites.length + 1;
+    return favorites.length >= 10
+      ? setCoinNavData(favorites)
+      : fetchCoinNavData(totalNavItemsToFetch);
   }, [favorites]);
 
   useEffect(() => {
