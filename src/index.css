@@ -196,6 +196,9 @@ a:focus {
   top: 0px;
   right: -2px;
 }
+.coin-nav .star path {
+  filter: drop-shadow(-0.5em 1em 3em var(--black));
+}
 .coin-nav ul > li > button {
   display: block;
   color: var(--gray);
@@ -227,7 +230,7 @@ a:focus {
 
 .search {
   padding: 0;
-  margin: 1.25rem 0 1.5rem;
+  margin: 1.25rem 0 2.5rem;
 }
 
 .details header {
@@ -243,14 +246,12 @@ a:focus {
   cursor: pointer;
   background: none;
   outline: none;
-  width: 1.5em;
-  height: 1.5em;
-  border: 0.125rem solid var(--yellow);
+  border: none;
   border-radius: 100%;
-  font-size: 1.5rem;
+  font-size: 2rem;
   position: absolute;
-  bottom: -0.75em;
-  right: -1.25em;
+  top: -0.25em;
+  right: -0.5em;
 }
 .details .logo-wrapper button:hover {
   color: var(--purple-bright);
@@ -269,6 +270,9 @@ a:focus {
 .details .star {
   margin-left: -0.125em;
   color: var(--yellow);
+}
+.details .star path {
+  filter: drop-shadow(-0.5em 1em 3em var(--black));
 }
 .details h2 {
   margin: 1em 0 0;
