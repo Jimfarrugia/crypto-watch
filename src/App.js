@@ -146,11 +146,13 @@ function App() {
           },
         })
         .then(response => {
+          // any favorites in the result should be given the 'favorite' property
+          const favoritesInResult = response.data
+            .filter(item => favorites.find(favorite => favorite.id === item.id))
+            .map(item => ({ isFavorite: true, ...item }));
           // reorder the array to put any favorites at the start
           setCoinNavData([
-            ...response.data.filter(item =>
-              favorites.find(favorite => favorite.id === item.id)
-            ),
+            ...favoritesInResult,
             ...response.data.filter(
               item => !favorites.find(favorite => favorite.id === item.id)
             ),
@@ -175,7 +177,12 @@ function App() {
       const docRef = doc(db, "favorites", currentUser.uid);
       onSnapshot(
         docRef,
-        doc => setFavorites(doc.data() && doc.data().favorites) || []
+        doc =>
+          setFavorites(
+            doc.data() &&
+              doc.data().favorites &&
+              doc.data().favorites.map(item => ({ isFavorite: true, ...item }))
+          ) || []
       );
     }
   }, [currentUser]);
