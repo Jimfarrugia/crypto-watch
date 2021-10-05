@@ -130,7 +130,8 @@ a:focus {
   line-height: 1.35;
 }
 
-.signin-button {
+.signin-button,
+.logout-button {
   position: absolute;
   top: 0;
   right: 0.75em;
@@ -139,22 +140,25 @@ a:focus {
   color: var(--white);
   background: none;
   outline: none;
-  border: 1px solid white;
+  border: 0.125rem solid white;
   border-radius: 100%;
 }
-.signin-button:hover {
-  color: var(--blue-bright);
-  border-color: var(--blue-bright);
+.signin-button:hover,
+.logout-button:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
   cursor: pointer;
 }
-.signin-button:focus {
-  outline: 0.25rem solid var(--blue-bright);
-  border-color: var(--blue-bright);
+.signin-button:focus,
+.logout-button:focus {
+  border-color: var(--yellow);
 }
-.signin-button:focus svg {
-  color: var(--blue-bright);
+.signin-button:focus svg,
+.logout-button:focus svg {
+  color: var(--yellow);
 }
-.signin-button svg {
+.signin-button svg,
+.logout-button svg {
   font-size: 1rem;
 }
 
