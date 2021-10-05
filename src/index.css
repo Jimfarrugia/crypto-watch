@@ -215,13 +215,14 @@ a:focus {
   display: inline-block;
   padding: 0.25rem 0;
   transition: ease 0.25s;
+  border-bottom: 0.15rem solid var(--black);
 }
 .coin-nav button:hover > span,
 .coin-nav button:focus > span {
   color: var(--purple-bright);
 }
 .coin-nav button:focus > span {
-  border-bottom: 0.15rem solid var(--purple-bright);
+  border-color: var(--purple-bright);
 }
 .coin-nav button > img {
   pointer-events: none;
@@ -230,7 +231,7 @@ a:focus {
 
 .search {
   padding: 0;
-  margin: 1.25rem 0 2.5rem;
+  margin: 1.1rem 0 2.5rem;
 }
 
 .details header {
