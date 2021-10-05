@@ -161,6 +161,9 @@ a:focus {
 .logout-button svg {
   font-size: 1rem;
 }
+.logout-button svg {
+  margin-right: -0.125em;
+}
 
 .page-footer {
   padding: 1.5rem 0;
