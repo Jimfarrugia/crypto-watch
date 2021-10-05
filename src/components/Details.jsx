@@ -10,7 +10,10 @@ const Details = ({
   handleRemoveFavorite,
 }) => {
   const { currentUser } = useAuth();
-  const isFavorite = coinData && favorites.includes(coinData.id);
+  const isFavorite =
+    coinData &&
+    favorites &&
+    favorites.find(favorite => favorite.id === coinData.id);
 
   return (
     <section className="details">
@@ -28,7 +31,14 @@ const Details = ({
                 <button
                   type="button"
                   title="Add Favorite"
-                  onClick={() => handleNewFavorite(coinData.id)}
+                  onClick={() =>
+                    handleNewFavorite({
+                      id: coinData.id,
+                      name: coinData.name,
+                      symbol: coinData.symbol,
+                      image: coinData.image,
+                    })
+                  }
                 >
                   Add Favorite
                 </button>
@@ -39,7 +49,14 @@ const Details = ({
                 <button
                   type="button"
                   title="Remove Favorite"
-                  onClick={() => handleRemoveFavorite(coinData.id)}
+                  onClick={() =>
+                    handleRemoveFavorite({
+                      id: coinData.id,
+                      name: coinData.name,
+                      symbol: coinData.symbol,
+                      image: coinData.image,
+                    })
+                  }
                 >
                   Remove Favorite
                 </button>

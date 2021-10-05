@@ -1,22 +1,26 @@
-const CoinNav = ({ fetchCoinDataById, coinNavData }) => {
+const CoinNav = ({ fetchCoinDataById, coinNavData, favorites }) => {
+  const favoritesToRender = favorites.filter(
+    favorite => !coinNavData.find(coin => coin.id === favorite.id)
+  );
+  const navItems = [...favoritesToRender, ...coinNavData];
   return (
     <nav className="coin-nav">
       <ul>
-        {coinNavData &&
-          coinNavData.map((coin) => (
-            <li key={coin.symbol}>
+        {navItems &&
+          navItems.map(item => (
+            <li key={item.symbol}>
               <button
-                title={coin.name}
-                onClick={() => fetchCoinDataById(coin.id)}
+                title={item.name}
+                onClick={() => fetchCoinDataById(item.id)}
               >
                 <img
-                  src={coin.image}
-                  alt={`${coin.name} icon`}
+                  src={item.image}
+                  alt={`${item.name} icon`}
                   height="32"
                   width="32"
                 />
                 <br />
-                <span>{coin.symbol}</span>
+                <span>{item.symbol}</span>
               </button>
             </li>
           ))}

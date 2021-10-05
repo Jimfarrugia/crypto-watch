@@ -145,13 +145,22 @@ function App() {
             per_page: n,
           },
         })
-        .then(response => setCoinNavData(response.data))
-        .catch(error => console.log(error));
+        .then(response => {
+          // reorder the array to put any favorites at the start
+          setCoinNavData([
+            ...response.data.filter(item =>
+              favorites.find(favorite => favorite.id === item.id)
+            ),
+            ...response.data.filter(
+              item => !favorites.find(favorite => favorite.id === item.id)
+            ),
+          ]);
+        })
+        .catch(error => console.error(error));
     };
-
     fetchCoinNavData(coinNavLength);
     fetchCoinList();
-  }, []);
+  }, [favorites]);
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinDataById(coinData.id);
@@ -164,7 +173,10 @@ function App() {
   useEffect(() => {
     if (currentUser) {
       const docRef = doc(db, "favorites", currentUser.uid);
-      onSnapshot(docRef, doc => setFavorites(doc.data().favorites));
+      onSnapshot(
+        docRef,
+        doc => setFavorites(doc.data() && doc.data().favorites) || []
+      );
     }
   }, [currentUser]);
 
@@ -204,13 +216,13 @@ function App() {
     setVsCurrency(value);
   };
 
-  const handleNewFavorite = async coinId => {
+  const handleNewFavorite = async data => {
     if (!currentUser) return window.alert("Error:  You are not signed in.");
     try {
       const id = currentUser.uid;
       const payload = {
         user: currentUser.uid,
-        favorites: arrayUnion(coinId),
+        favorites: arrayUnion(data),
       };
       const docRef = doc(db, "favorites", id);
       await setDoc(docRef, payload, { merge: true });
@@ -225,11 +237,11 @@ function App() {
     }
   };
 
-  const handleRemoveFavorite = async coinId => {
+  const handleRemoveFavorite = async data => {
     if (!currentUser) return window.alert("Error:  You are not signed in.");
     try {
       const id = currentUser.uid;
-      const payload = { favorites: arrayRemove(coinId) };
+      const payload = { favorites: arrayRemove(data) };
       const docRef = doc(db, "favorites", id);
       await setDoc(docRef, payload, { merge: true });
     } catch (error) {
@@ -250,14 +262,15 @@ function App() {
         {(coinNavData && coinList && (
           <>
             <CoinNav
-              fetchCoinDataById={fetchCoinDataById}
+              favorites={favorites}
               coinNavData={coinNavData}
+              fetchCoinDataById={fetchCoinDataById}
             />
             <SearchBar
               searchTerm={searchTerm}
               searchSuggestions={searchSuggestions}
-              handleSearchInputChange={handleSearchInputChange}
               handleSearchChange={handleSearchChange}
+              handleSearchInputChange={handleSearchInputChange}
             />
           </>
         )) ||
