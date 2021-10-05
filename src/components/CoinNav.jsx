@@ -16,6 +16,7 @@ const CoinNav = ({ fetchCoinDataById, coinNavData, favorites }) => {
                 <FontAwesomeIcon className="star" icon={faStar} />
               )}
               <button
+                type="button"
                 title={item.name}
                 onClick={() => fetchCoinDataById(item.id)}
               >
