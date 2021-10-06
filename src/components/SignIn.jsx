@@ -37,7 +37,7 @@ const SignIn = () => {
   };
 
   return (
-    <div>
+    <>
       <h2>Sign In</h2>
       {error && <div className="alert-error">{error}</div>}
       <form onSubmit={handleSubmit}>
@@ -58,7 +58,11 @@ const SignIn = () => {
         </p>
       </form>
       <p>
-        <button disabled={isLoading} onClick={handleLoginWithGoogle}>
+        <button
+          type="button"
+          disabled={isLoading}
+          onClick={handleLoginWithGoogle}
+        >
           Sign In with Google
         </button>
       </p>
@@ -66,9 +70,9 @@ const SignIn = () => {
         <Link to="/forgot-password">Forgot Password</Link>
       </p>
       <p>
-        Need an account? <Link to="/signup">Sign Up</Link>
+        Need an account? <Link to="/sign-up">Sign Up</Link>
       </p>
-    </div>
+    </>
   );
 };
 

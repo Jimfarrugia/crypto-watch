@@ -5,6 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import App from "./App";
 import Layout from "./components/Layout";
 import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 import PageNotFound from "./components/PageNotFound";
 import "./index.css";
 
@@ -16,6 +17,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={App} />
             <Route path="/sign-in" component={SignIn} />
+            <Route path="/sign-up" component={SignUp} />
             <Route component={PageNotFound} />
           </Switch>
         </Layout>
