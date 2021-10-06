@@ -1,18 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
-  const { loginWithGoogle, currentUser, logout } = useAuth();
-
-  const handleSignIn = async () => {
-    try {
-      await loginWithGoogle();
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
 
   const handleLogout = async () => {
     try {
@@ -36,7 +29,7 @@ const Header = () => {
           title={currentUser ? "Logout" : "Sign In"}
           className={currentUser ? "logout-button" : "signin-button"}
           onClick={e => {
-            currentUser ? handleLogout() : handleSignIn();
+            currentUser ? handleLogout() : history.push("/sign-in");
             e.currentTarget.blur();
           }}
         >
