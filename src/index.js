@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import App from "./App";
+import Layout from "./components/Layout";
 import PageNotFound from "./components/PageNotFound";
 import "./index.css";
 
@@ -10,10 +11,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route component={PageNotFound} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </Layout>
       </AuthProvider>
     </Router>
   </React.StrictMode>,

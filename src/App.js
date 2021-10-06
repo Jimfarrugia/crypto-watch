@@ -10,8 +10,6 @@ import {
 } from "@firebase/firestore";
 import { db } from "./firebase";
 import { useAuth } from "./contexts/AuthContext";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
@@ -268,51 +266,47 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <div className="page-wrapper">
-        {(coinNavData && coinList && (
+      {(coinNavData && coinList && (
+        <>
+          <CoinNav
+            favorites={favorites}
+            coinNavData={coinNavData}
+            fetchCoinDataById={fetchCoinDataById}
+          />
+          <SearchBar
+            searchTerm={searchTerm}
+            searchSuggestions={searchSuggestions}
+            handleSearchChange={handleSearchChange}
+            handleSearchInputChange={handleSearchInputChange}
+          />
+        </>
+      )) ||
+        (isLoading && <div className="loader"></div>)}
+      {(isLoading && <div className="loader"></div>) ||
+        (error && <div>{error}</div>) || (
           <>
-            <CoinNav
+            <Details
+              coinData={coinData}
+              chartData={chartData}
+              vsCurrency={vsCurrency}
+              error={error}
               favorites={favorites}
-              coinNavData={coinNavData}
-              fetchCoinDataById={fetchCoinDataById}
+              handleNewFavorite={handleNewFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
             />
-            <SearchBar
-              searchTerm={searchTerm}
-              searchSuggestions={searchSuggestions}
-              handleSearchChange={handleSearchChange}
-              handleSearchInputChange={handleSearchInputChange}
-            />
+            {chartData && (
+              <>
+                <Settings
+                  vsCurrency={vsCurrency}
+                  priceHistoryDays={priceHistoryDays}
+                  handleChangeVsCurrency={handleChangeVsCurrency}
+                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+                />
+                <Line data={chartData} />
+              </>
+            )}
           </>
-        )) ||
-          (isLoading && <div className="loader"></div>)}
-        {(isLoading && <div className="loader"></div>) ||
-          (error && <div>{error}</div>) || (
-            <>
-              <Details
-                coinData={coinData}
-                chartData={chartData}
-                vsCurrency={vsCurrency}
-                error={error}
-                favorites={favorites}
-                handleNewFavorite={handleNewFavorite}
-                handleRemoveFavorite={handleRemoveFavorite}
-              />
-              {chartData && (
-                <>
-                  <Settings
-                    vsCurrency={vsCurrency}
-                    priceHistoryDays={priceHistoryDays}
-                    handleChangeVsCurrency={handleChangeVsCurrency}
-                    handleChangePriceHistoryDays={handleChangePriceHistoryDays}
-                  />
-                  <Line data={chartData} />
-                </>
-              )}
-            </>
-          )}
-        <Footer />
-      </div>
+        )}
     </div>
   );
 }
