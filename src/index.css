@@ -92,6 +92,10 @@ a:focus {
 .text-green {
   color: var(--green);
 }
+.page-not-found {
+  margin-top: 1.5em;
+  text-align: center;
+}
 
 .button-link {
   font-size: 1rem;
