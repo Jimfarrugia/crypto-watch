@@ -96,6 +96,11 @@ a:focus {
   margin-top: 1.5em;
   text-align: center;
 }
+a.discreet-link:link,
+a.discreet-link:visited {
+  color: var(--white);
+  outline: none;
+}
 
 .button-link {
   font-size: 1rem;

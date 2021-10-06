@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
@@ -25,7 +26,11 @@ const Header = () => {
   return (
     <div className="page-header-wrapper">
       <header className="page-header">
-        <h1 data-testid="page-heading">Crypto Watch</h1>
+        <h1 data-testid="page-heading">
+          <Link to="/" className="discreet-link">
+            Crypto Watch
+          </Link>
+        </h1>
         <button
           type="button"
           title={currentUser ? "Logout" : "Sign In"}
