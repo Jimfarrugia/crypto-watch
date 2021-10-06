@@ -173,9 +173,8 @@ a.discreet-link:visited {
 .logout-button svg {
   margin-right: -0.125em;
 }
-
-.page-footer {
-  padding: 1.5rem 0;
+.signin-button {
+  padding-left: 0.625em;
 }
 
 .coin-nav {
@@ -304,6 +303,10 @@ a.discreet-link:visited {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.125em;
+}
+
+.page-footer {
+  padding: 1.5rem 0;
 }
 
 .page-footer ul {

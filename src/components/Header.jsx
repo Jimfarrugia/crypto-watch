@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -40,7 +40,7 @@ const Header = () => {
             e.currentTarget.blur();
           }}
         >
-          <FontAwesomeIcon icon={currentUser ? faSignOutAlt : faUser} />
+          <FontAwesomeIcon icon={currentUser ? faSignOutAlt : faSignInAlt} />
         </button>
       </header>
     </div>
