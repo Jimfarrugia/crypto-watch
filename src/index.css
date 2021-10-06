@@ -9,6 +9,7 @@
   --blue: #062f4f;
   --blue-bright: #4717f6;
   --red: #ff0a0a;
+  --red-dark: #b30606;
   --green: #1aff1a;
   --yellow: #feff01;
 }
@@ -91,6 +92,12 @@ a:focus {
 }
 .text-green {
   color: var(--green);
+}
+.alert-error {
+  background: var(--red-dark);
+  width: fit-content;
+  padding: 1em;
+  border-radius: 0.25em;
 }
 .page-not-found {
   margin-top: 1.5em;
