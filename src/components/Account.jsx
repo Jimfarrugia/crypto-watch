@@ -63,7 +63,32 @@ const Account = () => {
 
   const handleChangeEmail = async e => {
     e.preventDefault();
-    console.log("handleChangeEmail");
+    setEmailError("");
+    setEmailMessage("");
+    setIsLoading(true);
+    const email = emailRef.current.value;
+    const emailConfirmation = emailConfirmationRef.current.value;
+    if (email !== emailConfirmation) {
+      setEmailError("Email addresses do not match.");
+      return setIsLoading(false);
+    }
+    try {
+      await updateUserEmail(email);
+    } catch (e) {
+      console.error(e);
+      if (e.code === "auth/requires-recent-login") {
+        setEmailError(
+          "It's been too long since you signed in.  Please sign in again first."
+        );
+      } else {
+        setEmailError("Change email failed.  Please try again.");
+      }
+      return setIsLoading(false);
+    }
+    emailRef.current.value = "";
+    emailConfirmationRef.current.value = "";
+    setEmailMessage("Success. Your email address has been changed.");
+    setIsLoading(false);
   };
 
   return (
