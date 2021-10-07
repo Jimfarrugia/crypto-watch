@@ -220,14 +220,13 @@ a.discreet-link:visited {
   justify-content: space-between;
 }
 .coin-nav ul > li {
-  padding: 0 0.25rem;
+  padding: 0.25em 0.25em 0;
   margin: 0;
   list-style-type: none;
   position: relative;
 }
-.coin-nav ul > li:first-child,
-.coin-nav ul > li:last-child {
-  padding: 0;
+.coin-nav ul > li:first-child {
+  padding-left: 0;
 }
 .coin-nav ul > li > .star {
   pointer-events: none;
