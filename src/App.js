@@ -38,7 +38,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
   const [coinList, setCoinList] = useState(undefined);
-  const [coinNavData, setCoinNavData] = useState(undefined);
+  const [coinNavData, setCoinNavData] = useState([]);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
   const [favorites, setFavorites] = useState([]);
@@ -146,10 +146,15 @@ function App() {
           },
         })
         .then(response => {
-          // any favorites in the result should be given the 'favorite' property
-          const favoritesInResult = response.data
-            .filter(item => favorites.find(favorite => favorite.id === item.id))
-            .map(item => ({ isFavorite: true, ...item }));
+          // any favorites in the result should be given the 'isFavorite' property
+          const favoritesInResult =
+            favorites && favorites.length < 1
+              ? []
+              : response.data
+                  .filter(item =>
+                    favorites.find(favorite => favorite.id === item.id)
+                  )
+                  .map(item => ({ isFavorite: true, ...item }));
           // reorder the array to put any favorites at the start
           setCoinNavData([
             ...favoritesInResult,
@@ -160,10 +165,9 @@ function App() {
         })
         .catch(error => console.error(error));
     };
-    const totalNavItemsToFetch = coinNavLength - favorites.length + 1;
-    return favorites.length >= 10
+    return favorites && favorites.length >= coinNavLength
       ? setCoinNavData(favorites)
-      : fetchCoinNavData(totalNavItemsToFetch);
+      : fetchCoinNavData(coinNavLength);
   }, [favorites]);
 
   useEffect(() => {
@@ -269,6 +273,7 @@ function App() {
       {(coinNavData && coinList && (
         <>
           <CoinNav
+            coinNavLength={coinNavLength}
             favorites={favorites}
             coinNavData={coinNavData}
             fetchCoinDataById={fetchCoinDataById}
