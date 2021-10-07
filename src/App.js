@@ -10,8 +10,6 @@ import {
 } from "@firebase/firestore";
 import { db } from "./firebase";
 import { useAuth } from "./contexts/AuthContext";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
@@ -40,7 +38,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
   const [coinList, setCoinList] = useState(undefined);
-  const [coinNavData, setCoinNavData] = useState(undefined);
+  const [coinNavData, setCoinNavData] = useState([]);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
   const [favorites, setFavorites] = useState([]);
@@ -148,10 +146,15 @@ function App() {
           },
         })
         .then(response => {
-          // any favorites in the result should be given the 'favorite' property
-          const favoritesInResult = response.data
-            .filter(item => favorites.find(favorite => favorite.id === item.id))
-            .map(item => ({ isFavorite: true, ...item }));
+          // any favorites in the result should be given the 'isFavorite' property
+          const favoritesInResult =
+            favorites && favorites.length < 1
+              ? []
+              : response.data
+                  .filter(item =>
+                    favorites.find(favorite => favorite.id === item.id)
+                  )
+                  .map(item => ({ isFavorite: true, ...item }));
           // reorder the array to put any favorites at the start
           setCoinNavData([
             ...favoritesInResult,
@@ -162,10 +165,9 @@ function App() {
         })
         .catch(error => console.error(error));
     };
-    const totalNavItemsToFetch = coinNavLength - favorites.length + 1;
-    return favorites.length >= 10
+    return favorites && favorites.length >= coinNavLength
       ? setCoinNavData(favorites)
-      : fetchCoinNavData(totalNavItemsToFetch);
+      : fetchCoinNavData(coinNavLength);
   }, [favorites]);
 
   useEffect(() => {
@@ -268,51 +270,48 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <div className="page-wrapper">
-        {(coinNavData && coinList && (
+      {(coinNavData && coinList && (
+        <>
+          <CoinNav
+            coinNavLength={coinNavLength}
+            favorites={favorites}
+            coinNavData={coinNavData}
+            fetchCoinDataById={fetchCoinDataById}
+          />
+          <SearchBar
+            searchTerm={searchTerm}
+            searchSuggestions={searchSuggestions}
+            handleSearchChange={handleSearchChange}
+            handleSearchInputChange={handleSearchInputChange}
+          />
+        </>
+      )) ||
+        (isLoading && <div className="loader"></div>)}
+      {(isLoading && <div className="loader"></div>) ||
+        (error && <div>{error}</div>) || (
           <>
-            <CoinNav
+            <Details
+              coinData={coinData}
+              chartData={chartData}
+              vsCurrency={vsCurrency}
+              error={error}
               favorites={favorites}
-              coinNavData={coinNavData}
-              fetchCoinDataById={fetchCoinDataById}
+              handleNewFavorite={handleNewFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
             />
-            <SearchBar
-              searchTerm={searchTerm}
-              searchSuggestions={searchSuggestions}
-              handleSearchChange={handleSearchChange}
-              handleSearchInputChange={handleSearchInputChange}
-            />
+            {chartData && (
+              <>
+                <Settings
+                  vsCurrency={vsCurrency}
+                  priceHistoryDays={priceHistoryDays}
+                  handleChangeVsCurrency={handleChangeVsCurrency}
+                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+                />
+                <Line data={chartData} />
+              </>
+            )}
           </>
-        )) ||
-          (isLoading && <div className="loader"></div>)}
-        {(isLoading && <div className="loader"></div>) ||
-          (error && <div>{error}</div>) || (
-            <>
-              <Details
-                coinData={coinData}
-                chartData={chartData}
-                vsCurrency={vsCurrency}
-                error={error}
-                favorites={favorites}
-                handleNewFavorite={handleNewFavorite}
-                handleRemoveFavorite={handleRemoveFavorite}
-              />
-              {chartData && (
-                <>
-                  <Settings
-                    vsCurrency={vsCurrency}
-                    priceHistoryDays={priceHistoryDays}
-                    handleChangeVsCurrency={handleChangeVsCurrency}
-                    handleChangePriceHistoryDays={handleChangePriceHistoryDays}
-                  />
-                  <Line data={chartData} />
-                </>
-              )}
-            </>
-          )}
-        <Footer />
-      </div>
+        )}
     </div>
   );
 }

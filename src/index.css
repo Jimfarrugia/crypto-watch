@@ -9,6 +9,7 @@
   --blue: #062f4f;
   --blue-bright: #4717f6;
   --red: #ff0a0a;
+  --red-dark: #b30606;
   --green: #1aff1a;
   --yellow: #feff01;
 }
@@ -74,16 +75,16 @@ input {
 
 a:link,
 a:visited {
-  color: var(--purple);
+  color: var(--purple-bright);
   text-decoration: none;
   transition: 0.25s;
 }
 a:hover,
 a:active {
-  color: var(--purple-bright);
+  color: var(--purple);
 }
 a:focus {
-  outline: 0.125rem solid var(--purple-bright);
+  outline: 0.125rem solid var(--purple);
 }
 
 .text-red {
@@ -91,6 +92,21 @@ a:focus {
 }
 .text-green {
   color: var(--green);
+}
+.alert-error {
+  background: var(--red-dark);
+  width: fit-content;
+  padding: 1em;
+  border-radius: 0.25em;
+}
+.page-not-found {
+  margin-top: 1.5em;
+  text-align: center;
+}
+a.discreet-link:link,
+a.discreet-link:visited {
+  color: var(--white);
+  outline: none;
 }
 
 .button-link {
@@ -164,9 +180,8 @@ a:focus {
 .logout-button svg {
   margin-right: -0.125em;
 }
-
-.page-footer {
-  padding: 1.5rem 0;
+.signin-button {
+  padding-left: 0.625em;
 }
 
 .coin-nav {
@@ -295,6 +310,10 @@ a:focus {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.125em;
+}
+
+.page-footer {
+  padding: 1.5rem 0;
 }
 
 .page-footer ul {
