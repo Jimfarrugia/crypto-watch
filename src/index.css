@@ -343,6 +343,10 @@ a.discreet-link:visited {
   grid-gap: 1.125em;
 }
 
+.account h3 {
+  margin-top: 2.25rem;
+}
+
 .page-footer {
   padding: 1.5rem 0;
 }
