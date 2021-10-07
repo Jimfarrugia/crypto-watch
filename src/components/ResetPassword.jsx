@@ -17,8 +17,11 @@ const ForgotPassword = () => {
     try {
       await resetPassword(emailRef.current.value);
       setMessage("Success. Check your email inbox for further instructions.");
-    } catch {
-      setError("Failed to reset password.");
+    } catch (e) {
+      e.code === "auth/user-not-found"
+        ? setError("Could not find a user with that email address.")
+        : setError("Failed to reset password.");
+      console.error(e);
     }
     setIsLoading(false);
   };
