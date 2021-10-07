@@ -15,8 +15,8 @@ const CoinNav = ({
           favorite => !coinNavData.find(coin => coin.id === favorite.id)
         );
   const navItemsData = [...favoritesToRender, ...coinNavData];
+  // if there are 10 or more favorites navItems, remove everything else and display them all
   const favoritesInNavItemsData = navItemsData.filter(item => item.isFavorite);
-  // if there are 10 or more favorites in result, remove everything else and display them all
   const navItems =
     favoritesInNavItemsData.length >= coinNavLength
       ? favoritesInNavItemsData
