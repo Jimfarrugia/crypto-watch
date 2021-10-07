@@ -18,7 +18,11 @@ const SignIn = () => {
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
     } catch (e) {
-      setError("Sign in failed. Please try again.");
+      e.code === "auth/wrong-password"
+        ? setError("Password is incorrect.")
+        : e.code === "auth/user-not-found"
+        ? setError("Could not find a user with that email address.")
+        : setError("Sign in failed. Please try again.");
       console.error(e);
     }
     setIsLoading(false);
