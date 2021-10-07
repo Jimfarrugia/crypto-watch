@@ -75,16 +75,16 @@ input {
 
 a:link,
 a:visited {
-  color: var(--purple);
+  color: var(--purple-bright);
   text-decoration: none;
   transition: 0.25s;
 }
 a:hover,
 a:active {
-  color: var(--purple-bright);
+  color: var(--purple);
 }
 a:focus {
-  outline: 0.125rem solid var(--purple-bright);
+  outline: 0.125rem solid var(--purple);
 }
 
 .text-red {
