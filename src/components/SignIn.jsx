@@ -8,6 +8,7 @@ const SignIn = () => {
   const { login, loginWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async e => {
@@ -44,23 +45,41 @@ const SignIn = () => {
     <>
       <h2>Sign In</h2>
       {error && <div className="alert-error">{error}</div>}
-      <form onSubmit={handleSubmit}>
+      {(isOpen && (
+        <form onSubmit={handleSubmit}>
+          <p>
+            <label htmlFor="email">Email</label>
+            <br />
+            <input type="email" id="email" ref={emailRef} required />
+          </p>
+          <p>
+            <label htmlFor="password">Password</label>
+            <br />
+            <input type="password" id="password" ref={passwordRef} required />
+          </p>
+          <p>
+            <button type="submit" disabled={isLoading}>
+              Sign In
+            </button>
+          </p>
+          <p>
+            <Link to="/reset-password">Forgot Password</Link>
+          </p>
+          <p>
+            Need an account? <Link to="/sign-up">Sign Up</Link>
+          </p>
+        </form>
+      )) || (
         <p>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input type="email" id="email" ref={emailRef} required />
-        </p>
-        <p>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input type="password" id="password" ref={passwordRef} required />
-        </p>
-        <p>
-          <button type="submit" disabled={isLoading}>
-            Sign In
+          <button
+            type="button"
+            disabled={isLoading}
+            onClick={() => setIsOpen(true)}
+          >
+            Sign In with Email
           </button>
         </p>
-      </form>
+      )}
       <p>
         <button
           type="button"
@@ -69,12 +88,6 @@ const SignIn = () => {
         >
           Sign In with Google
         </button>
-      </p>
-      <p>
-        <Link to="/reset-password">Forgot Password</Link>
-      </p>
-      <p>
-        Need an account? <Link to="/sign-up">Sign Up</Link>
       </p>
     </>
   );

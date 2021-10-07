@@ -1,20 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
   const history = useHistory();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      window.location.reload();
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const isEmailPasswordUser =
+    currentUser && currentUser.providerData[0].providerId === "password";
 
   return (
     <div className="page-header-wrapper">
@@ -24,17 +17,35 @@ const Header = () => {
             Crypto Watch
           </Link>
         </h1>
-        <button
-          type="button"
-          title={currentUser ? "Logout" : "Sign In"}
-          className={currentUser ? "logout-button" : "signin-button"}
-          onClick={e => {
-            currentUser ? handleLogout() : history.push("/sign-in");
-            e.currentTarget.blur();
-          }}
-        >
-          <FontAwesomeIcon icon={currentUser ? faSignOutAlt : faSignInAlt} />
-        </button>
+        {(!currentUser || (currentUser && isEmailPasswordUser)) && (
+          <button
+            type="button"
+            title={currentUser ? "My Account" : "Sign In"}
+            className={currentUser ? "account-button" : "signin-button"}
+            onClick={e => {
+              currentUser ? history.push("/account") : history.push("/sign-in");
+              e.currentTarget.blur();
+            }}
+          >
+            <FontAwesomeIcon icon={currentUser ? faUser : faSignInAlt} />
+          </button>
+        )}
+        {currentUser && !isEmailPasswordUser && (
+          <button
+            type="button"
+            title="My Account"
+            className="account-img-button"
+            onClick={e => {
+              history.push("/account");
+              e.currentTarget.blur();
+            }}
+          >
+            <img
+              src={currentUser.photoURL}
+              alt={`${currentUser.displayName} profile pic`}
+            />
+          </button>
+        )}
       </header>
     </div>
   );

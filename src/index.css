@@ -11,6 +11,7 @@
   --red: #ff0a0a;
   --red-dark: #b30606;
   --green: #1aff1a;
+  --green-dark: #008800;
   --yellow: #feff01;
 }
 
@@ -99,6 +100,12 @@ a:focus {
   padding: 1em;
   border-radius: 0.25em;
 }
+.alert-success {
+  background: var(--green-dark);
+  width: fit-content;
+  padding: 1em;
+  border-radius: 0.25em;
+}
 .page-not-found {
   margin-top: 1.5em;
   text-align: center;
@@ -147,7 +154,7 @@ a.discreet-link:visited {
 }
 
 .signin-button,
-.logout-button {
+.account-button {
   position: absolute;
   top: 0;
   right: 0.75em;
@@ -156,32 +163,57 @@ a.discreet-link:visited {
   color: var(--white);
   background: none;
   outline: none;
-  border: 0.125rem solid white;
+  border: 0.125rem solid var(--white);
   border-radius: 100%;
-}
-.signin-button:hover,
-.logout-button:hover {
-  color: var(--yellow);
-  border-color: var(--yellow);
   cursor: pointer;
 }
+.signin-button:hover,
+.account-button:hover,
+.account-img-button:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
 .signin-button:focus,
-.logout-button:focus {
+.account-button:focus,
+.account-img-button:focus {
   border-color: var(--yellow);
 }
 .signin-button:focus svg,
-.logout-button:focus svg {
+.account-button:focus svg {
   color: var(--yellow);
 }
 .signin-button svg,
-.logout-button svg {
+.account-button svg {
   font-size: 1rem;
-}
-.logout-button svg {
-  margin-right: -0.125em;
 }
 .signin-button {
   padding-left: 0.625em;
+}
+
+.account-img-button {
+  display: block;
+  height: 2.575em;
+  width: 2.825em;
+  position: absolute;
+  top: 0;
+  right: 0.75em;
+  margin: 0.9em 0 0;
+  padding: 0;
+  background: none;
+  outline: none;
+  border: 0.125rem solid var(--white);
+  border-radius: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.account-img-button > img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  display: inline-block;
+  border-radius: 100%;
+  position: relative;
+  top: -0.125rem;
 }
 
 .coin-nav {
@@ -195,14 +227,13 @@ a.discreet-link:visited {
   justify-content: space-between;
 }
 .coin-nav ul > li {
-  padding: 0 0.25rem;
+  padding: 0.25em 0.25em 0;
   margin: 0;
   list-style-type: none;
   position: relative;
 }
-.coin-nav ul > li:first-child,
-.coin-nav ul > li:last-child {
-  padding: 0;
+.coin-nav ul > li:first-child {
+  padding-left: 0;
 }
 .coin-nav ul > li > .star {
   pointer-events: none;
@@ -310,6 +341,10 @@ a.discreet-link:visited {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.125em;
+}
+
+.account h3 {
+  margin-top: 2.25rem;
 }
 
 .page-footer {

@@ -181,7 +181,7 @@ function App() {
   useEffect(() => {
     if (currentUser) {
       const docRef = doc(db, "favorites", currentUser.uid);
-      onSnapshot(
+      const unsubscribe = onSnapshot(
         docRef,
         doc =>
           setFavorites(
@@ -190,6 +190,7 @@ function App() {
               doc.data().favorites.map(item => ({ isFavorite: true, ...item }))
           ) || []
       );
+      return unsubscribe;
     }
   }, [currentUser]);
 
