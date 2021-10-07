@@ -11,6 +11,7 @@
   --red: #ff0a0a;
   --red-dark: #b30606;
   --green: #1aff1a;
+  --green-dark: #008800;
   --yellow: #feff01;
 }
 
@@ -95,6 +96,12 @@ a:focus {
 }
 .alert-error {
   background: var(--red-dark);
+  width: fit-content;
+  padding: 1em;
+  border-radius: 0.25em;
+}
+.alert-success {
+  background: var(--green-dark);
   width: fit-content;
   padding: 1em;
   border-radius: 0.25em;
