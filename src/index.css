@@ -156,17 +156,19 @@ a.discreet-link:visited {
   color: var(--white);
   background: none;
   outline: none;
-  border: 0.125rem solid white;
+  border: 0.125rem solid var(--white);
   border-radius: 100%;
-}
-.signin-button:hover,
-.account-button:hover {
-  color: var(--yellow);
-  border-color: var(--yellow);
   cursor: pointer;
 }
+.signin-button:hover,
+.account-button:hover,
+.account-img-button:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
 .signin-button:focus,
-.account-button:focus {
+.account-button:focus,
+.account-img-button:focus {
   border-color: var(--yellow);
 }
 .signin-button:focus svg,
@@ -177,11 +179,34 @@ a.discreet-link:visited {
 .account-button svg {
   font-size: 1rem;
 }
-.account-button svg {
-  margin-right: -0.125em;
-}
 .signin-button {
   padding-left: 0.625em;
+}
+
+.account-img-button {
+  display: block;
+  height: 2.575em;
+  width: 2.825em;
+  position: absolute;
+  top: 0;
+  right: 0.75em;
+  margin: 0.9em 0 0;
+  padding: 0;
+  background: none;
+  outline: none;
+  border: 0.125rem solid var(--white);
+  border-radius: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.account-img-button > img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  display: inline-block;
+  border-radius: 100%;
+  position: relative;
+  top: -0.125rem;
 }
 
 .coin-nav {

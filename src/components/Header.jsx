@@ -6,6 +6,8 @@ import { useAuth } from "../contexts/AuthContext";
 const Header = () => {
   const { currentUser } = useAuth();
   const history = useHistory();
+  const isEmailPasswordUser =
+    currentUser && currentUser.providerData[0].providerId === "password";
 
   return (
     <div className="page-header-wrapper">
@@ -15,17 +17,35 @@ const Header = () => {
             Crypto Watch
           </Link>
         </h1>
-        <button
-          type="button"
-          title={currentUser ? "My Account" : "Sign In"}
-          className={currentUser ? "account-button" : "signin-button"}
-          onClick={e => {
-            currentUser ? history.push("/account") : history.push("/sign-in");
-            e.currentTarget.blur();
-          }}
-        >
-          <FontAwesomeIcon icon={currentUser ? faUser : faSignInAlt} />
-        </button>
+        {(!currentUser || (currentUser && isEmailPasswordUser)) && (
+          <button
+            type="button"
+            title={currentUser ? "My Account" : "Sign In"}
+            className={currentUser ? "account-button" : "signin-button"}
+            onClick={e => {
+              currentUser ? history.push("/account") : history.push("/sign-in");
+              e.currentTarget.blur();
+            }}
+          >
+            <FontAwesomeIcon icon={currentUser ? faUser : faSignInAlt} />
+          </button>
+        )}
+        {currentUser && !isEmailPasswordUser && (
+          <button
+            type="button"
+            title="My Account"
+            className="account-img-button"
+            onClick={e => {
+              history.push("/account");
+              e.currentTarget.blur();
+            }}
+          >
+            <img
+              src={currentUser.photoURL}
+              alt={`${currentUser.displayName} profile pic`}
+            />
+          </button>
+        )}
       </header>
     </div>
   );
