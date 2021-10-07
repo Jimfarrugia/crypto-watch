@@ -147,7 +147,7 @@ a.discreet-link:visited {
 }
 
 .signin-button,
-.logout-button {
+.account-button {
   position: absolute;
   top: 0;
   right: 0.75em;
@@ -160,24 +160,24 @@ a.discreet-link:visited {
   border-radius: 100%;
 }
 .signin-button:hover,
-.logout-button:hover {
+.account-button:hover {
   color: var(--yellow);
   border-color: var(--yellow);
   cursor: pointer;
 }
 .signin-button:focus,
-.logout-button:focus {
+.account-button:focus {
   border-color: var(--yellow);
 }
 .signin-button:focus svg,
-.logout-button:focus svg {
+.account-button:focus svg {
   color: var(--yellow);
 }
 .signin-button svg,
-.logout-button svg {
+.account-button svg {
   font-size: 1rem;
 }
-.logout-button svg {
+.account-button svg {
   margin-right: -0.125em;
 }
 .signin-button {
