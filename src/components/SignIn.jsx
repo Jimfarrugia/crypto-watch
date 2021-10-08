@@ -5,7 +5,8 @@ import { useAuth } from "../contexts/AuthContext";
 const SignIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, loginWithGoogle, loginWithTwitter } = useAuth();
+  const { login, loginWithGoogle, loginWithTwitter, loginWithFacebook } =
+    useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,21 @@ const SignIn = () => {
       history.push("/");
     } catch {
       setError("Sign in failed. Please try again.");
+    }
+    setIsLoading(false);
+  };
+
+  const handleLoginWithFacebook = async () => {
+    setError("");
+    setIsLoading(true);
+    try {
+      await loginWithFacebook();
+      history.push("/");
+    } catch (e) {
+      e.code === "auth/account-exists-with-different-credential"
+        ? setError("An account with that email address already exists.")
+        : setError("Sign in failed. Please try again.");
+      console.error(e);
     }
     setIsLoading(false);
   };
@@ -108,6 +124,15 @@ const SignIn = () => {
           onClick={handleLoginWithTwitter}
         >
           Sign In with Twitter
+        </button>
+      </p>
+      <p>
+        <button
+          type="button"
+          disabled={isLoading}
+          onClick={handleLoginWithFacebook}
+        >
+          Sign In with Facebook
         </button>
       </p>
     </>
