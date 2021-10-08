@@ -67,12 +67,10 @@ const Details = ({
             <p
               className={`current-price${
                 (coinData.price_change_percentage_24h &&
-                  coinData.price_change_percentage_24h.toString().match(/^-/) &&
+                  coinData.price_change_percentage_24h < 0 &&
                   " text-red") ||
                 (coinData.price_change_percentage_24h &&
-                  !coinData.price_change_percentage_24h
-                    .toString()
-                    .match(/^-/) &&
+                  coinData.price_change_percentage_24h > 0 &&
                   " text-green") ||
                 ""
               }`}
