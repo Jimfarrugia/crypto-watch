@@ -1,8 +1,11 @@
 import { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
+import { setDoc, doc } from "@firebase/firestore";
+import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { currencies, color } from "../constants";
+import RefreshButton from "./RefreshButton";
 
 const Account = () => {
   const { currentUser, logout, updateUserPassword, updateUserEmail } =
@@ -13,6 +16,8 @@ const Account = () => {
   const passwordConfirmationRef = useRef();
   const history = useHistory();
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
+  const [vsCurrencyError, setVsCurrencyError] = useState("");
+  const [vsCurrencyMessage, setVsCurrencyMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -74,7 +79,27 @@ const Account = () => {
   };
 
   const handleChangeUserVsCurrency = async () => {
-    console.log(vsCurrency);
+    setVsCurrencyError("");
+    setIsLoading(true);
+    try {
+      const id = currentUser.uid;
+      const payload = {
+        user: currentUser.uid,
+        vsCurrency: vsCurrency,
+      };
+      const docRef = doc(db, "users", id);
+      await setDoc(docRef, payload, { merge: true });
+    } catch (e) {
+      setVsCurrencyError(
+        <p>
+          There was an error while communicating with the database. Please{" "}
+          <RefreshButton /> the page and try again.
+        </p>
+      );
+      console.error(e);
+    }
+    setVsCurrencyMessage("Success. Your preferred currency was changed.");
+    setIsLoading(false);
   };
 
   const handleChangePassword = async e => {
@@ -155,6 +180,12 @@ const Account = () => {
         </button>
       </p>
       <div>
+        {vsCurrencyError && (
+          <div className="alert-error">{vsCurrencyError}</div>
+        )}
+        {vsCurrencyMessage && (
+          <div className="alert-success">{vsCurrencyMessage}</div>
+        )}
         <Select
           isSearchable={false}
           options={currencies}
