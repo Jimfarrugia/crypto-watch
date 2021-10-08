@@ -25,6 +25,7 @@ const Details = ({
       name: coinData.name,
       symbol: coinData.symbol,
       image: coinData.image,
+      isFavorite: true,
     };
     return isFavorite ? handleRemoveFavorite(data) : handleNewFavorite(data);
   };

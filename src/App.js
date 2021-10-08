@@ -182,18 +182,9 @@ function App() {
     if (currentUser) {
       const docRef = doc(db, "users", currentUser.uid);
       const unsubscribe = onSnapshot(docRef, doc => {
-      const docRef = doc(db, "favorites", currentUser.uid);
-      const unsubscribe = onSnapshot(
-        docRef,
-        doc =>
-        setFavorites(
-          (doc.data() &&
-            doc.data().favorites &&
-            doc
-              .data()
-              .favorites.map(item => ({ isFavorite: true, ...item }))) ||
-            []
-        );
+        const data = doc.data();
+        if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+        if (data && data.favorites) setFavorites(data.favorites);
       });
       return unsubscribe;
     }
