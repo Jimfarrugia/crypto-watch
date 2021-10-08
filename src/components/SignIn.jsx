@@ -36,8 +36,13 @@ const SignIn = () => {
     try {
       await loginWithGoogle();
       history.push("/");
-    } catch {
-      setError("Sign in failed. Please try again.");
+    } catch (e) {
+      e.code === "auth/account-exists-with-different-credential"
+        ? setError(
+            "Your account was created using a different provider. You must use the same provider each time you sign in."
+          )
+        : setError("Sign in failed. Please try again.");
+      console.error(e);
     }
     setIsLoading(false);
   };
@@ -48,8 +53,9 @@ const SignIn = () => {
     try {
       await loginWithTwitter();
       history.push("/");
-    } catch {
+    } catch (e) {
       setError("Sign in failed. Please try again.");
+      console.error(e);
     }
     setIsLoading(false);
   };
@@ -62,7 +68,9 @@ const SignIn = () => {
       history.push("/");
     } catch (e) {
       e.code === "auth/account-exists-with-different-credential"
-        ? setError("An account with that email address already exists.")
+        ? setError(
+            "Your account was created using a different provider. You must use the same provider each time you sign in."
+          )
         : setError("Sign in failed. Please try again.");
       console.error(e);
     }
