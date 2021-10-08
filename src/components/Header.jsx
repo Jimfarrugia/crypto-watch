@@ -43,6 +43,7 @@ const Header = () => {
             <img
               src={currentUser.photoURL}
               alt={`${currentUser.displayName} profile pic`}
+              referrerPolicy="no-referrer"
             />
           </button>
         )}
