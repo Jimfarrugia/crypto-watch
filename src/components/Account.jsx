@@ -179,6 +179,7 @@ const Account = () => {
           Sign Out
         </button>
       </p>
+      <h3>Preferred Currency</h3>
       <div>
         {vsCurrencyError && (
           <div className="alert-error">{vsCurrencyError}</div>
