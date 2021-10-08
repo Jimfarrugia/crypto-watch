@@ -194,14 +194,16 @@ const Account = () => {
           placeholder={vsCurrency.toUpperCase()}
           onChange={({ value }) => setVsCurrency(value)}
         />
-        <button
-          type="button"
-          title="Save"
-          disabled={isLoading}
-          onClick={handleChangeUserVsCurrency}
-        >
-          Save
-        </button>
+        <p>
+          <button
+            type="button"
+            title="Save"
+            disabled={isLoading}
+            onClick={handleChangeUserVsCurrency}
+          >
+            Save
+          </button>
+        </p>
       </div>
       {isEmailPasswordUser && (
         <>
