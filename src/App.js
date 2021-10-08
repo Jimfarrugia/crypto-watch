@@ -180,16 +180,21 @@ function App() {
 
   useEffect(() => {
     if (currentUser) {
+      const docRef = doc(db, "users", currentUser.uid);
+      const unsubscribe = onSnapshot(docRef, doc => {
       const docRef = doc(db, "favorites", currentUser.uid);
       const unsubscribe = onSnapshot(
         docRef,
         doc =>
-          setFavorites(
-            doc.data() &&
-              doc.data().favorites &&
-              doc.data().favorites.map(item => ({ isFavorite: true, ...item }))
-          ) || []
-      );
+        setFavorites(
+          (doc.data() &&
+            doc.data().favorites &&
+            doc
+              .data()
+              .favorites.map(item => ({ isFavorite: true, ...item }))) ||
+            []
+        );
+      });
       return unsubscribe;
     }
   }, [currentUser]);
@@ -238,7 +243,7 @@ function App() {
         user: currentUser.uid,
         favorites: arrayUnion(data),
       };
-      const docRef = doc(db, "favorites", id);
+      const docRef = doc(db, "users", id);
       await setDoc(docRef, payload, { merge: true });
     } catch (error) {
       setError(
@@ -256,7 +261,7 @@ function App() {
     try {
       const id = currentUser.uid;
       const payload = { favorites: arrayRemove(data) };
-      const docRef = doc(db, "favorites", id);
+      const docRef = doc(db, "users", id);
       await setDoc(docRef, payload, { merge: true });
     } catch (error) {
       setError(
