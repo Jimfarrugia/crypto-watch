@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 const SignIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, loginWithTwitter } = useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +34,18 @@ const SignIn = () => {
     setIsLoading(true);
     try {
       await loginWithGoogle();
+      history.push("/");
+    } catch {
+      setError("Sign in failed. Please try again.");
+    }
+    setIsLoading(false);
+  };
+
+  const handleLoginWithTwitter = async () => {
+    setError("");
+    setIsLoading(true);
+    try {
+      await loginWithTwitter();
       history.push("/");
     } catch {
       setError("Sign in failed. Please try again.");
@@ -87,6 +99,15 @@ const SignIn = () => {
           onClick={handleLoginWithGoogle}
         >
           Sign In with Google
+        </button>
+      </p>
+      <p>
+        <button
+          type="button"
+          disabled={isLoading}
+          onClick={handleLoginWithTwitter}
+        >
+          Sign In with Twitter
         </button>
       </p>
     </>

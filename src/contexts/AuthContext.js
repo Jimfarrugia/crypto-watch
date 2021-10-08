@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
+  TwitterAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -21,7 +22,11 @@ export const AuthProvider = ({ children }) => {
 
   const googleProvider = new GoogleAuthProvider();
 
+  const twitterProvider = new TwitterAuthProvider();
+
   const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+
+  const loginWithTwitter = () => signInWithPopup(auth, twitterProvider);
 
   const signup = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
@@ -50,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     loginWithGoogle,
+    loginWithTwitter,
     resetPassword,
     updateUserEmail,
     updateUserPassword,
