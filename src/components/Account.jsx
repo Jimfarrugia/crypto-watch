@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import Select from "react-select";
 import { useAuth } from "../contexts/AuthContext";
+import { currencies, color } from "../constants";
 
 const Account = () => {
   const { currentUser, logout, updateUserPassword, updateUserEmail } =
@@ -10,6 +12,7 @@ const Account = () => {
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
   const history = useHistory();
+  const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
   const [emailMessage, setEmailMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -18,6 +21,49 @@ const Account = () => {
   const isEmailPasswordUser =
     currentUser && currentUser.providerData[0].providerId === "password";
 
+  const { black, white, purple, purpleBright } = color;
+
+  const selectStyles = {
+    control: (styles, { isFocused }) => ({
+      ...styles,
+      fontSize: "0.9rem",
+      background: "none",
+      boxShadow: isFocused ? `0 0 0.25em ${purpleBright}` : "none",
+      borderColor: isFocused ? purpleBright : purple,
+      "&:hover": {
+        borderColor: purpleBright,
+        cursor: "pointer",
+      },
+    }),
+    option: (styles, { isFocused }) => ({
+      ...styles,
+      fontSize: "0.9rem",
+      backgroundColor: isFocused ? purpleBright : black,
+      color: white,
+      borderBottom: `1px solid ${purple}`,
+      "&:hover": {
+        backgroundColor: purpleBright,
+        color: white,
+        cursor: "pointer",
+      },
+      "&:last-child": {
+        borderBottom: "none",
+      },
+    }),
+    menu: styles => ({
+      ...styles,
+      margin: 0,
+      backgroundColor: black,
+      border: `1px solid ${purple}`,
+      borderTop: "none",
+    }),
+    input: styles => ({ ...styles, color: purpleBright }),
+    placeholder: styles => ({ ...styles, color: purple }),
+    singleValue: styles => ({ ...styles, color: purple }),
+    dropdownIndicator: styles => ({ ...styles, color: purple }),
+    indicatorSeparator: styles => ({ ...styles, backgroundColor: purple }),
+  };
+
   const handleSignOut = async () => {
     try {
       await logout();
@@ -25,6 +71,10 @@ const Account = () => {
     } catch (e) {
       console.error(e);
     }
+  };
+
+  const handleChangeUserVsCurrency = async () => {
+    console.log(vsCurrency);
   };
 
   const handleChangePassword = async e => {
@@ -104,6 +154,23 @@ const Account = () => {
           Sign Out
         </button>
       </p>
+      <div>
+        <Select
+          isSearchable={false}
+          options={currencies}
+          styles={selectStyles}
+          placeholder={vsCurrency.toUpperCase()}
+          onChange={({ value }) => setVsCurrency(value)}
+        />
+        <button
+          type="button"
+          title="Save"
+          disabled={isLoading}
+          onClick={handleChangeUserVsCurrency}
+        >
+          Save
+        </button>
+      </div>
       {isEmailPasswordUser && (
         <>
           <h3>Change Password</h3>
