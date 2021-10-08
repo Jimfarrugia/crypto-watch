@@ -14,6 +14,7 @@ import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
+import RefreshButton from "./components/RefreshButton";
 import {
   currencies,
   timeframes,
@@ -23,12 +24,6 @@ import {
 } from "./constants";
 
 const { blue, blueBright } = color;
-
-const RefreshButton = () => (
-  <button className="button-link" onClick={() => window.location.reload()}>
-    refresh
-  </button>
-);
 
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
