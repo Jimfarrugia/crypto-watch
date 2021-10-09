@@ -135,6 +135,18 @@ a.discreet-link:visited {
 .outlined-button:focus {
   box-shadow: 0 0 0.25em var(--purple);
 }
+.outlined-button.red {
+  color: var(--red-dark);
+  border-color: var(--red-dark);
+}
+.outlined-button.red:hover,
+.outlined-button.red:focus {
+  color: var(--red);
+  border-color: var(--red);
+}
+.outlined-button.red:focus {
+  box-shadow: 0 0 0.5em var(--red-dark);
+}
 
 .button-link {
   font-size: 1rem;

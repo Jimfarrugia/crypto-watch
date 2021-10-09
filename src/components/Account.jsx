@@ -163,7 +163,7 @@ const Account = () => {
           type="button"
           title="Sign Out"
           disabled={isLoading}
-          className="outlined-button"
+          className="outlined-button red"
           onClick={handleSignOut}
         >
           Sign Out
