@@ -154,7 +154,7 @@ const Account = () => {
         <p>
           <button
             type="button"
-            title="Save"
+            title="Save Preferred Currency"
             disabled={isLoading}
             onClick={handleChangeUserVsCurrency}
           >
@@ -191,7 +191,11 @@ const Account = () => {
               />
             </p>
             <p>
-              <button type="submit" disabled={isLoading}>
+              <button
+                type="submit"
+                title="Submit Change Password"
+                disabled={isLoading}
+              >
                 Submit
               </button>
             </p>
@@ -216,7 +220,11 @@ const Account = () => {
               />
             </p>
             <p>
-              <button type="submit" disabled={isLoading}>
+              <button
+                type="submit"
+                title="Submit Change Email"
+                disabled={isLoading}
+              >
                 Submit
               </button>
             </p>
