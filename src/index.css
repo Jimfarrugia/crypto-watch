@@ -350,6 +350,10 @@ a.discreet-link:visited {
 .account h3 {
   margin-top: 2.25rem;
 }
+.account .preferred-currency .alert-error,
+.account .preferred-currency .alert-success {
+  margin-bottom: 1em;
+}
 
 .page-footer {
   padding: 1.5rem 0;
