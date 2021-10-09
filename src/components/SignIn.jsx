@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { capitalizeFirstLetter } from "../helpers";
 
 const SignIn = () => {
   const emailRef = useRef();
@@ -32,7 +33,7 @@ const SignIn = () => {
 
   const handleLoginWithProvider = async provider => {
     setError("");
-    setIsLoading("");
+    setIsLoading(true);
     try {
       const method =
         provider === "google"
@@ -55,6 +56,16 @@ const SignIn = () => {
     }
     setIsLoading(false);
   };
+
+  const SignInWithProviderButton = ({ provider }) => (
+    <button
+      type="button"
+      disabled={isLoading}
+      onClick={() => handleLoginWithProvider(provider)}
+    >
+      Sign In with {capitalizeFirstLetter(provider)}
+    </button>
+  );
 
   return (
     <>
@@ -96,31 +107,13 @@ const SignIn = () => {
         </p>
       )}
       <p>
-        <button
-          type="button"
-          disabled={isLoading}
-          onClick={() => handleLoginWithProvider("google")}
-        >
-          Sign In with Google
-        </button>
+        <SignInWithProviderButton provider="google" />
       </p>
       <p>
-        <button
-          type="button"
-          disabled={isLoading}
-          onClick={() => handleLoginWithProvider("twitter")}
-        >
-          Sign In with Twitter
-        </button>
+        <SignInWithProviderButton provider="facebook" />
       </p>
       <p>
-        <button
-          type="button"
-          disabled={isLoading}
-          onClick={() => handleLoginWithProvider("facebook")}
-        >
-          Sign In with Facebook
-        </button>
+        <SignInWithProviderButton provider="twitter" />
       </p>
     </>
   );
