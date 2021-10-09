@@ -3,6 +3,7 @@
 :root {
   --black: #0e0b16;
   --gray: #777;
+  --gray-dark: #444;
   --white: #e7dfdd;
   --purple: #813772;
   --purple-bright: #a239ca;
@@ -134,6 +135,14 @@ a.discreet-link:visited {
 }
 .outlined-button:focus {
   box-shadow: 0 0 0.25em var(--purple);
+}
+.outlined-button:disabled {
+  color: var(--gray-dark);
+  border-color: var(--gray-dark);
+}
+.outlined-button:disabled svg {
+  color: var(--gray-dark);
+  border-color: var(--gray-dark);
 }
 .outlined-button.red {
   color: var(--red-dark);
