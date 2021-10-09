@@ -74,7 +74,11 @@ export const selectStyles = {
     borderTop: "none",
   }),
   input: styles => ({ ...styles, color: purpleBright }),
-  placeholder: styles => ({ ...styles, color: purple }),
+  placeholder: styles => ({
+    ...styles,
+    color: purpleBright,
+    letterSpacing: "0.025rem",
+  }),
   singleValue: styles => ({ ...styles, color: purple }),
   dropdownIndicator: styles => ({ ...styles, color: purple }),
   indicatorSeparator: styles => ({ ...styles, backgroundColor: purple }),
