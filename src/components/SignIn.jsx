@@ -1,5 +1,12 @@
 import { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import {
+  faTwitter,
+  faFacebookSquare,
+  faGoogle,
+} from "@fortawesome/free-brands-svg-icons";
 import { useAuth } from "../contexts/AuthContext";
 import { capitalizeFirstLetter } from "../helpers";
 
@@ -63,6 +70,17 @@ const SignIn = () => {
       disabled={isLoading}
       onClick={() => handleLoginWithProvider(provider)}
     >
+      <FontAwesomeIcon
+        icon={
+          provider === "twitter"
+            ? faTwitter
+            : provider === "facebook"
+            ? faFacebookSquare
+            : provider === "google"
+            ? faGoogle
+            : null
+        }
+      />
       Sign In with {capitalizeFirstLetter(provider)}
     </button>
   );
@@ -102,6 +120,7 @@ const SignIn = () => {
             disabled={isLoading}
             onClick={() => setIsOpen(true)}
           >
+            <FontAwesomeIcon icon={faEnvelope} />
             Sign In with Email
           </button>
         </p>
