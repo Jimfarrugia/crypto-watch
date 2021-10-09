@@ -203,7 +203,7 @@ a.discreet-link:visited {
   margin-bottom: -0.18em;
 }
 
-.signin-button,
+.sign-in-header-button,
 .account-button {
   position: absolute;
   top: 0;
@@ -217,26 +217,26 @@ a.discreet-link:visited {
   border-radius: 100%;
   cursor: pointer;
 }
-.signin-button:hover,
+.sign-in-header-button:hover,
 .account-button:hover,
 .account-img-button:hover {
   color: var(--yellow);
   border-color: var(--yellow);
 }
-.signin-button:focus,
+.sign-in-header-button:focus,
 .account-button:focus,
 .account-img-button:focus {
   border-color: var(--yellow);
 }
-.signin-button:focus svg,
+.sign-in-header-button:focus svg,
 .account-button:focus svg {
   color: var(--yellow);
 }
-.signin-button svg,
+.sign-in-header-button svg,
 .account-button svg {
   font-size: 1rem;
 }
-.signin-button {
+.sign-in-header-button {
   padding-left: 0.625em;
 }
 

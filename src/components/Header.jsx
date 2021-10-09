@@ -28,7 +28,7 @@ const Header = () => {
           <button
             type="button"
             title={currentUser ? "My Account" : "Sign In"}
-            className={currentUser ? "account-button" : "signin-button"}
+            className={currentUser ? "account-button" : "sign-in-header-button"}
             onClick={e => {
               currentUser ? history.push("/account") : history.push("/sign-in");
               e.currentTarget.blur();
