@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import { setDoc, doc } from "@firebase/firestore";
@@ -122,6 +122,27 @@ const Account = () => {
     setEmailMessage("Success. Your email address has been changed.");
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    let alertTimeout = setTimeout(() => {
+      setEmailError("");
+      setEmailMessage("");
+      setPasswordError("");
+      setPasswordMessage("");
+      setVsCurrencyError("");
+      setVsCurrencyMessage("");
+    }, 5000);
+    return () => {
+      clearTimeout(alertTimeout);
+    };
+  }, [
+    emailMessage,
+    emailError,
+    passwordMessage,
+    passwordError,
+    vsCurrencyMessage,
+    vsCurrencyError,
+  ]);
 
   return (
     <div className="account">
