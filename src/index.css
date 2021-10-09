@@ -34,10 +34,15 @@ code {
 
 ::-webkit-scrollbar {
   width: 0.5em;
-  height: 0.25em;
+  height: 0.5em;
   background-color: var(--black);
 }
-
+.page-wrapper ::-webkit-scrollbar {
+  height: 0.25em;
+}
+::-webkit-scrollbar-corner {
+  background-color: var(--black);
+}
 ::-webkit-scrollbar-thumb {
   background-color: var(--purple);
   outline: none;
@@ -49,14 +54,8 @@ code {
   color: var(--purple);
   opacity: 1; /* Firefox */
 }
-
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: var(--white);
-}
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
   color: var(--white);
 }
 
