@@ -13,20 +13,20 @@ const SignIn = () => {
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleSubmit = async event => {
+    event.preventDefault();
     setError("");
     setIsLoading(true);
     try {
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
-    } catch (e) {
-      e.code === "auth/wrong-password"
+    } catch (error) {
+      error.code === "auth/wrong-password"
         ? setError("Password is incorrect.")
-        : e.code === "auth/user-not-found"
+        : error.code === "auth/user-not-found"
         ? setError("Could not find a user with that email address.")
         : setError("Sign in failed. Please try again.");
-      console.error(e);
+      console.error(error);
     }
     setIsLoading(false);
   };
@@ -46,13 +46,13 @@ const SignIn = () => {
       if (method === null)
         throw new Error("Could not determine which provider was requested.");
       history.push("/");
-    } catch (e) {
-      e.code === "auth/account-exists-with-different-credential"
+    } catch (error) {
+      error.code === "auth/account-exists-with-different-credential"
         ? setError(
             "Your account was created using a different provider. You must use the same provider each time you sign in."
           )
         : setError("Sign in failed. Please try again.");
-      console.error(e);
+      console.error(error);
     }
     setIsLoading(false);
   };
