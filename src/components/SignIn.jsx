@@ -68,6 +68,7 @@ const SignIn = () => {
     <button
       type="button"
       disabled={isLoading}
+      className="outlined-button sign-in-handler-button"
       onClick={() => handleLoginWithProvider(provider)}
     >
       <FontAwesomeIcon
@@ -81,12 +82,12 @@ const SignIn = () => {
             : null
         }
       />
-      Sign In with {capitalizeFirstLetter(provider)}
+      Sign in with {capitalizeFirstLetter(provider)}
     </button>
   );
 
   return (
-    <>
+    <div className="sign-in">
       <h2>Sign In</h2>
       {error && <div className="alert-error">{error}</div>}
       {(isOpen && (
@@ -119,9 +120,10 @@ const SignIn = () => {
             type="button"
             disabled={isLoading}
             onClick={() => setIsOpen(true)}
+            className="outlined-button sign-in-handler-button"
           >
             <FontAwesomeIcon icon={faEnvelope} />
-            Sign In with Email
+            Sign in with Email
           </button>
         </p>
       )}
@@ -134,7 +136,7 @@ const SignIn = () => {
       <p>
         <SignInWithProviderButton provider="twitter" />
       </p>
-    </>
+    </div>
   );
 };
 

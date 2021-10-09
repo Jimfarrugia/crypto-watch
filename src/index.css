@@ -68,6 +68,10 @@ h1 {
   text-shadow: 1px 1px 4px #00000088;
 }
 
+h2 {
+  margin-bottom: 1.125em;
+}
+
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -387,6 +391,26 @@ a.discreet-link:visited {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.125em;
+}
+
+.sign-in {
+  text-align: center;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.sign-in-handler-button {
+  text-transform: none;
+  width: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  font-size: 1rem;
+  margin-bottom: 0.75em;
+}
+.sign-in-handler-button svg {
+  margin-right: 0.5em;
+  font-size: 1rem;
+  color: var(--purple-bright);
 }
 
 .account h3 {
