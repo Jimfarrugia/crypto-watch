@@ -115,6 +115,27 @@ a.discreet-link:visited {
   outline: none;
 }
 
+.outlined-button {
+  color: var(--purple);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.075rem;
+  background: none;
+  border: 0.125rem solid var(--purple);
+  border-radius: 0.2rem;
+  padding: 0.75em 1.5em;
+  outline: none;
+  cursor: pointer;
+}
+.outlined-button:hover,
+.outlined-button:focus {
+  color: var(--purple-bright);
+  border-color: var(--purple-bright);
+}
+.outlined-button:focus {
+  box-shadow: 0 0 0.25em var(--purple);
+}
+
 .button-link {
   font-size: 1rem;
   background: none;

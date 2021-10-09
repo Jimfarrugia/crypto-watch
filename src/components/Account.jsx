@@ -163,6 +163,7 @@ const Account = () => {
           type="button"
           title="Sign Out"
           disabled={isLoading}
+          className="outlined-button"
           onClick={handleSignOut}
         >
           Sign Out
@@ -188,6 +189,7 @@ const Account = () => {
             type="button"
             title="Save Preferred Currency"
             disabled={isLoading}
+            className="outlined-button"
             onClick={handleChangeUserVsCurrency}
           >
             Save
@@ -226,6 +228,7 @@ const Account = () => {
               <button
                 type="submit"
                 title="Submit Change Password"
+                className="outlined-button"
                 disabled={isLoading}
               >
                 Submit
@@ -255,6 +258,7 @@ const Account = () => {
               <button
                 type="submit"
                 title="Submit Change Email"
+                className="outlined-button"
                 disabled={isLoading}
               >
                 Submit
