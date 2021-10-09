@@ -30,41 +30,20 @@ const SignIn = () => {
     setIsLoading(false);
   };
 
-  const handleLoginWithGoogle = async () => {
+  const handleLoginWithProvider = async provider => {
     setError("");
-    setIsLoading(true);
+    setIsLoading("");
     try {
-      await loginWithGoogle();
-      history.push("/");
-    } catch (e) {
-      e.code === "auth/account-exists-with-different-credential"
-        ? setError(
-            "Your account was created using a different provider. You must use the same provider each time you sign in."
-          )
-        : setError("Sign in failed. Please try again.");
-      console.error(e);
-    }
-    setIsLoading(false);
-  };
-
-  const handleLoginWithTwitter = async () => {
-    setError("");
-    setIsLoading(true);
-    try {
-      await loginWithTwitter();
-      history.push("/");
-    } catch (e) {
-      setError("Sign in failed. Please try again.");
-      console.error(e);
-    }
-    setIsLoading(false);
-  };
-
-  const handleLoginWithFacebook = async () => {
-    setError("");
-    setIsLoading(true);
-    try {
-      await loginWithFacebook();
+      const method =
+        provider === "google"
+          ? await loginWithGoogle()
+          : provider === "facebook"
+          ? await loginWithFacebook()
+          : provider === "twitter"
+          ? await loginWithTwitter()
+          : null;
+      if (method === null)
+        throw new Error("Could not determine which provider was requested.");
       history.push("/");
     } catch (e) {
       e.code === "auth/account-exists-with-different-credential"
@@ -120,7 +99,7 @@ const SignIn = () => {
         <button
           type="button"
           disabled={isLoading}
-          onClick={handleLoginWithGoogle}
+          onClick={() => handleLoginWithProvider("google")}
         >
           Sign In with Google
         </button>
@@ -129,7 +108,7 @@ const SignIn = () => {
         <button
           type="button"
           disabled={isLoading}
-          onClick={handleLoginWithTwitter}
+          onClick={() => handleLoginWithProvider("twitter")}
         >
           Sign In with Twitter
         </button>
@@ -138,7 +117,7 @@ const SignIn = () => {
         <button
           type="button"
           disabled={isLoading}
-          onClick={handleLoginWithFacebook}
+          onClick={() => handleLoginWithProvider("facebook")}
         >
           Sign In with Facebook
         </button>
