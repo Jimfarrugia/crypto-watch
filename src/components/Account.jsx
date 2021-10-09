@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
-import { setDoc, doc } from "@firebase/firestore";
+import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { currencies, selectStyles } from "../constants";
@@ -143,6 +143,17 @@ const Account = () => {
     vsCurrencyMessage,
     vsCurrencyError,
   ]);
+
+  useEffect(() => {
+    if (currentUser) {
+      const docRef = doc(db, "users", currentUser.uid);
+      const unsubscribe = onSnapshot(docRef, doc => {
+        const data = doc.data();
+        if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+      });
+      return unsubscribe;
+    }
+  }, [currentUser]);
 
   return (
     <div className="account">
