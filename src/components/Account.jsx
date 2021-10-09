@@ -4,7 +4,7 @@ import Select from "react-select";
 import { setDoc, doc } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { currencies, color } from "../constants";
+import { currencies, selectStyles } from "../constants";
 import RefreshButton from "./RefreshButton";
 
 const Account = () => {
@@ -25,49 +25,6 @@ const Account = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isEmailPasswordUser =
     currentUser && currentUser.providerData[0].providerId === "password";
-
-  const { black, white, purple, purpleBright } = color;
-
-  const selectStyles = {
-    control: (styles, { isFocused }) => ({
-      ...styles,
-      fontSize: "0.9rem",
-      background: "none",
-      boxShadow: isFocused ? `0 0 0.25em ${purpleBright}` : "none",
-      borderColor: isFocused ? purpleBright : purple,
-      "&:hover": {
-        borderColor: purpleBright,
-        cursor: "pointer",
-      },
-    }),
-    option: (styles, { isFocused }) => ({
-      ...styles,
-      fontSize: "0.9rem",
-      backgroundColor: isFocused ? purpleBright : black,
-      color: white,
-      borderBottom: `1px solid ${purple}`,
-      "&:hover": {
-        backgroundColor: purpleBright,
-        color: white,
-        cursor: "pointer",
-      },
-      "&:last-child": {
-        borderBottom: "none",
-      },
-    }),
-    menu: styles => ({
-      ...styles,
-      margin: 0,
-      backgroundColor: black,
-      border: `1px solid ${purple}`,
-      borderTop: "none",
-    }),
-    input: styles => ({ ...styles, color: purpleBright }),
-    placeholder: styles => ({ ...styles, color: purple }),
-    singleValue: styles => ({ ...styles, color: purple }),
-    dropdownIndicator: styles => ({ ...styles, color: purple }),
-    indicatorSeparator: styles => ({ ...styles, backgroundColor: purple }),
-  };
 
   const handleSignOut = async () => {
     try {
@@ -180,7 +137,7 @@ const Account = () => {
         </button>
       </p>
       <h3>Preferred Currency</h3>
-      <div>
+      <div className="preferred-currency">
         {vsCurrencyError && (
           <div className="alert-error">{vsCurrencyError}</div>
         )}

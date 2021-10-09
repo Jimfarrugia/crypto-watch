@@ -1,9 +1,7 @@
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { color } from "../constants";
-
-const { black, white, purple, purpleBright } = color;
+import { selectStyles } from "../constants";
 
 const SearchBar = ({
   searchTerm,
@@ -20,53 +18,6 @@ const SearchBar = ({
           return option.label.match(regex);
         })
       : searchSuggestions;
-
-  const selectStyles = {
-    control: (styles, { isFocused }) => ({
-      ...styles,
-      fontSize: "1rem",
-      background: "none",
-      boxShadow: isFocused ? `0 0 0.25em ${purpleBright}` : "none",
-      borderColor: isFocused ? purpleBright : purple,
-      "&:hover": {
-        borderColor: purpleBright,
-        cursor: "text",
-      },
-    }),
-    option: (styles, { isFocused }) => ({
-      ...styles,
-      fontSize: "1rem",
-      backgroundColor: isFocused ? purpleBright : black,
-      color: white,
-      borderBottom: `1px solid ${purpleBright}`,
-      "&:hover": {
-        backgroundColor: purpleBright,
-        color: white,
-        cursor: "pointer",
-      },
-      "&:last-child": {
-        borderBottom: "none",
-      },
-    }),
-    dropdownIndicator: styles => ({
-      ...styles,
-      color: purple,
-      "&:hover": {
-        color: purple,
-      },
-    }),
-    menu: styles => ({
-      ...styles,
-      margin: 0,
-      backgroundColor: black,
-      border: `1px solid ${purpleBright}`,
-      borderTop: "none",
-    }),
-    input: styles => ({ ...styles, color: purpleBright }),
-    placeholder: styles => ({ ...styles, color: purple }),
-    singleValue: styles => ({ ...styles, color: purple }),
-    indicatorSeparator: styles => ({ ...styles, backgroundColor: purple }),
-  };
 
   const DropdownIndicator = props => {
     return (

@@ -36,3 +36,46 @@ export const color = {
   red: "#ff0a0a",
   green: "#1aff1a",
 };
+
+const { black, white, purple, purpleBright } = color;
+
+export const selectStyles = {
+  control: (styles, { isFocused }) => ({
+    ...styles,
+    fontSize: "0.9rem",
+    background: "none",
+    boxShadow: isFocused ? `0 0 0.25em ${purpleBright}` : "none",
+    borderColor: isFocused ? purpleBright : purple,
+    "&:hover": {
+      borderColor: purpleBright,
+      cursor: "pointer",
+    },
+  }),
+  option: (styles, { isFocused }) => ({
+    ...styles,
+    fontSize: "0.9rem",
+    backgroundColor: isFocused ? purpleBright : black,
+    color: white,
+    borderBottom: `1px solid ${purple}`,
+    "&:hover": {
+      backgroundColor: purpleBright,
+      color: white,
+      cursor: "pointer",
+    },
+    "&:last-child": {
+      borderBottom: "none",
+    },
+  }),
+  menu: styles => ({
+    ...styles,
+    margin: 0,
+    backgroundColor: black,
+    border: `1px solid ${purple}`,
+    borderTop: "none",
+  }),
+  input: styles => ({ ...styles, color: purpleBright }),
+  placeholder: styles => ({ ...styles, color: purple }),
+  singleValue: styles => ({ ...styles, color: purple }),
+  dropdownIndicator: styles => ({ ...styles, color: purple }),
+  indicatorSeparator: styles => ({ ...styles, backgroundColor: purple }),
+};
