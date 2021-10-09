@@ -1,5 +1,5 @@
 // Receives a 3-letter currency string and returns the appropriate currency symbol.
-export const currencySymbol = (currency) => {
+export const currencySymbol = currency => {
   return !currency
     ? ""
     : currency.charAt(currency.length - 1) === "d"
@@ -21,7 +21,7 @@ export const currencySymbol = (currency) => {
 
 // Formats a number to a more readable format for currency.
 // 50123456 -> "50,123,456" ....... 101.9 -> "101.90"
-export const formatPriceNumber = (number) => {
+export const formatPriceNumber = number => {
   let result =
     number > 1000
       ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") // commas
@@ -34,3 +34,6 @@ export const formatPriceNumber = (number) => {
       : result
   );
 };
+
+export const capitalizeFirstLetter = string =>
+  string.charAt(0).toUpperCase() + string.slice(1);
