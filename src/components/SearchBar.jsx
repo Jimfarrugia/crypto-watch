@@ -15,7 +15,7 @@ const SearchBar = ({
   // begin with the search term.
   const options =
     searchSuggestions.length > 10
-      ? searchSuggestions.filter((option) => {
+      ? searchSuggestions.filter(option => {
           let regex = new RegExp(`^${searchTerm}`, "i");
           return option.label.match(regex);
         })
@@ -48,27 +48,27 @@ const SearchBar = ({
         borderBottom: "none",
       },
     }),
-    dropdownIndicator: (styles) => ({
+    dropdownIndicator: styles => ({
       ...styles,
       color: purple,
       "&:hover": {
         color: purple,
       },
     }),
-    menu: (styles) => ({
+    menu: styles => ({
       ...styles,
       margin: 0,
       backgroundColor: black,
       border: `1px solid ${purpleBright}`,
       borderTop: "none",
     }),
-    input: (styles) => ({ ...styles, color: purpleBright }),
-    placeholder: (styles) => ({ ...styles, color: purple }),
-    singleValue: (styles) => ({ ...styles, color: purple }),
-    indicatorSeparator: (styles) => ({ ...styles, backgroundColor: purple }),
+    input: styles => ({ ...styles, color: purpleBright }),
+    placeholder: styles => ({ ...styles, color: purple }),
+    singleValue: styles => ({ ...styles, color: purple }),
+    indicatorSeparator: styles => ({ ...styles, backgroundColor: purple }),
   };
 
-  const DropdownIndicator = (props) => {
+  const DropdownIndicator = props => {
     return (
       <components.DropdownIndicator {...props}>
         <FontAwesomeIcon icon={faSearch} />
@@ -82,8 +82,8 @@ const SearchBar = ({
         options={options}
         styles={selectStyles}
         components={{ DropdownIndicator }}
-        onInputChange={(input) => handleSearchInputChange(input)}
-        onChange={(option) => handleSearchChange(option)}
+        onInputChange={input => handleSearchInputChange(input)}
+        onChange={option => handleSearchChange(option)}
         noOptionsMessage={() => null}
         placeholder="Search..."
         autoComplete="off"
