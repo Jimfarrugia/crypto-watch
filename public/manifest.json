@@ -1,6 +1,7 @@
 {
   "short_name": "Crypto Watch",
   "name": "Crypto Watch",
+  "description": "Track the price of your favorite cryptocurrencies.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#a239ca",
+  "background_color": "#0e0b16"
 }
