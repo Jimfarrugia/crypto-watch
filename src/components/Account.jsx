@@ -205,22 +205,26 @@ const Account = () => {
           )}
           <form onSubmit={handleChangePassword}>
             <p>
-              <label htmlFor="new-password">New Password</label>
-              <br />
+              <label htmlFor="new-password" className="hidden">
+                New Password
+              </label>
               <input
                 id="new-password"
                 type="password"
                 ref={passwordRef}
+                placeholder="New Password"
                 required
               />
             </p>
             <p>
-              <label htmlFor="confirm-password">Confirm Password</label>
-              <br />
+              <label htmlFor="confirm-password" className="hidden">
+                Confirm Password
+              </label>
               <input
                 id="confirm-password"
                 type="password"
                 ref={passwordConfirmationRef}
+                placeholder="Confirm New Password"
                 required
               />
             </p>
@@ -240,17 +244,26 @@ const Account = () => {
           {emailMessage && <div className="alert-success">{emailMessage}</div>}
           <form onSubmit={handleChangeEmail}>
             <p>
-              <label htmlFor="new-email">New Email</label>
-              <br />
-              <input id="new-email" type="email" ref={emailRef} required />
+              <label htmlFor="new-email" className="hidden">
+                New Email
+              </label>
+              <input
+                id="new-email"
+                type="email"
+                ref={emailRef}
+                placeholder="New Email"
+                required
+              />
             </p>
             <p>
-              <label htmlFor="confirm-email">Confirm Email</label>
-              <br />
+              <label htmlFor="confirm-email" className="hidden">
+                Confirm Email
+              </label>
               <input
                 id="confirm-email"
                 type="email"
                 ref={emailConfirmationRef}
+                placeholder="Confirm New Email"
                 required
               />
             </p>
