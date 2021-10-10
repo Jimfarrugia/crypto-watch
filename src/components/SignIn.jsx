@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -85,6 +85,11 @@ const SignIn = () => {
       Sign in with {capitalizeFirstLetter(provider)}
     </button>
   );
+
+  useEffect(() => {
+    let alertTimeout = setTimeout(() => setError(""), 5000);
+    return () => clearTimeout(alertTimeout);
+  }, [error]);
 
   return (
     <div className="sign-in">
