@@ -149,17 +149,18 @@ a:focus {
 .text-green {
   color: var(--green);
 }
-.alert-error {
-  background: var(--red-dark);
-  width: fit-content;
+.alert-error,
+.alert-success {
   padding: 1em;
   border-radius: 0.25em;
+  width: fit-content;
+  line-height: 1.35;
+}
+.alert-error {
+  background: var(--red-dark);
 }
 .alert-success {
   background: var(--green-dark);
-  width: fit-content;
-  padding: 1em;
-  border-radius: 0.25em;
 }
 .page-not-found {
   margin-top: 1.5em;
