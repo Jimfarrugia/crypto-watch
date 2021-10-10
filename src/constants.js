@@ -58,6 +58,7 @@ export const selectStyles = {
   option: (styles, { isFocused }) => ({
     ...styles,
     fontSize: "0.9rem",
+    textAlign: "left",
     backgroundColor: isFocused ? purpleBright : black,
     color: white,
     borderBottom: `1px solid ${purple}`,
