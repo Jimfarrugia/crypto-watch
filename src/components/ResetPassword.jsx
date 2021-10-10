@@ -27,30 +27,40 @@ const ForgotPassword = () => {
   };
 
   return (
-    <>
+    <div className="reset-password">
       <h2>Reset Password</h2>
       {error && <div className="alert-error">{error}</div>}
       {message && <div className="alert-success">{message}</div>}
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className="hidden">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            ref={emailRef}
+            placeholder="Email"
+            required
+          />
         </p>
         <p>
-          <input id="email" type="email" ref={emailRef} required />
-        </p>
-        <p>
-          <button type="submit" disabled={isLoading}>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="outlined-button"
+          >
             Reset Password
           </button>
         </p>
       </form>
       <p>
-        <Link to="/sign-in">Login</Link>
+        <Link to="/sign-in">Cancel</Link>
       </p>
       <p>
         Need an account? <Link to="/sign-up">Sign Up</Link>
       </p>
-    </>
+    </div>
   );
 };
 
