@@ -29,32 +29,48 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="sign-up">
       <h2>Sign Up</h2>
       {error && <div className="alert-error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input type="email" id="email" ref={emailRef} required />
-        </p>
-        <p>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input type="password" id="password" ref={passwordRef} required />
-        </p>
-        <p>
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <br />
+          <label htmlFor="email" className="hidden">
+            Email
+          </label>
           <input
-            type="password"
-            id="confirm-password"
-            ref={passwordConfirmationRef}
+            type="email"
+            id="email"
+            ref={emailRef}
+            placeholder="Email"
             required
           />
         </p>
         <p>
-          <button type="submit" disabled={loading}>
+          <label htmlFor="password" className="hidden">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            ref={passwordRef}
+            placeholder="Password"
+            required
+          />
+        </p>
+        <p>
+          <label htmlFor="confirm-password" className="hidden">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="confirm-password"
+            ref={passwordConfirmationRef}
+            placeholder="Confirm Password"
+            required
+          />
+        </p>
+        <p>
+          <button type="submit" disabled={loading} className="outlined-button">
             Sign Up
           </button>
         </p>
@@ -62,7 +78,7 @@ const SignUp = () => {
       <p>
         Already have an account? <Link to="/sign-in">Sign In</Link>
       </p>
-    </>
+    </div>
   );
 };
 

@@ -446,6 +446,7 @@ a.discreet-link:visited {
 }
 
 .sign-in,
+.sign-up,
 .reset-password {
   text-align: center;
   max-width: 350px;
@@ -453,21 +454,25 @@ a.discreet-link:visited {
 }
 
 .sign-in .alert-error,
+.sign-up .alert-error,
 .reset-password .alert-error {
   width: 100%;
   box-sizing: border-box;
 }
 
-.sign-in form {
+.sign-in form,
+.sign-up form {
   margin-bottom: 1.75rem;
 }
 
 .sign-in form .outlined-button,
+.sign-up form .outlined-button,
 .reset-password .outlined-button {
   font-size: 0.9rem;
 }
 
 .sign-in .outlined-button,
+.sign-up .outlined-button,
 .reset-password .outlined-button {
   width: 100%;
 }
