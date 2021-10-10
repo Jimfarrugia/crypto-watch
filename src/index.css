@@ -62,7 +62,7 @@ code {
 
 h1 {
   margin: 0;
-  text-align: center;
+  text-align: left;
   padding: 0.75em 0;
   font-size: 1.25rem;
   text-shadow: 1px 1px 4px #00000088;
@@ -245,7 +245,7 @@ a.discreet-link:visited {
 }
 
 .page-header > h1 img {
-  margin-right: 0.5em;
+  margin-right: 0.25em;
   margin-bottom: -0.18em;
 }
 

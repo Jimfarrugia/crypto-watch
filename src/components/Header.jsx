@@ -14,13 +14,13 @@ const Header = () => {
       <header className="page-header">
         <h1 data-testid="page-heading">
           <Link to="/" className="discreet-link">
-            {/* <img
+            <img
               className="imageRotateHorizontal"
               src="/logo192.png"
               alt="Coin Watch logo"
               height="22"
               width="22"
-            /> */}
+            />
             Crypto Watch
           </Link>
         </h1>
