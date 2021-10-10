@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -27,6 +27,11 @@ const SignUp = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    let alertTimeout = setTimeout(() => setError(""), 5000);
+    return () => clearTimeout(alertTimeout);
+  }, [error]);
 
   return (
     <div className="sign-up">
