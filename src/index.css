@@ -445,6 +445,11 @@ a.discreet-link:visited {
   margin: 0 auto;
 }
 
+.sign-in .alert-error {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .sign-in form {
   margin-bottom: 1.75rem;
 }
