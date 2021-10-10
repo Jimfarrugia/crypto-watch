@@ -98,7 +98,9 @@ const SignIn = () => {
       {(isOpen && (
         <form onSubmit={handleSubmit}>
           <p>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="hidden">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -108,7 +110,9 @@ const SignIn = () => {
             />
           </p>
           <p>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="hidden">
+              Password
+            </label>
             <input
               type="password"
               id="password"

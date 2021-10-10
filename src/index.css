@@ -72,6 +72,12 @@ h2 {
   margin-bottom: 1.125em;
 }
 
+label.hidden {
+  visibility: hidden;
+  display: block;
+  height: 0;
+}
+
 input {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -456,12 +462,6 @@ a.discreet-link:visited {
 
 .sign-in form .outlined-button {
   font-size: 0.9rem;
-}
-
-.sign-in label {
-  visibility: hidden;
-  display: block;
-  height: 0;
 }
 
 .sign-in .outlined-button {
