@@ -94,16 +94,30 @@ const SignIn = () => {
         <form onSubmit={handleSubmit}>
           <p>
             <label htmlFor="email">Email</label>
-            <br />
-            <input type="email" id="email" ref={emailRef} required />
+            <input
+              type="email"
+              id="email"
+              ref={emailRef}
+              placeholder="Email"
+              required
+            />
           </p>
           <p>
             <label htmlFor="password">Password</label>
-            <br />
-            <input type="password" id="password" ref={passwordRef} required />
+            <input
+              type="password"
+              id="password"
+              ref={passwordRef}
+              placeholder="Password"
+              required
+            />
           </p>
           <p>
-            <button type="submit" disabled={isLoading}>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="outlined-button"
+            >
               Sign In
             </button>
           </p>
