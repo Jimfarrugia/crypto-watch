@@ -22,7 +22,13 @@ const SignUp = () => {
       await signup(emailRef.current.value, passwordRef.current.value);
       history.push("/");
     } catch (e) {
-      setError("Failed to create an account.");
+      e.code === "auth/invalid-email"
+        ? setError("The email address you provided is invalid.")
+        : e.code === "auth/weak-password"
+        ? setError("Password must be at least 6 characters.")
+        : e.code === "auth/email-already-in-use"
+        ? setError("An account with that email address already exists.")
+        : setError("Failed to create an account.");
       console.error(e);
     }
     setLoading(false);
