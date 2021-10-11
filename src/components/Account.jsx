@@ -158,6 +158,8 @@ const Account = () => {
       setEmailMessage("");
       setPasswordError("");
       setPasswordMessage("");
+      setTimeframeError("");
+      setTimeframeMessage("");
       setVsCurrencyError("");
       setVsCurrencyMessage("");
     }, 5000);
@@ -169,6 +171,8 @@ const Account = () => {
     emailError,
     passwordMessage,
     passwordError,
+    timeframeMessage,
+    timeframeError,
     vsCurrencyMessage,
     vsCurrencyError,
   ]);
