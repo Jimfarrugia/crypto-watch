@@ -13,8 +13,13 @@ import { capitalizeFirstLetter } from "../helpers";
 const SignIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, loginWithGoogle, loginWithTwitter, loginWithFacebook } =
-    useAuth();
+  const {
+    currentUser,
+    login,
+    loginWithGoogle,
+    loginWithTwitter,
+    loginWithFacebook,
+  } = useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -90,6 +95,10 @@ const SignIn = () => {
     let alertTimeout = setTimeout(() => setError(""), 5000);
     return () => clearTimeout(alertTimeout);
   }, [error]);
+
+  useEffect(() => {
+    if (currentUser) history.push("/account");
+  }, [currentUser, history]);
 
   return (
     <div className="sign-in">
