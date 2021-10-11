@@ -498,7 +498,9 @@ a.discreet-link:visited {
   margin-top: 2.25rem;
 }
 .account .preferred-currency .alert-error,
-.account .preferred-currency .alert-success {
+.account .preferred-currency .alert-success,
+.account .preferred-timeframe .alert-error,
+.account .preferred-timeframe .alert-success {
   margin-bottom: 1em;
 }
 

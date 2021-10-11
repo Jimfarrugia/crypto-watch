@@ -4,7 +4,7 @@ import Select from "react-select";
 import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { currencies, selectStyles } from "../constants";
+import { currencies, timeframes, selectStyles } from "../constants";
 import RefreshButton from "./RefreshButton";
 
 const Account = () => {
@@ -16,12 +16,15 @@ const Account = () => {
   const passwordConfirmationRef = useRef();
   const history = useHistory();
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
+  const [timeframe, setTimeframe] = useState(timeframes[2]);
   const [vsCurrencyError, setVsCurrencyError] = useState("");
   const [vsCurrencyMessage, setVsCurrencyMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [timeframeMessage, setTimeframeMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [timeframeError, setTimeframeError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const isEmailPasswordUser =
     currentUser && currentUser.providerData[0].providerId === "password";
@@ -37,6 +40,7 @@ const Account = () => {
 
   const handleChangeUserVsCurrency = async () => {
     setVsCurrencyError("");
+    setVsCurrencyMessage("");
     setIsLoading(true);
     try {
       const id = currentUser.uid;
@@ -56,6 +60,31 @@ const Account = () => {
       console.error(e);
     }
     setVsCurrencyMessage("Success. Your preferred currency was changed.");
+    setIsLoading(false);
+  };
+
+  const handleChangeUserTimeframe = async () => {
+    setTimeframeError("");
+    setTimeframeMessage("");
+    setIsLoading(true);
+    try {
+      const id = currentUser.uid;
+      const payload = {
+        user: currentUser.uid,
+        timeframe: timeframe,
+      };
+      const docRef = doc(db, "users", id);
+      await setDoc(docRef, payload, { merge: true });
+    } catch (e) {
+      setTimeframeError(
+        <p>
+          There was an error while communicating with the database. Please{" "}
+          <RefreshButton /> the page and try again.
+        </p>
+      );
+      console.error(e);
+    }
+    setTimeframeMessage("Success. Your preferred timeframe was changed.");
     setIsLoading(false);
   };
 
@@ -191,6 +220,31 @@ const Account = () => {
             disabled={isLoading}
             className="outlined-button"
             onClick={handleChangeUserVsCurrency}
+          >
+            Save
+          </button>
+        </p>
+      </div>
+      <h3>Preferred Timeframe</h3>
+      <div className="preferred-timeframe">
+        {timeframeError && <div className="alert-error">{timeframeError}</div>}
+        {timeframeMessage && (
+          <div className="alert-success">{timeframeMessage}</div>
+        )}
+        <Select
+          isSearchable={false}
+          options={timeframes}
+          styles={selectStyles}
+          placeholder={timeframe.label}
+          onChange={({ value }) => setTimeframe(value)}
+        />
+        <p>
+          <button
+            type="button"
+            title="Save Preferred Timeframe"
+            disabled={isLoading}
+            className="outlined-button"
+            onClick={handleChangeUserTimeframe}
           >
             Save
           </button>
