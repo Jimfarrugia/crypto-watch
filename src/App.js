@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { default as axios } from "axios";
 import { Line } from "react-chartjs-2";
 import {
@@ -38,6 +39,7 @@ function App() {
   const [chartData, setChartData] = useState(undefined);
   const [favorites, setFavorites] = useState([]);
   const { currentUser } = useAuth();
+  const { history } = useHistory();
 
   axios.defaults.baseURL = API_BASE_URL;
 
@@ -222,7 +224,7 @@ function App() {
   };
 
   const handleNewFavorite = async data => {
-    if (!currentUser) return window.alert("Error:  You are not signed in.");
+    if (!currentUser) return history.push("/sign-in");
     try {
       const id = currentUser.uid;
       const payload = {
@@ -243,7 +245,7 @@ function App() {
   };
 
   const handleRemoveFavorite = async data => {
-    if (!currentUser) return window.alert("Error:  You are not signed in.");
+    if (!currentUser) return history.push("/sign-in");
     try {
       const id = currentUser.uid;
       const payload = { favorites: arrayRemove(data) };
