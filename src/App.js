@@ -180,8 +180,9 @@ function App() {
       const docRef = doc(db, "users", currentUser.uid);
       const unsubscribe = onSnapshot(docRef, doc => {
         const data = doc.data();
-        if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
         if (data && data.favorites) setFavorites(data.favorites);
+        if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+        if (data && data.timeframe) setPriceHistoryDays(data.timeframe);
       });
       return unsubscribe;
     }
