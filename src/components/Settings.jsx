@@ -3,8 +3,8 @@ import { currencies, timeframes, selectStyles } from "../constants";
 
 const Settings = ({
   vsCurrency,
-  priceHistoryDays,
-  handleChangePriceHistoryDays,
+  timeframe,
+  handleChangeTimeframe,
   handleChangeVsCurrency,
 }) => {
   return (
@@ -23,8 +23,8 @@ const Settings = ({
           isSearchable={false}
           options={timeframes}
           styles={selectStyles}
-          placeholder={priceHistoryDays.label}
-          onChange={handleChangePriceHistoryDays}
+          placeholder={timeframe.label}
+          onChange={handleChangeTimeframe}
         />
       </div>
     </div>

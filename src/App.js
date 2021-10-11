@@ -28,7 +28,7 @@ const { blue, blueBright } = color;
 
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
-  const [priceHistoryDays, setPriceHistoryDays] = useState(timeframes[2]);
+  const [timeframe, setTimeframe] = useState(timeframes[2]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [searchTerm, setSearchTerm] = useState(undefined);
@@ -90,7 +90,7 @@ function App() {
   };
 
   const fetchCoinPriceHistory = id => {
-    const params = { vs_currency: vsCurrency, days: priceHistoryDays.value };
+    const params = { vs_currency: vsCurrency, days: timeframe.value };
     if (params.days < 91) {
       params["interval"] = "daily";
     }
@@ -173,7 +173,7 @@ function App() {
 
   useEffect(() => {
     if (coinData && coinData.id) fetchCoinPriceHistory(coinData.id);
-  }, [priceHistoryDays]); // eslint-disable-line
+  }, [timeframe]); // eslint-disable-line
 
   useEffect(() => {
     if (currentUser) {
@@ -182,7 +182,7 @@ function App() {
         const data = doc.data();
         if (data && data.favorites) setFavorites(data.favorites);
         if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
-        if (data && data.timeframe) setPriceHistoryDays(data.timeframe);
+        if (data && data.timeframe) setTimeframe(data.timeframe);
       });
       return unsubscribe;
     }
@@ -214,9 +214,9 @@ function App() {
     fetchCoinDataById(option.value);
   };
 
-  const handleChangePriceHistoryDays = selectedOption => {
+  const handleChangeTimeframe = selectedOption => {
     setIsLoading(true);
-    setPriceHistoryDays(selectedOption);
+    setTimeframe(selectedOption);
   };
 
   const handleChangeVsCurrency = ({ value }) => {
@@ -298,9 +298,9 @@ function App() {
               <>
                 <Settings
                   vsCurrency={vsCurrency}
-                  priceHistoryDays={priceHistoryDays}
+                  timeframe={timeframe}
                   handleChangeVsCurrency={handleChangeVsCurrency}
-                  handleChangePriceHistoryDays={handleChangePriceHistoryDays}
+                  handleChangeTimeframe={handleChangeTimeframe}
                 />
                 <Line data={chartData} />
               </>
