@@ -179,6 +179,7 @@ const Account = () => {
       const unsubscribe = onSnapshot(docRef, doc => {
         const data = doc.data();
         if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+        if (data && data.timeframe) setTimeframe(data.timeframe);
       });
       return unsubscribe;
     }
@@ -236,7 +237,7 @@ const Account = () => {
           options={timeframes}
           styles={selectStyles}
           placeholder={timeframe.label}
-          onChange={({ value }) => setTimeframe(value)}
+          onChange={selected => setTimeframe(selected)}
         />
         <p>
           <button
