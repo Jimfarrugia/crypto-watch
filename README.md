@@ -23,7 +23,7 @@ that it is being compared to. You can also adjust the timeframe of the historica
 The current price of the chosen cryptocurrency will appear in red if it's less than it was yesterday or green if it's greater than yesterday's price.
 
 ### Update (Oct. 2021):
-You can log in using email/password or using your Google account.
+You can log in using email/password or using your Google, Facebook or Twitter account.
 
 Once logged-in you will see a star icon overlayed on a cryptocurrency's logo while viewing it's details.
 
