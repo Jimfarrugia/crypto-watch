@@ -2,7 +2,7 @@
 
 View the current and historical price of any cryptocurrency.
 
-![Crypto Watch Screen Shot](./screenshot.png)
+![Crypto Watch Screen Shot](./screenshot01.png)
 
 ## Live Demo
 
