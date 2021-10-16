@@ -63,31 +63,21 @@ export const getDataUrlPrefix = url => {
 };
 
 // Convert an image url into a data url and save it to localStorage.
-// CoinGecko API normally returns a CORS error when doing this,
-// so if/when the fetch fails, try again using a CORS proxy server.
 export const saveImageToLocalStorage = (key, url) => {
-  imageToBase64(url)
+  imageToBase64(`${process.env.REACT_APP_CORS_PROXY_URL}${url}`)
     .then(base64 => {
+      if (base64.length < 100) {
+        // ! Sometimes we get back a string that is way too short to
+        // ! be a valid base64 string. Not sure why... (See gg-token)
+        console.log("Oddly short base64 string... Backing out...");
+        return null;
+      }
       const prefix = getDataUrlPrefix(url);
       const dataUrl = prefix + base64;
       return localStorage.setItem(key, dataUrl);
     })
     .catch(error => {
-      imageToBase64(`${process.env.REACT_APP_CORS_PROXY_URL}${url}`)
-        .then(base64 => {
-          if (base64.length < 100) {
-            // ! Sometimes we get back a string that is way too short to
-            // ! be a valid base64 string. Not sure why... (See gg-token)
-            console.log("Oddly short base64 string... Backing out...");
-            return null;
-          }
-          const prefix = getDataUrlPrefix(url);
-          const dataUrl = prefix + base64;
-          return localStorage.setItem(key, dataUrl);
-        })
-        .catch(error => {
-          console.error(error);
-          console.log("Fetch still failed with CORS proxy.");
-        });
+      console.error(error);
+      console.log("Fetch still failed with CORS proxy.");
     });
 };
