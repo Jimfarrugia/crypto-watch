@@ -76,6 +76,12 @@ export const saveImageToLocalStorage = (key, url) => {
     .catch(error => {
       imageToBase64(`https://cors-anywhere.herokuapp.com/${url}`)
         .then(base64 => {
+          if (base64.length < 100) {
+            // ! Sometimes we get back a string that is way too short to
+            // ! be a valid base64 string. Not sure why... (See gg-token)
+            console.log("Oddly short base64 string... Backing out...");
+            return null;
+          }
           const prefix = getDataUrlPrefix(url);
           const dataUrl = prefix + base64;
           return localStorage.setItem(key, dataUrl);
