@@ -53,7 +53,7 @@ const Details = ({
                 </button>
               )}
               <img
-                src={coinData.image}
+                src={localStorage.getItem(coinData.id) || coinData.image}
                 alt={`${coinData.name} logo`}
                 height="64"
                 width="64"
