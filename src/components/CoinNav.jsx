@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { saveImageToLocalStorage } from "../helpers";
 
 const CoinNav = ({
   fetchCoinDataById,
@@ -22,6 +24,14 @@ const CoinNav = ({
       ? favoritesInNavItemsData
       : navItemsData.slice(0, coinNavLength);
 
+  useEffect(() => {
+    navItems.forEach(item => {
+      if (!localStorage.getItem(item.id)) {
+        saveImageToLocalStorage(item.id, item.image);
+      }
+    });
+  }, [navItems]);
+
   return (
     <nav className="coin-nav">
       <ul>
@@ -40,7 +50,7 @@ const CoinNav = ({
                 }}
               >
                 <img
-                  src={item.image}
+                  src={localStorage.getItem(item.id) || item.image}
                   alt={`${item.name} icon`}
                   height="32"
                   width="32"
