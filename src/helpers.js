@@ -70,8 +70,5 @@ export const saveImageToLocalStorage = (key, url) => {
       const dataUrl = prefix + base64;
       return localStorage.setItem(key, dataUrl);
     })
-    .catch(error => {
-      console.error(error);
-      console.log("Fetch still failed with CORS proxy.");
-    });
+    .catch(error => console.error(error));
 };
