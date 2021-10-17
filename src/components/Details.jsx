@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
-import { currencySymbol, formatPriceNumber } from "../helpers";
+import {
+  currencySymbol,
+  formatPriceNumber,
+  saveImageToLocalStorage,
+} from "../helpers";
 import { useAuth } from "../contexts/AuthContext";
 
 const Details = ({
@@ -30,6 +35,12 @@ const Details = ({
     return isFavorite ? handleRemoveFavorite(data) : handleNewFavorite(data);
   };
 
+  useEffect(() => {
+    if (coinData && !localStorage.getItem(coinData.id)) {
+      saveImageToLocalStorage(coinData.id, coinData.image);
+    }
+  }, [coinData]);
+
   return (
     <section className="details">
       {coinData && chartData && (
@@ -53,7 +64,7 @@ const Details = ({
                 </button>
               )}
               <img
-                src={coinData.image}
+                src={localStorage.getItem(coinData.id) || coinData.image}
                 alt={`${coinData.name} logo`}
                 height="64"
                 width="64"
