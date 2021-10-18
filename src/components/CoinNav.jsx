@@ -54,6 +54,7 @@ const CoinNav = ({
                   alt={`${item.name} icon`}
                   height="32"
                   width="32"
+                  loading="lazy"
                 />
                 <br />
                 <span>{item.symbol}</span>

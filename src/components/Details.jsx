@@ -68,6 +68,7 @@ const Details = ({
                 alt={`${coinData.name} logo`}
                 height="64"
                 width="64"
+                loading="lazy"
               />
             </div>
             <h2>

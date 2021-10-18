@@ -20,6 +20,7 @@ const Header = () => {
               alt="Coin Watch logo"
               height="22"
               width="22"
+              loading="lazy"
             />
             Crypto Watch
           </Link>
@@ -51,6 +52,7 @@ const Header = () => {
               src={currentUser.photoURL}
               alt={`${currentUser.displayName} profile pic`}
               referrerPolicy="no-referrer"
+              loading="lazy"
             />
           </button>
         )}
