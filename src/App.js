@@ -281,8 +281,8 @@ function App() {
           />
         </>
       )) ||
-        (isLoading && <div className="loader"></div>)}
-      {(isLoading && <div className="loader"></div>) ||
+        (isLoading && <div className="loader" />)}
+      {(isLoading && <div className="loader" />) ||
         (error && <div>{error}</div>) || (
           <>
             <Details
