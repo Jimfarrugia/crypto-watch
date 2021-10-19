@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "./Alert";
+import ButtonOutlined from "./ButtonOutlined";
 import { ResetPasswordStyled } from "./styled/ResetPassword.styled";
 
 const ForgotPassword = () => {
@@ -45,13 +46,9 @@ const ForgotPassword = () => {
           />
         </p>
         <p>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="outlined-button"
-          >
+          <ButtonOutlined fullWidth type="submit" disabled={isLoading}>
             Reset Password
-          </button>
+          </ButtonOutlined>
         </p>
       </form>
       <p>

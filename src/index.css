@@ -3,48 +3,6 @@
   text-align: center;
 }
 
-.outlined-button {
-  color: var(--purple);
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.075rem;
-  background: none;
-  border: 0.125rem solid var(--purple);
-  border-radius: 0.2rem;
-  padding: 0.75em 1.5em;
-  outline: none;
-  cursor: pointer;
-  transition: 0.125s;
-}
-.outlined-button:hover,
-.outlined-button:focus {
-  color: var(--purple-bright);
-  border-color: var(--purple-bright);
-}
-.outlined-button:focus {
-  box-shadow: 0 0 0.25em var(--purple);
-}
-.outlined-button:disabled {
-  color: var(--gray-dark);
-  border-color: var(--gray-dark);
-}
-.outlined-button:disabled svg {
-  color: var(--gray-dark);
-  border-color: var(--gray-dark);
-}
-.outlined-button.red {
-  color: var(--red-dark);
-  border-color: var(--red-dark);
-}
-.outlined-button.red:hover,
-.outlined-button.red:focus {
-  color: var(--red);
-  border-color: var(--red);
-}
-.outlined-button.red:focus {
-  box-shadow: 0 0 0.5em var(--red-dark);
-}
-
 .button-link {
   font-size: 1rem;
   background: none;
@@ -64,32 +22,6 @@
 .sign-in form,
 .sign-up form {
   margin-bottom: 1.75rem;
-}
-
-.sign-in form .outlined-button,
-.sign-up form .outlined-button,
-.account .outlined-button,
-.reset-password .outlined-button {
-  font-size: 0.9rem;
-}
-
-.sign-in .outlined-button,
-.sign-up .outlined-button,
-.account .outlined-button,
-.reset-password .outlined-button {
-  width: 100%;
-}
-
-.sign-in-handler-button {
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 1rem;
-  margin-bottom: 0.75em;
-}
-.sign-in-handler-button svg {
-  margin-right: 0.5em;
-  font-size: 1rem;
-  color: var(--purple-bright);
 }
 
 .page-footer {

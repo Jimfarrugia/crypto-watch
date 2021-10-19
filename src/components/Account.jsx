@@ -7,6 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { currencies, timeframes, selectStyles } from "../constants";
 import RefreshButton from "./RefreshButton";
 import Alert from "./Alert";
+import ButtonOutlined from "./ButtonOutlined";
 import { AccountStyled } from "./styled/Account.styled";
 
 const Account = () => {
@@ -195,15 +196,16 @@ const Account = () => {
     <AccountStyled>
       <h2>My Account</h2>
       <p>
-        <button
+        <ButtonOutlined
+          color="red"
+          fullWidth
           type="button"
           title="Sign Out"
           disabled={isLoading}
-          className="outlined-button red"
           onClick={handleSignOut}
         >
           Sign Out
-        </button>
+        </ButtonOutlined>
       </p>
       <h3>Preferred Currency</h3>
       <div className="preferred-currency">
@@ -219,15 +221,15 @@ const Account = () => {
           onChange={({ value }) => setVsCurrency(value)}
         />
         <p>
-          <button
+          <ButtonOutlined
+            fullWidth
             type="button"
             title="Save Preferred Currency"
             disabled={isLoading}
-            className="outlined-button"
             onClick={handleChangeUserVsCurrency}
           >
             Save
-          </button>
+          </ButtonOutlined>
         </p>
       </div>
       <h3>Preferred Timeframe</h3>
@@ -242,15 +244,15 @@ const Account = () => {
           onChange={selected => setTimeframe(selected)}
         />
         <p>
-          <button
+          <ButtonOutlined
+            fullWidth
             type="button"
             title="Save Preferred Timeframe"
             disabled={isLoading}
-            className="outlined-button"
             onClick={handleChangeUserTimeframe}
           >
             Save
-          </button>
+          </ButtonOutlined>
         </p>
       </div>
       {isEmailPasswordUser && (
@@ -280,14 +282,14 @@ const Account = () => {
               />
             </p>
             <p>
-              <button
+              <ButtonOutlined
+                fullWidth
                 type="submit"
                 title="Submit Change Password"
-                className="outlined-button"
                 disabled={isLoading}
               >
                 Submit
-              </button>
+              </ButtonOutlined>
             </p>
           </form>
           <h3>Change Email</h3>
@@ -315,14 +317,14 @@ const Account = () => {
               />
             </p>
             <p>
-              <button
+              <ButtonOutlined
+                fullWidth
                 type="submit"
                 title="Submit Change Email"
-                className="outlined-button"
                 disabled={isLoading}
               >
                 Submit
-              </button>
+              </ButtonOutlined>
             </p>
           </form>
         </>

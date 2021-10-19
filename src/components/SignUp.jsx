@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "./Alert";
 import { SignUpStyled } from "./styled/SignUp.styled";
+import ButtonOutlined from "./ButtonOutlined";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -77,9 +78,9 @@ const SignUp = () => {
           />
         </p>
         <p>
-          <button type="submit" disabled={loading} className="outlined-button">
+          <ButtonOutlined fullWidth type="submit" disabled={loading}>
             Sign Up
-          </button>
+          </ButtonOutlined>
         </p>
       </form>
       <p>
