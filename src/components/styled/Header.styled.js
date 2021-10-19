@@ -84,7 +84,7 @@ export const AuthImageButton = styled.button`
   padding: 0;
   background: none;
   outline: none;
-  border: 0.125rem solid ${({ theme }) => theme.colors.yellow};
+  border: 0.125rem solid ${({ theme }) => theme.colors.white};
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
