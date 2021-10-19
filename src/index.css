@@ -80,65 +80,6 @@
   outline: 0.125rem solid var(--purple);
 }
 
-.coin-nav {
-  overflow: auto;
-}
-.coin-nav ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  justify-content: space-between;
-}
-.coin-nav ul > li {
-  padding: 0.25em 0.25em 0;
-  margin: 0;
-  list-style-type: none;
-  position: relative;
-}
-.coin-nav ul > li:first-child {
-  padding-left: 0;
-}
-.coin-nav ul > li > .star {
-  pointer-events: none;
-  color: var(--yellow);
-  position: absolute;
-  top: 0px;
-  right: -2px;
-}
-.coin-nav .star path {
-  filter: drop-shadow(-0.5em 1em 3em var(--black));
-}
-.coin-nav ul > li > button {
-  display: block;
-  color: var(--gray);
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-.coin-nav button > span {
-  font-family: "Ubuntu Mono", "Courier New", monospace;
-  display: inline-block;
-  padding: 0.25rem 0;
-  transition: ease 0.25s;
-  border-bottom: 0.15rem solid var(--black);
-}
-.coin-nav button:hover > span,
-.coin-nav button:focus > span {
-  color: var(--purple-bright);
-}
-.coin-nav button:focus > span {
-  border-color: var(--purple-bright);
-}
-.coin-nav button > img {
-  pointer-events: none;
-  display: inline-block;
-}
-
 .search {
   padding: 0;
   margin: 1.1rem 0 2.5rem;
