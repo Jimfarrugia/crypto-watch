@@ -2,6 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import {
+  HeaderWrapper,
+  HeaderStyled,
+  AuthButton,
+  AuthImageButton,
+} from "./styled/Header.styled";
 
 const Header = () => {
   const { currentUser } = useAuth();
@@ -10,12 +16,11 @@ const Header = () => {
     currentUser && currentUser.providerData[0].providerId === "password";
 
   return (
-    <div className="page-header-wrapper">
-      <header className="page-header">
+    <HeaderWrapper>
+      <HeaderStyled>
         <h1 data-testid="page-heading">
-          <Link to="/" className="discreet-link">
+          <Link to="/">
             <img
-              className="imageRotateHorizontal"
               src="/logo192.png"
               alt="Coin Watch logo"
               height="22"
@@ -26,23 +31,21 @@ const Header = () => {
           </Link>
         </h1>
         {(!currentUser || (currentUser && isEmailPasswordUser)) && (
-          <button
+          <AuthButton
             type="button"
             title={currentUser ? "My Account" : "Sign In"}
-            className={currentUser ? "account-button" : "sign-in-header-button"}
             onClick={e => {
               currentUser ? history.push("/account") : history.push("/sign-in");
               e.currentTarget.blur();
             }}
           >
             <FontAwesomeIcon icon={currentUser ? faUser : faSignInAlt} />
-          </button>
+          </AuthButton>
         )}
         {currentUser && !isEmailPasswordUser && (
-          <button
+          <AuthImageButton
             type="button"
             title="My Account"
-            className="account-img-button"
             onClick={e => {
               history.push("/account");
               e.currentTarget.blur();
@@ -54,10 +57,10 @@ const Header = () => {
               referrerPolicy="no-referrer"
               loading="lazy"
             />
-          </button>
+          </AuthImageButton>
         )}
-      </header>
-    </div>
+      </HeaderStyled>
+    </HeaderWrapper>
   );
 };
 
