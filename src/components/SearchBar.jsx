@@ -1,6 +1,7 @@
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { SearchBarStyled } from "./styled/SearchBar.styled";
 import { selectStyles } from "../constants";
 
 const SearchBar = ({
@@ -28,7 +29,7 @@ const SearchBar = ({
   };
 
   return (
-    <div className="search">
+    <SearchBarStyled>
       <Select
         options={options}
         styles={selectStyles}
@@ -41,7 +42,7 @@ const SearchBar = ({
         autoCorrect="off"
         spellCheck="false"
       />
-    </div>
+    </SearchBarStyled>
   );
 };
 
