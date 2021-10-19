@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { ResetPasswordStyled } from "./styled/ResetPassword.styled";
 
 const ForgotPassword = () => {
   const emailRef = useRef();
@@ -27,7 +28,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="reset-password">
+    <ResetPasswordStyled>
       <h2>Reset Password</h2>
       {error && <div className="alert-error">{error}</div>}
       {message && <div className="alert-success">{message}</div>}
@@ -58,7 +59,7 @@ const ForgotPassword = () => {
       <p>
         Need an account? <Link to="/sign-up">Sign Up</Link>
       </p>
-    </div>
+    </ResetPasswordStyled>
   );
 };
 

@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { useAuth } from "../contexts/AuthContext";
 import { capitalizeFirstLetter } from "../helpers";
+import { SignInStyled } from "./styled/SignIn.styled";
 
 const SignIn = () => {
   const emailRef = useRef();
@@ -101,7 +102,7 @@ const SignIn = () => {
   }, [currentUser, history]);
 
   return (
-    <div className="sign-in">
+    <SignInStyled>
       <h2>Sign In</h2>
       {error && <div className="alert-error">{error}</div>}
       {(isOpen && (
@@ -164,7 +165,7 @@ const SignIn = () => {
       <p>
         <SignInWithProviderButton provider="twitter" />
       </p>
-    </div>
+    </SignInStyled>
   );
 };
 

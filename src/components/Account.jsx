@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { currencies, timeframes, selectStyles } from "../constants";
 import RefreshButton from "./RefreshButton";
+import { AccountStyled } from "./styled/Account.styled";
 
 const Account = () => {
   const { currentUser, logout, updateUserPassword, updateUserEmail } =
@@ -190,7 +191,7 @@ const Account = () => {
   }, [currentUser]);
 
   return (
-    <div className="account">
+    <AccountStyled>
       <h2>My Account</h2>
       <p>
         <button
@@ -331,7 +332,7 @@ const Account = () => {
           </form>
         </>
       )}
-    </div>
+    </AccountStyled>
   );
 };
 
