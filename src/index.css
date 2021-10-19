@@ -61,12 +61,6 @@
   outline: 0.125rem solid var(--purple);
 }
 
-.sign-in .alert-error,
-.sign-up .alert-error,
-.account .alert-error,
-.reset-password .alert-error {
-}
-
 .sign-in form,
 .sign-up form {
   margin-bottom: 1.75rem;
@@ -96,10 +90,6 @@
   margin-right: 0.5em;
   font-size: 1rem;
   color: var(--purple-bright);
-}
-
-.account h3 {
-  margin-top: 2.25rem;
 }
 
 .page-footer {
