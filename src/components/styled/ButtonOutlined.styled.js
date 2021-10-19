@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const ButtonOutlinedStyled = styled.button`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "fit-content")};
-  color: ${({ theme, color }) => theme.colors[color || "purple"]};
+  color: ${({ theme, color }) =>
+    theme.colors[color ? `${color}Dark` : "purple"]};
   font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
