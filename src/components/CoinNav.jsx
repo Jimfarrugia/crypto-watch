@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { saveImageToLocalStorage } from "../helpers";
+import { CoinNavStyled } from "./styled/CoinNav.styled";
 
 const CoinNav = ({
   fetchCoinDataById,
@@ -33,14 +34,12 @@ const CoinNav = ({
   }, [navItems]);
 
   return (
-    <nav className="coin-nav">
+    <CoinNavStyled>
       <ul>
         {navItems &&
           navItems.map(item => (
             <li key={item.symbol}>
-              {item.isFavorite && (
-                <FontAwesomeIcon className="star" icon={faStar} />
-              )}
+              {item.isFavorite && <FontAwesomeIcon icon={faStar} />}
               <button
                 type="button"
                 title={item.name}
@@ -62,7 +61,7 @@ const CoinNav = ({
             </li>
           ))}
       </ul>
-    </nav>
+    </CoinNavStyled>
   );
 };
 

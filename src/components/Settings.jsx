@@ -1,5 +1,6 @@
 import Select from "react-select";
 import { currencies, timeframes, selectStyles } from "../constants";
+import { SettingsStyled } from "./styled/Settings.styled";
 
 const Settings = ({
   vsCurrency,
@@ -8,8 +9,8 @@ const Settings = ({
   handleChangeVsCurrency,
 }) => {
   return (
-    <div className="settings">
-      <div className="currency">
+    <SettingsStyled>
+      <div>
         <Select
           isSearchable={false}
           options={currencies}
@@ -18,7 +19,7 @@ const Settings = ({
           onChange={handleChangeVsCurrency}
         />
       </div>
-      <div className="timeframe">
+      <div>
         <Select
           isSearchable={false}
           options={timeframes}
@@ -27,7 +28,7 @@ const Settings = ({
           onChange={handleChangeTimeframe}
         />
       </div>
-    </div>
+    </SettingsStyled>
   );
 };
 

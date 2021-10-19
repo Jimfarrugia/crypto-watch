@@ -8,6 +8,7 @@ import {
   saveImageToLocalStorage,
 } from "../helpers";
 import { useAuth } from "../contexts/AuthContext";
+import { DetailsStyled } from "./styled/Details.styled";
 
 const Details = ({
   coinData,
@@ -23,6 +24,17 @@ const Details = ({
     coinData &&
     favorites &&
     favorites.find(favorite => favorite.id === coinData.id);
+
+  const priceColor =
+    coinData &&
+    coinData.price_change_percentage_24h &&
+    coinData.price_change_percentage_24h < 0
+      ? "red"
+      : coinData &&
+        coinData.price_change_percentage_24h &&
+        coinData.price_change_percentage_24h > 0
+      ? "green"
+      : "white";
 
   const handleFavorite = (isFavorite, coinData) => {
     const data = {
@@ -42,11 +54,11 @@ const Details = ({
   }, [coinData]);
 
   return (
-    <section className="details">
+    <>
       {coinData && chartData && (
-        <>
+        <DetailsStyled priceColor={priceColor}>
           <header>
-            <div className="logo-wrapper">
+            <div>
               {currentUser && (
                 <button
                   type="button"
@@ -57,9 +69,9 @@ const Details = ({
                   }}
                 >
                   {isFavorite ? (
-                    <FontAwesomeIcon icon={faStarSolid} className="star" />
+                    <FontAwesomeIcon icon={faStarSolid} />
                   ) : (
-                    <FontAwesomeIcon icon={faStarOutline} className="star" />
+                    <FontAwesomeIcon icon={faStarOutline} />
                   )}
                 </button>
               )}
@@ -76,25 +88,15 @@ const Details = ({
               <br />
               <small>{coinData.symbol}</small>
             </h2>
-            <p
-              className={`current-price${
-                (coinData.price_change_percentage_24h &&
-                  coinData.price_change_percentage_24h < 0 &&
-                  " text-red") ||
-                (coinData.price_change_percentage_24h &&
-                  coinData.price_change_percentage_24h > 0 &&
-                  " text-green") ||
-                ""
-              }`}
-            >
+            <p>
               {coinData.current_price &&
                 currencySymbol(vsCurrency) +
                   formatPriceNumber(coinData.current_price)}
             </p>
           </header>
-        </>
+        </DetailsStyled>
       )}
-    </section>
+    </>
   );
 };
 

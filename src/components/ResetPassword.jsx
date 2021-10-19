@@ -1,13 +1,17 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Alert from "./Alert";
+import ButtonOutlined from "./ButtonOutlined";
+import { ResetPasswordStyled } from "./styled/ResetPassword.styled";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const emailRef = useRef();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -27,15 +31,13 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="reset-password">
+    <ResetPasswordStyled>
       <h2>Reset Password</h2>
-      {error && <div className="alert-error">{error}</div>}
-      {message && <div className="alert-success">{message}</div>}
+      {error && <Alert status="error" text={error} />}
+      {message && <Alert status="success" text={message} />}
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="email" className="hidden">
-            Email
-          </label>
+          <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
@@ -45,23 +47,27 @@ const ForgotPassword = () => {
           />
         </p>
         <p>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="outlined-button"
-          >
+          <ButtonOutlined fullWidth type="submit" disabled={isLoading}>
             Reset Password
-          </button>
+          </ButtonOutlined>
+        </p>
+        <p>
+          <ButtonOutlined
+            fullWidth
+            color="red"
+            type="button"
+            disabled={isLoading}
+            onClick={() => history.push("/sign-in")}
+          >
+            Cancel
+          </ButtonOutlined>
         </p>
       </form>
       <p>
-        <Link to="/sign-in">Cancel</Link>
-      </p>
-      <p>
         Need an account? <Link to="/sign-up">Sign Up</Link>
       </p>
-    </div>
+    </ResetPasswordStyled>
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

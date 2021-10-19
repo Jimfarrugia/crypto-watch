@@ -1,5 +1,7 @@
+import { FooterStyled } from "./styled/Footer.styled";
+
 const Footer = () => (
-  <footer className="page-footer">
+  <FooterStyled>
     <ul>
       <li>
         <a
@@ -32,7 +34,7 @@ const Footer = () => (
         </a>
       </li>
     </ul>
-  </footer>
+  </FooterStyled>
 );
 
 export default Footer;

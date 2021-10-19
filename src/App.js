@@ -16,6 +16,7 @@ import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
 import RefreshButton from "./components/RefreshButton";
+import Loader from "./components/Loader";
 import {
   currencies,
   timeframes,
@@ -264,7 +265,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       {(coinNavData && coinList && (
         <>
           <CoinNav
@@ -281,33 +282,32 @@ function App() {
           />
         </>
       )) ||
-        (isLoading && <div className="loader" />)}
-      {(isLoading && <div className="loader" />) ||
-        (error && <div>{error}</div>) || (
-          <>
-            <Details
-              coinData={coinData}
-              chartData={chartData}
-              vsCurrency={vsCurrency}
-              error={error}
-              favorites={favorites}
-              handleNewFavorite={handleNewFavorite}
-              handleRemoveFavorite={handleRemoveFavorite}
-            />
-            {chartData && (
-              <>
-                <Settings
-                  vsCurrency={vsCurrency}
-                  timeframe={timeframe}
-                  handleChangeVsCurrency={handleChangeVsCurrency}
-                  handleChangeTimeframe={handleChangeTimeframe}
-                />
-                <Line data={chartData} />
-              </>
-            )}
-          </>
-        )}
-    </div>
+        (isLoading && <Loader />)}
+      {(isLoading && <Loader />) || (error && <div>{error}</div>) || (
+        <>
+          <Details
+            coinData={coinData}
+            chartData={chartData}
+            vsCurrency={vsCurrency}
+            error={error}
+            favorites={favorites}
+            handleNewFavorite={handleNewFavorite}
+            handleRemoveFavorite={handleRemoveFavorite}
+          />
+          {chartData && (
+            <>
+              <Settings
+                vsCurrency={vsCurrency}
+                timeframe={timeframe}
+                handleChangeVsCurrency={handleChangeVsCurrency}
+                handleChangeTimeframe={handleChangeTimeframe}
+              />
+              <Line data={chartData} />
+            </>
+          )}
+        </>
+      )}
+    </>
   );
 }
 

@@ -9,6 +9,10 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { useAuth } from "../contexts/AuthContext";
 import { capitalizeFirstLetter } from "../helpers";
+import { SignInStyled } from "./styled/SignIn.styled";
+import Alert from "./Alert";
+import ButtonOutlined from "./ButtonOutlined";
+import { SignInWithProviderButtonStyled } from "./styled/SignInWithProviderButtonStyled.styled";
 
 const SignIn = () => {
   const emailRef = useRef();
@@ -70,10 +74,10 @@ const SignIn = () => {
   };
 
   const SignInWithProviderButton = ({ provider }) => (
-    <button
+    <SignInWithProviderButtonStyled
+      fullWidth
       type="button"
       disabled={isLoading}
-      className="outlined-button sign-in-handler-button"
       onClick={() => handleLoginWithProvider(provider)}
     >
       <FontAwesomeIcon
@@ -88,7 +92,7 @@ const SignIn = () => {
         }
       />
       Sign in with {capitalizeFirstLetter(provider)}
-    </button>
+    </SignInWithProviderButtonStyled>
   );
 
   useEffect(() => {
@@ -101,15 +105,13 @@ const SignIn = () => {
   }, [currentUser, history]);
 
   return (
-    <div className="sign-in">
+    <SignInStyled>
       <h2>Sign In</h2>
-      {error && <div className="alert-error">{error}</div>}
+      {error && <Alert status="error" text={error} />}
       {(isOpen && (
         <form onSubmit={handleSubmit}>
           <p>
-            <label htmlFor="email" className="hidden">
-              Email
-            </label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
@@ -119,9 +121,7 @@ const SignIn = () => {
             />
           </p>
           <p>
-            <label htmlFor="password" className="hidden">
-              Password
-            </label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
@@ -131,13 +131,9 @@ const SignIn = () => {
             />
           </p>
           <p>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="outlined-button"
-            >
+            <ButtonOutlined fullWidth type="submit" disabled={isLoading}>
               Sign In
-            </button>
+            </ButtonOutlined>
           </p>
           <p>
             <Link to="/reset-password">Forgot Password</Link>
@@ -148,15 +144,15 @@ const SignIn = () => {
         </form>
       )) || (
         <p>
-          <button
+          <SignInWithProviderButtonStyled
+            fullWidth
             type="button"
             disabled={isLoading}
             onClick={() => setIsOpen(true)}
-            className="outlined-button sign-in-handler-button"
           >
             <FontAwesomeIcon icon={faEnvelope} />
             Sign in with Email
-          </button>
+          </SignInWithProviderButtonStyled>
         </p>
       )}
       <p>
@@ -168,7 +164,7 @@ const SignIn = () => {
       <p>
         <SignInWithProviderButton provider="twitter" />
       </p>
-    </div>
+    </SignInStyled>
   );
 };
 

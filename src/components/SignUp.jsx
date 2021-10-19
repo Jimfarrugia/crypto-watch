@@ -1,6 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Alert from "./Alert";
+import { SignUpStyled } from "./styled/SignUp.styled";
+import ButtonOutlined from "./ButtonOutlined";
 
 const SignUp = () => {
   const emailRef = useRef();
@@ -40,14 +43,12 @@ const SignUp = () => {
   }, [error]);
 
   return (
-    <div className="sign-up">
+    <SignUpStyled>
       <h2>Sign Up</h2>
-      {error && <div className="alert-error">{error}</div>}
+      {error && <Alert status="error" text={error} />}
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="email" className="hidden">
-            Email
-          </label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -57,9 +58,7 @@ const SignUp = () => {
           />
         </p>
         <p>
-          <label htmlFor="password" className="hidden">
-            Password
-          </label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -69,9 +68,7 @@ const SignUp = () => {
           />
         </p>
         <p>
-          <label htmlFor="confirm-password" className="hidden">
-            Confirm Password
-          </label>
+          <label htmlFor="confirm-password">Confirm Password</label>
           <input
             type="password"
             id="confirm-password"
@@ -81,15 +78,15 @@ const SignUp = () => {
           />
         </p>
         <p>
-          <button type="submit" disabled={loading} className="outlined-button">
+          <ButtonOutlined fullWidth type="submit" disabled={loading}>
             Sign Up
-          </button>
+          </ButtonOutlined>
         </p>
       </form>
       <p>
         Already have an account? <Link to="/sign-in">Sign In</Link>
       </p>
-    </div>
+    </SignUpStyled>
   );
 };
 

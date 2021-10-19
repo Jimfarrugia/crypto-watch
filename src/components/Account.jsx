@@ -6,6 +6,9 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { currencies, timeframes, selectStyles } from "../constants";
 import RefreshButton from "./RefreshButton";
+import Alert from "./Alert";
+import ButtonOutlined from "./ButtonOutlined";
+import { AccountStyled } from "./styled/Account.styled";
 
 const Account = () => {
   const { currentUser, logout, updateUserPassword, updateUserEmail } =
@@ -190,83 +193,78 @@ const Account = () => {
   }, [currentUser]);
 
   return (
-    <div className="account">
+    <AccountStyled>
       <h2>My Account</h2>
       <p>
-        <button
+        <ButtonOutlined
+          color="red"
+          fullWidth
           type="button"
           title="Sign Out"
           disabled={isLoading}
-          className="outlined-button red"
           onClick={handleSignOut}
         >
           Sign Out
-        </button>
+        </ButtonOutlined>
       </p>
       <h3>Preferred Currency</h3>
-      <div className="preferred-currency">
-        {vsCurrencyError && (
-          <div className="alert-error">{vsCurrencyError}</div>
-        )}
-        {vsCurrencyMessage && (
-          <div className="alert-success">{vsCurrencyMessage}</div>
-        )}
-        <Select
-          isSearchable={false}
-          options={currencies}
-          styles={selectStyles}
-          placeholder={vsCurrency.toUpperCase()}
-          onChange={({ value }) => setVsCurrency(value)}
-        />
-        <p>
-          <button
-            type="button"
-            title="Save Preferred Currency"
-            disabled={isLoading}
-            className="outlined-button"
-            onClick={handleChangeUserVsCurrency}
-          >
-            Save
-          </button>
-        </p>
-      </div>
+      {vsCurrencyError && (
+        <Alert status="error" text={vsCurrencyError} spacing={1} />
+      )}
+      {vsCurrencyMessage && (
+        <Alert status="success" text={vsCurrencyMessage} spacing={1} />
+      )}
+      <Select
+        isSearchable={false}
+        options={currencies}
+        styles={selectStyles}
+        placeholder={vsCurrency.toUpperCase()}
+        onChange={({ value }) => setVsCurrency(value)}
+      />
+      <p>
+        <ButtonOutlined
+          fullWidth
+          type="button"
+          title="Save Preferred Currency"
+          disabled={isLoading}
+          onClick={handleChangeUserVsCurrency}
+        >
+          Save
+        </ButtonOutlined>
+      </p>
       <h3>Preferred Timeframe</h3>
-      <div className="preferred-timeframe">
-        {timeframeError && <div className="alert-error">{timeframeError}</div>}
-        {timeframeMessage && (
-          <div className="alert-success">{timeframeMessage}</div>
-        )}
-        <Select
-          isSearchable={false}
-          options={timeframes}
-          styles={selectStyles}
-          placeholder={timeframe.label}
-          onChange={selected => setTimeframe(selected)}
-        />
-        <p>
-          <button
-            type="button"
-            title="Save Preferred Timeframe"
-            disabled={isLoading}
-            className="outlined-button"
-            onClick={handleChangeUserTimeframe}
-          >
-            Save
-          </button>
-        </p>
-      </div>
+      {timeframeError && (
+        <Alert status="error" text={timeframeError} spacing={1} />
+      )}
+      {timeframeMessage && (
+        <Alert status="success" text={timeframeMessage} spacing={1} />
+      )}
+      <Select
+        isSearchable={false}
+        options={timeframes}
+        styles={selectStyles}
+        placeholder={timeframe.label}
+        onChange={selected => setTimeframe(selected)}
+      />
+      <p>
+        <ButtonOutlined
+          fullWidth
+          type="button"
+          title="Save Preferred Timeframe"
+          disabled={isLoading}
+          onClick={handleChangeUserTimeframe}
+        >
+          Save
+        </ButtonOutlined>
+      </p>
       {isEmailPasswordUser && (
         <>
           <h3>Change Password</h3>
-          {passwordError && <div className="alert-error">{passwordError}</div>}
-          {passwordMessage && (
-            <div className="alert-success">{passwordMessage}</div>
-          )}
+          {passwordError && <Alert status="error" text={passwordError} />}
+          {passwordMessage && <Alert status="success" text={passwordMessage} />}
           <form onSubmit={handleChangePassword}>
             <p>
-              <label htmlFor="new-password" className="hidden">
-                New Password
-              </label>
+              <label htmlFor="new-password">New Password</label>
               <input
                 id="new-password"
                 type="password"
@@ -276,9 +274,7 @@ const Account = () => {
               />
             </p>
             <p>
-              <label htmlFor="confirm-password" className="hidden">
-                Confirm Password
-              </label>
+              <label htmlFor="confirm-password">Confirm Password</label>
               <input
                 id="confirm-password"
                 type="password"
@@ -288,24 +284,22 @@ const Account = () => {
               />
             </p>
             <p>
-              <button
+              <ButtonOutlined
+                fullWidth
                 type="submit"
                 title="Submit Change Password"
-                className="outlined-button"
                 disabled={isLoading}
               >
                 Submit
-              </button>
+              </ButtonOutlined>
             </p>
           </form>
           <h3>Change Email</h3>
-          {emailError && <div className="alert-error">{emailError}</div>}
-          {emailMessage && <div className="alert-success">{emailMessage}</div>}
+          {emailError && <Alert status="error" text={emailError} />}
+          {emailMessage && <Alert status="success" text={emailMessage} />}
           <form onSubmit={handleChangeEmail}>
             <p>
-              <label htmlFor="new-email" className="hidden">
-                New Email
-              </label>
+              <label htmlFor="new-email">New Email</label>
               <input
                 id="new-email"
                 type="email"
@@ -315,9 +309,7 @@ const Account = () => {
               />
             </p>
             <p>
-              <label htmlFor="confirm-email" className="hidden">
-                Confirm Email
-              </label>
+              <label htmlFor="confirm-email">Confirm Email</label>
               <input
                 id="confirm-email"
                 type="email"
@@ -327,19 +319,19 @@ const Account = () => {
               />
             </p>
             <p>
-              <button
+              <ButtonOutlined
+                fullWidth
                 type="submit"
                 title="Submit Change Email"
-                className="outlined-button"
                 disabled={isLoading}
               >
                 Submit
-              </button>
+              </ButtonOutlined>
             </p>
           </form>
         </>
       )}
-    </div>
+    </AccountStyled>
   );
 };
 

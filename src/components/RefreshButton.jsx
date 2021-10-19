@@ -1,8 +1,10 @@
+import { RefreshButtonStyled } from "./styled/RefreshButton.styled";
+
 const RefreshButton = () => {
   return (
-    <button className="button-link" onClick={() => window.location.reload()}>
+    <RefreshButtonStyled onClick={() => window.location.reload()}>
       refresh
-    </button>
+    </RefreshButtonStyled>
   );
 };
 
