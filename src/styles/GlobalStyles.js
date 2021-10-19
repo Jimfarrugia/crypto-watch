@@ -20,22 +20,22 @@ const GlobalStyles = createGlobalStyle`
 		background-color: ${({ theme }) => theme.colors.black};
 	}
 	::-webkit-scrollbar-corner {
-		background-color: var(--black);
+		background-color: ${({ theme }) => theme.colors.black};
 	}
 	::-webkit-scrollbar-thumb {
-		background-color: var(--purple);
+		background-color: ${({ theme }) => theme.colors.purple};
 		outline: none;
 		border-radius: 3px;
 	}
 
 	::placeholder {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
-		color: var(--purple);
+		color: ${({ theme }) => theme.colors.purple};
 		opacity: 1; /* Firefox */
 	}
 	:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		color: var(--white);
+		color: ${({ theme }) => theme.colors.white};
 	}
 
 	h1 {

@@ -26,7 +26,9 @@ export const DetailsStyled = styled.div`
           color: ${({ theme }) => theme.colors.yellow};
 
           path {
-            filter: drop-shadow(-0.5em 1em 3em var(--black));
+            filter: drop-shadow(
+              -0.5em 1em 3em ${({ theme }) => theme.colors.black}
+            );
           }
         }
 
