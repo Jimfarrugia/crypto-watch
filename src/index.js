@@ -5,9 +5,9 @@ import { ThemeProvider } from "styled-components";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
+import Loader from "./components/Loader";
 import GlobalStyles from "./styles/GlobalStyles";
 import theme from "./styles/theme";
-// import "./index.css";
 
 const App = React.lazy(() => import("./App"));
 const SignIn = React.lazy(() => import("./components/SignIn"));
@@ -23,7 +23,7 @@ ReactDOM.render(
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <Layout>
-            <React.Suspense fallback={<div className="loader" />}>
+            <React.Suspense fallback={<Loader />}>
               <Switch>
                 <Route exact path="/" component={App} />
                 <Route path="/sign-in" component={SignIn} />
