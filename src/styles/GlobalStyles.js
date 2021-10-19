@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-	@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&family=Ubuntu:wght@400;700&display=swap");
-
 	body {
 		background: ${({ theme }) => theme.colors.black};
 		color: ${({ theme }) => theme.colors.white};
