@@ -5,7 +5,7 @@ import Alert from "./Alert";
 import ButtonOutlined from "./ButtonOutlined";
 import { ResetPasswordStyled } from "./styled/ResetPassword.styled";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const emailRef = useRef();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
@@ -61,4 +61,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;
