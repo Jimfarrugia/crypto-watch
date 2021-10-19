@@ -264,9 +264,7 @@ const Account = () => {
           )}
           <form onSubmit={handleChangePassword}>
             <p>
-              <label htmlFor="new-password" className="hidden">
-                New Password
-              </label>
+              <label htmlFor="new-password">New Password</label>
               <input
                 id="new-password"
                 type="password"
@@ -276,9 +274,7 @@ const Account = () => {
               />
             </p>
             <p>
-              <label htmlFor="confirm-password" className="hidden">
-                Confirm Password
-              </label>
+              <label htmlFor="confirm-password">Confirm Password</label>
               <input
                 id="confirm-password"
                 type="password"
@@ -303,9 +299,7 @@ const Account = () => {
           {emailMessage && <div className="alert-success">{emailMessage}</div>}
           <form onSubmit={handleChangeEmail}>
             <p>
-              <label htmlFor="new-email" className="hidden">
-                New Email
-              </label>
+              <label htmlFor="new-email">New Email</label>
               <input
                 id="new-email"
                 type="email"
@@ -315,9 +309,7 @@ const Account = () => {
               />
             </p>
             <p>
-              <label htmlFor="confirm-email" className="hidden">
-                Confirm Email
-              </label>
+              <label htmlFor="confirm-email">Confirm Email</label>
               <input
                 id="confirm-email"
                 type="email"

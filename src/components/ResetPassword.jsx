@@ -33,9 +33,7 @@ const ForgotPassword = () => {
       {message && <div className="alert-success">{message}</div>}
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="email" className="hidden">
-            Email
-          </label>
+          <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"

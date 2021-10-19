@@ -45,9 +45,7 @@ const SignUp = () => {
       {error && <div className="alert-error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="email" className="hidden">
-            Email
-          </label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -57,9 +55,7 @@ const SignUp = () => {
           />
         </p>
         <p>
-          <label htmlFor="password" className="hidden">
-            Password
-          </label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -69,9 +65,7 @@ const SignUp = () => {
           />
         </p>
         <p>
-          <label htmlFor="confirm-password" className="hidden">
-            Confirm Password
-          </label>
+          <label htmlFor="confirm-password">Confirm Password</label>
           <input
             type="password"
             id="confirm-password"
