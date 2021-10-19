@@ -265,7 +265,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       {(coinNavData && coinList && (
         <>
           <CoinNav
@@ -307,7 +307,7 @@ function App() {
           )}
         </>
       )}
-    </div>
+    </>
   );
 }
 

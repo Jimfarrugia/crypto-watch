@@ -54,7 +54,7 @@ const Details = ({
   }, [coinData]);
 
   return (
-    <section className="details">
+    <>
       {coinData && chartData && (
         <DetailsStyled priceColor={priceColor}>
           <header>
@@ -96,7 +96,7 @@ const Details = ({
           </header>
         </DetailsStyled>
       )}
-    </section>
+    </>
   );
 };
 

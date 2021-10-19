@@ -10,7 +10,7 @@ const Settings = ({
 }) => {
   return (
     <SettingsStyled>
-      <div className="currency">
+      <div>
         <Select
           isSearchable={false}
           options={currencies}
@@ -19,7 +19,7 @@ const Settings = ({
           onChange={handleChangeVsCurrency}
         />
       </div>
-      <div className="timeframe">
+      <div>
         <Select
           isSearchable={false}
           options={timeframes}

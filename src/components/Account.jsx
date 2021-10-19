@@ -208,59 +208,55 @@ const Account = () => {
         </ButtonOutlined>
       </p>
       <h3>Preferred Currency</h3>
-      <div className="preferred-currency">
-        {vsCurrencyError && (
-          <Alert status="error" text={vsCurrencyError} spacing={1} />
-        )}
-        {vsCurrencyMessage && (
-          <Alert status="success" text={vsCurrencyMessage} spacing={1} />
-        )}
-        <Select
-          isSearchable={false}
-          options={currencies}
-          styles={selectStyles}
-          placeholder={vsCurrency.toUpperCase()}
-          onChange={({ value }) => setVsCurrency(value)}
-        />
-        <p>
-          <ButtonOutlined
-            fullWidth
-            type="button"
-            title="Save Preferred Currency"
-            disabled={isLoading}
-            onClick={handleChangeUserVsCurrency}
-          >
-            Save
-          </ButtonOutlined>
-        </p>
-      </div>
+      {vsCurrencyError && (
+        <Alert status="error" text={vsCurrencyError} spacing={1} />
+      )}
+      {vsCurrencyMessage && (
+        <Alert status="success" text={vsCurrencyMessage} spacing={1} />
+      )}
+      <Select
+        isSearchable={false}
+        options={currencies}
+        styles={selectStyles}
+        placeholder={vsCurrency.toUpperCase()}
+        onChange={({ value }) => setVsCurrency(value)}
+      />
+      <p>
+        <ButtonOutlined
+          fullWidth
+          type="button"
+          title="Save Preferred Currency"
+          disabled={isLoading}
+          onClick={handleChangeUserVsCurrency}
+        >
+          Save
+        </ButtonOutlined>
+      </p>
       <h3>Preferred Timeframe</h3>
-      <div className="preferred-timeframe">
-        {timeframeError && (
-          <Alert status="error" text={timeframeError} spacing={1} />
-        )}
-        {timeframeMessage && (
-          <Alert status="success" text={timeframeMessage} spacing={1} />
-        )}
-        <Select
-          isSearchable={false}
-          options={timeframes}
-          styles={selectStyles}
-          placeholder={timeframe.label}
-          onChange={selected => setTimeframe(selected)}
-        />
-        <p>
-          <ButtonOutlined
-            fullWidth
-            type="button"
-            title="Save Preferred Timeframe"
-            disabled={isLoading}
-            onClick={handleChangeUserTimeframe}
-          >
-            Save
-          </ButtonOutlined>
-        </p>
-      </div>
+      {timeframeError && (
+        <Alert status="error" text={timeframeError} spacing={1} />
+      )}
+      {timeframeMessage && (
+        <Alert status="success" text={timeframeMessage} spacing={1} />
+      )}
+      <Select
+        isSearchable={false}
+        options={timeframes}
+        styles={selectStyles}
+        placeholder={timeframe.label}
+        onChange={selected => setTimeframe(selected)}
+      />
+      <p>
+        <ButtonOutlined
+          fullWidth
+          type="button"
+          title="Save Preferred Timeframe"
+          disabled={isLoading}
+          onClick={handleChangeUserTimeframe}
+        >
+          Save
+        </ButtonOutlined>
+      </p>
       {isEmailPasswordUser && (
         <>
           <h3>Change Password</h3>
