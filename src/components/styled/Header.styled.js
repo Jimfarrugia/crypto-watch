@@ -56,7 +56,7 @@ export const AuthButton = styled.button`
   border-radius: 100%;
   cursor: pointer;
 
-  & svg {
+  svg {
     font-size: 1rem;
   }
 
@@ -84,7 +84,7 @@ export const AuthImageButton = styled.button`
   padding: 0;
   background: none;
   outline: none;
-  border: 0.125rem solid var(--white);
+  border: 0.125rem solid ${({ theme }) => theme.colors.yellow};
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
