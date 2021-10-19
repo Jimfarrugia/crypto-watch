@@ -14,32 +14,6 @@
   outline: 0.125rem solid var(--purple);
 }
 
-.sign-in form,
-.sign-up form {
-  margin-bottom: 1.75rem;
-}
-
-.page-footer {
-  padding: 1.5rem 0;
-}
-
-.page-footer ul {
-  border-top: 1px solid var(--purple);
-  padding: 0.75rem 0 0;
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--white);
-  color: var(--gray);
-}
-
-.page-footer li {
-  list-style: none;
-  display: block;
-  position: relative;
-  text-align: right;
-  padding: 0.5rem 0;
-}
-
 /* Loader */
 .loader {
   color: var(--purple-bright);
