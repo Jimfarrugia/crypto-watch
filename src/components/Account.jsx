@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { currencies, timeframes, selectStyles } from "../constants";
 import RefreshButton from "./RefreshButton";
+import Alert from "./Alert";
 import { AccountStyled } from "./styled/Account.styled";
 
 const Account = () => {
@@ -206,11 +207,9 @@ const Account = () => {
       </p>
       <h3>Preferred Currency</h3>
       <div className="preferred-currency">
-        {vsCurrencyError && (
-          <div className="alert-error">{vsCurrencyError}</div>
-        )}
+        {vsCurrencyError && <Alert status="error" text={vsCurrencyError} />}
         {vsCurrencyMessage && (
-          <div className="alert-success">{vsCurrencyMessage}</div>
+          <Alert status="success" text={vsCurrencyMessage} />
         )}
         <Select
           isSearchable={false}
@@ -233,10 +232,8 @@ const Account = () => {
       </div>
       <h3>Preferred Timeframe</h3>
       <div className="preferred-timeframe">
-        {timeframeError && <div className="alert-error">{timeframeError}</div>}
-        {timeframeMessage && (
-          <div className="alert-success">{timeframeMessage}</div>
-        )}
+        {timeframeError && <Alert status="error" text={timeframeError} />}
+        {timeframeMessage && <Alert status="success" text={timeframeMessage} />}
         <Select
           isSearchable={false}
           options={timeframes}
@@ -259,10 +256,8 @@ const Account = () => {
       {isEmailPasswordUser && (
         <>
           <h3>Change Password</h3>
-          {passwordError && <div className="alert-error">{passwordError}</div>}
-          {passwordMessage && (
-            <div className="alert-success">{passwordMessage}</div>
-          )}
+          {passwordError && <Alert status="error" text={passwordError} />}
+          {passwordMessage && <Alert status="success" text={passwordMessage} />}
           <form onSubmit={handleChangePassword}>
             <p>
               <label htmlFor="new-password">New Password</label>
@@ -296,8 +291,8 @@ const Account = () => {
             </p>
           </form>
           <h3>Change Email</h3>
-          {emailError && <div className="alert-error">{emailError}</div>}
-          {emailMessage && <div className="alert-success">{emailMessage}</div>}
+          {emailError && <Alert status="error" text={emailError} />}
+          {emailMessage && <Alert status="success" text={emailMessage} />}
           <form onSubmit={handleChangeEmail}>
             <p>
               <label htmlFor="new-email">New Email</label>

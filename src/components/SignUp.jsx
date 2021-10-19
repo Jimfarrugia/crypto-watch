@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Alert from "./Alert";
 import { SignUpStyled } from "./styled/SignUp.styled";
 
 const SignUp = () => {
@@ -43,7 +44,7 @@ const SignUp = () => {
   return (
     <SignUpStyled>
       <h2>Sign Up</h2>
-      {error && <div className="alert-error">{error}</div>}
+      {error && <Alert status="error" text={error} />}
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="email">Email</label>

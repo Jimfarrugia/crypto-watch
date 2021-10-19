@@ -10,6 +10,7 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import { capitalizeFirstLetter } from "../helpers";
 import { SignInStyled } from "./styled/SignIn.styled";
+import Alert from "./Alert";
 
 const SignIn = () => {
   const emailRef = useRef();
@@ -104,7 +105,7 @@ const SignIn = () => {
   return (
     <SignInStyled>
       <h2>Sign In</h2>
-      {error && <div className="alert-error">{error}</div>}
+      {error && <Alert status="error" text={error} />}
       {(isOpen && (
         <form onSubmit={handleSubmit}>
           <p>
