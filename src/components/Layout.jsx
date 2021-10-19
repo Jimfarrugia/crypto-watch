@@ -1,14 +1,15 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import { PageWrapper } from "./styled/PageWrapper.styled";
 
 const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <div className="page-wrapper">
+      <PageWrapper>
         {children}
         <Footer />
-      </div>
+      </PageWrapper>
     </>
   );
 };
