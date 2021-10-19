@@ -8,4 +8,5 @@ export const AlertStyled = styled.div`
   border-radius: 0.25em;
   line-height: 1.35;
   box-sizing: border-box;
+  margin-bottom: ${({ spacing }) => `${spacing || 0}em`};
 `;

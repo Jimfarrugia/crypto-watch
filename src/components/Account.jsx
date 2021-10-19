@@ -209,9 +209,11 @@ const Account = () => {
       </p>
       <h3>Preferred Currency</h3>
       <div className="preferred-currency">
-        {vsCurrencyError && <Alert status="error" text={vsCurrencyError} />}
+        {vsCurrencyError && (
+          <Alert status="error" text={vsCurrencyError} spacing={1} />
+        )}
         {vsCurrencyMessage && (
-          <Alert status="success" text={vsCurrencyMessage} />
+          <Alert status="success" text={vsCurrencyMessage} spacing={1} />
         )}
         <Select
           isSearchable={false}
@@ -234,8 +236,12 @@ const Account = () => {
       </div>
       <h3>Preferred Timeframe</h3>
       <div className="preferred-timeframe">
-        {timeframeError && <Alert status="error" text={timeframeError} />}
-        {timeframeMessage && <Alert status="success" text={timeframeMessage} />}
+        {timeframeError && (
+          <Alert status="error" text={timeframeError} spacing={1} />
+        )}
+        {timeframeMessage && (
+          <Alert status="success" text={timeframeMessage} spacing={1} />
+        )}
         <Select
           isSearchable={false}
           options={timeframes}

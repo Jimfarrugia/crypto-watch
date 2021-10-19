@@ -1,6 +1,6 @@
 import { AlertStyled } from "./styled/Alert.styled";
 
-const Alert = ({ status, text }) => {
+const Alert = ({ status, text, spacing }) => {
   const background =
     status === "success"
       ? "greenDark"
@@ -8,7 +8,11 @@ const Alert = ({ status, text }) => {
       ? "redDark"
       : "purple";
 
-  return <AlertStyled background={background}>{text}</AlertStyled>;
+  return (
+    <AlertStyled background={background} spacing={spacing}>
+      {text}
+    </AlertStyled>
+  );
 };
 
 export default Alert;
