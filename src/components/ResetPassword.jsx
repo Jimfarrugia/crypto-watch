@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Alert from "./Alert";
 import ButtonOutlined from "./ButtonOutlined";
@@ -11,6 +11,7 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -50,10 +51,18 @@ const ResetPassword = () => {
             Reset Password
           </ButtonOutlined>
         </p>
+        <p>
+          <ButtonOutlined
+            fullWidth
+            color="red"
+            type="button"
+            disabled={isLoading}
+            onClick={() => history.push("/sign-in")}
+          >
+            Cancel
+          </ButtonOutlined>
+        </p>
       </form>
-      <p>
-        <Link to="/sign-in">Cancel</Link>
-      </p>
       <p>
         Need an account? <Link to="/sign-up">Sign Up</Link>
       </p>
