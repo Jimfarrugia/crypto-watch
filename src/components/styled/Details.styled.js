@@ -1,4 +1,6 @@
 import styled from "styled-components";
+const currentTheme =
+  localStorage.getItem("theme") === "light" ? "light" : "dark";
 
 export const DetailsStyled = styled.div`
   header {
@@ -60,6 +62,10 @@ export const DetailsStyled = styled.div`
     padding: 0;
     margin: 0.5em 0 1em;
     color: ${({ theme, priceColor }) =>
-      priceColor ? theme.color[priceColor].light : theme.color.text.main};
+      priceColor
+        ? currentTheme === "light"
+          ? theme.color[priceColor].dark
+          : theme.color[priceColor].light
+        : theme.color.text.main};
   }
 `;
