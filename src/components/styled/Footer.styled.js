@@ -1,21 +1,29 @@
 import styled from "styled-components";
 
 export const FooterStyled = styled.div`
-  padding: 1.5rem 0;
+  padding: 1em 0;
+  margin-top: 2em;
+  border-top: 1px solid ${({ theme }) => theme.color.main.dark};
+  text-align: right;
 
   ul {
-    padding: 0.75rem 0 0;
     margin: 0;
+    padding: 0.5rem 0 0;
     font-size: 0.8rem;
-    color: ${({ theme }) => theme.colors.gray};
-    border-top: 1px solid ${({ theme }) => theme.colors.purple};
+    line-height: 1.35;
+    color: ${({ theme }) => theme.color.text.secondary};
 
     li {
       display: block;
       position: relative;
       list-style: none;
-      text-align: right;
       padding: 0.5rem 0;
+
+      button {
+        font-size: 0.8rem;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
     }
   }
 `;

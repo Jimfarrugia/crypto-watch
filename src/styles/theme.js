@@ -1,19 +1,61 @@
-const theme = {
-  colors: {
-    black: "#0e0b16",
-    gray: "#777777",
-    grayDark: "#444444",
-    white: "#e7dfdd",
-    purple: "#813772",
-    purpleBright: "#a239ca",
-    blue: "#062f4f",
-    blueBright: "#4717f6",
-    red: "#ff0a0a",
-    redDark: "#b30606",
-    green: "#1aff1a",
-    greenDark: "#008800",
-    yellow: "#feff01",
+import { colors } from "../constants";
+
+export const light = {
+  color: {
+    main: {
+      light: colors.purpleBright,
+      dark: colors.purple,
+    },
+    secondary: {
+      light: colors.blueBright,
+      dark: colors.blue,
+    },
+    error: {
+      light: colors.red,
+      dark: colors.redDark,
+    },
+    success: {
+      light: colors.green,
+      dark: colors.greenDark,
+    },
+    text: {
+      main: colors.black,
+      secondary: colors.grayDark,
+      link: colors.purpleBright,
+      hover: colors.purple,
+    },
+    highlight: colors.yellow,
+    background: colors.white,
+    disabled: colors.gray,
   },
 };
 
-export default theme;
+export const dark = {
+  color: {
+    main: {
+      light: colors.purpleBright,
+      dark: colors.purple,
+    },
+    secondary: {
+      light: colors.blueBright,
+      dark: colors.blue,
+    },
+    error: {
+      light: colors.red,
+      dark: colors.redDark,
+    },
+    success: {
+      light: colors.green,
+      dark: colors.greenDark,
+    },
+    text: {
+      main: colors.white,
+      secondary: colors.gray,
+      link: colors.purpleBright,
+      hover: colors.purple,
+    },
+    highlight: colors.yellow,
+    background: colors.black,
+    disabled: colors.grayDark,
+  },
+};

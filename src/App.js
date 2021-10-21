@@ -10,22 +10,20 @@ import {
   onSnapshot,
 } from "@firebase/firestore";
 import { db } from "./firebase";
+import { useTheme } from "styled-components";
 import { useAuth } from "./contexts/AuthContext";
 import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
-import RefreshButton from "./components/RefreshButton";
+import DiscreetButton from "./components/DiscreetButton";
 import Loader from "./components/Loader";
 import {
   currencies,
   timeframes,
   coinNavLength,
-  color,
   API_BASE_URL,
 } from "./constants";
-
-const { blue, blueBright } = color;
 
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
@@ -41,6 +39,7 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const { currentUser } = useAuth();
   const { history } = useHistory();
+  const theme = useTheme();
 
   axios.defaults.baseURL = API_BASE_URL;
 
@@ -53,7 +52,12 @@ function App() {
           <>
             <p>Unable to connect to the data server right now.</p>
             <p>
-              Please <RefreshButton /> the page.
+              Please{" "}
+              <DiscreetButton
+                text="refresh"
+                onClick={() => window.location.reload()}
+              />{" "}
+              the page.
             </p>
             <p>
               Please note that the data server can handle up to ~50 requests per
@@ -117,8 +121,8 @@ function App() {
             {
               label: `Price in ${vsCurrency.toUpperCase()}`,
               data: prices.map(price => price[1]),
-              borderColor: blueBright,
-              backgroundColor: blue,
+              borderColor: theme.color.secondary.light,
+              backgroundColor: theme.color.secondary.dark,
               fill: true,
             },
           ],
@@ -239,7 +243,11 @@ function App() {
       setError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(error);
@@ -257,7 +265,11 @@ function App() {
       setError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(error);

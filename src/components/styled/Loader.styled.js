@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LoaderStyled = styled.div`
-  color: ${({ theme }) => theme.colors.purpleBright};
+  color: ${({ theme }) => theme.color.main.light};
   font-size: 1rem;
   margin: 5em auto;
   width: 1em;

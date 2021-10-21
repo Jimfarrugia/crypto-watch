@@ -12,7 +12,7 @@ import { capitalizeFirstLetter } from "../helpers";
 import { SignInStyled } from "./styled/SignIn.styled";
 import Alert from "./Alert";
 import ButtonOutlined from "./ButtonOutlined";
-import { SignInWithProviderButtonStyled } from "./styled/SignInWithProviderButtonStyled.styled";
+import { SignInWithProviderButtonStyled } from "./styled/SignInWithProviderButton.styled";
 
 const SignIn = () => {
   const emailRef = useRef();

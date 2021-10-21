@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import Select from "react-select";
 import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { currencies, timeframes, selectStyles } from "../constants";
-import RefreshButton from "./RefreshButton";
+import { currencies, timeframes } from "../constants";
+import Select from "./Select";
+import DiscreetButton from "./DiscreetButton";
 import Alert from "./Alert";
 import ButtonOutlined from "./ButtonOutlined";
 import { AccountStyled } from "./styled/Account.styled";
@@ -57,7 +57,11 @@ const Account = () => {
       setVsCurrencyError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(e);
@@ -82,7 +86,11 @@ const Account = () => {
       setTimeframeError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(e);
@@ -197,8 +205,8 @@ const Account = () => {
       <h2>My Account</h2>
       <p>
         <ButtonOutlined
-          color="red"
           fullWidth
+          color="error"
           type="button"
           title="Sign Out"
           disabled={isLoading}
@@ -217,7 +225,6 @@ const Account = () => {
       <Select
         isSearchable={false}
         options={currencies}
-        styles={selectStyles}
         placeholder={vsCurrency.toUpperCase()}
         onChange={({ value }) => setVsCurrency(value)}
       />
@@ -242,7 +249,6 @@ const Account = () => {
       <Select
         isSearchable={false}
         options={timeframes}
-        styles={selectStyles}
         placeholder={timeframe.label}
         onChange={selected => setTimeframe(selected)}
       />

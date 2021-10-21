@@ -54,7 +54,7 @@ const ResetPassword = () => {
         <p>
           <ButtonOutlined
             fullWidth
-            color="red"
+            color="error"
             type="button"
             disabled={isLoading}
             onClick={() => history.push("/sign-in")}

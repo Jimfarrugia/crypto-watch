@@ -29,12 +29,12 @@ const Details = ({
     coinData &&
     coinData.price_change_percentage_24h &&
     coinData.price_change_percentage_24h < 0
-      ? "red"
+      ? "error"
       : coinData &&
         coinData.price_change_percentage_24h &&
         coinData.price_change_percentage_24h > 0
-      ? "green"
-      : "white";
+      ? "success"
+      : null;
 
   const handleFavorite = (isFavorite, coinData) => {
     const data = {

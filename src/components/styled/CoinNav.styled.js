@@ -23,7 +23,7 @@ export const CoinNavStyled = styled.nav`
 
     & > button {
       display: block;
-      color: ${({ theme }) => theme.colors.gray};
+      color: ${({ theme }) => theme.color.text.secondary};
       background: none;
       border: none;
       outline: none;
@@ -42,30 +42,30 @@ export const CoinNavStyled = styled.nav`
         display: inline-block;
         padding: 0.25rem 0;
         transition: ease 0.25s;
-        border-bottom: 0.15rem solid ${({ theme }) => theme.colors.black};
+        border-bottom: 0.15rem solid ${({ theme }) => theme.color.background};
       }
 
       &:hover > span,
       &:focus > span {
-        color: ${({ theme }) => theme.colors.purpleBright};
+        color: ${({ theme }) => theme.color.main.light};
       }
 
       &:focus > span {
-        border-color: ${({ theme }) => theme.colors.purpleBright};
+        border-color: ${({ theme }) => theme.color.main.light};
       }
     }
 
     // Star
     & > svg {
       pointer-events: none;
-      color: ${({ theme }) => theme.colors.yellow};
+      color: ${({ theme }) => theme.color.highlight};
       position: absolute;
       top: 0px;
       right: -2px;
 
       & > path {
         filter: drop-shadow(
-          -0.5em 1em 3em ${({ theme }) => theme.colors.black}
+          -0.5em 1em 3em ${({ theme }) => theme.color.background}
         );
       }
     }
