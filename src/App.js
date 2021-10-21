@@ -10,6 +10,7 @@ import {
   onSnapshot,
 } from "@firebase/firestore";
 import { db } from "./firebase";
+import { useTheme } from "styled-components";
 import { useAuth } from "./contexts/AuthContext";
 import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
@@ -21,11 +22,8 @@ import {
   currencies,
   timeframes,
   coinNavLength,
-  colors,
   API_BASE_URL,
 } from "./constants";
-
-const { blue, blueBright } = colors;
 
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
@@ -41,6 +39,7 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const { currentUser } = useAuth();
   const { history } = useHistory();
+  const theme = useTheme();
 
   axios.defaults.baseURL = API_BASE_URL;
 
@@ -117,8 +116,8 @@ function App() {
             {
               label: `Price in ${vsCurrency.toUpperCase()}`,
               data: prices.map(price => price[1]),
-              borderColor: blueBright,
-              backgroundColor: blue,
+              borderColor: theme.color.secondary.light,
+              backgroundColor: theme.color.secondary.dark,
               fill: true,
             },
           ],
