@@ -16,7 +16,7 @@ import CoinNav from "./components/CoinNav";
 import SearchBar from "./components/SearchBar";
 import Details from "./components/Details";
 import Settings from "./components/Settings";
-import RefreshButton from "./components/RefreshButton";
+import DiscreetButton from "./components/DiscreetButton";
 import Loader from "./components/Loader";
 import {
   currencies,
@@ -52,7 +52,12 @@ function App() {
           <>
             <p>Unable to connect to the data server right now.</p>
             <p>
-              Please <RefreshButton /> the page.
+              Please{" "}
+              <DiscreetButton
+                text="refresh"
+                onClick={() => window.location.reload()}
+              />{" "}
+              the page.
             </p>
             <p>
               Please note that the data server can handle up to ~50 requests per
@@ -238,7 +243,11 @@ function App() {
       setError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(error);
@@ -256,7 +265,11 @@ function App() {
       setError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(error);

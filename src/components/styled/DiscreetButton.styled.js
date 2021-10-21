@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RefreshButtonStyled = styled.button`
+export const DiscreetButtonStyled = styled.button`
   font-size: 1rem;
   background: none;
   border: none;

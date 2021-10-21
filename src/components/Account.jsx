@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { currencies, timeframes } from "../constants";
 import Select from "./Select";
-import RefreshButton from "./RefreshButton";
+import DiscreetButton from "./DiscreetButton";
 import Alert from "./Alert";
 import ButtonOutlined from "./ButtonOutlined";
 import { AccountStyled } from "./styled/Account.styled";
@@ -57,7 +57,11 @@ const Account = () => {
       setVsCurrencyError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(e);
@@ -82,7 +86,11 @@ const Account = () => {
       setTimeframeError(
         <p>
           There was an error while communicating with the database. Please{" "}
-          <RefreshButton /> the page and try again.
+          <DiscreetButton
+            text="refresh"
+            onClick={() => window.location.reload()}
+          />{" "}
+          the page and try again.
         </p>
       );
       console.error(e);
