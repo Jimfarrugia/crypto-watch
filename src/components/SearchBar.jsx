@@ -1,8 +1,8 @@
-import Select, { components } from "react-select";
+import { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { SearchBarStyled } from "./styled/SearchBar.styled";
-import { selectStyles } from "../constants";
+import Select from "./Select";
 
 const SearchBar = ({
   searchTerm,
@@ -32,7 +32,6 @@ const SearchBar = ({
     <SearchBarStyled>
       <Select
         options={options}
-        styles={selectStyles}
         components={{ DropdownIndicator }}
         onInputChange={input => handleSearchInputChange(input)}
         onChange={option => handleSearchChange(option)}

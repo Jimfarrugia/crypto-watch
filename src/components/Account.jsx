@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import Select from "react-select";
 import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { currencies, timeframes, selectStyles } from "../constants";
+import { currencies, timeframes } from "../constants";
+import Select from "./Select";
 import RefreshButton from "./RefreshButton";
 import Alert from "./Alert";
 import ButtonOutlined from "./ButtonOutlined";
@@ -217,7 +217,6 @@ const Account = () => {
       <Select
         isSearchable={false}
         options={currencies}
-        styles={selectStyles}
         placeholder={vsCurrency.toUpperCase()}
         onChange={({ value }) => setVsCurrency(value)}
       />
@@ -242,7 +241,6 @@ const Account = () => {
       <Select
         isSearchable={false}
         options={timeframes}
-        styles={selectStyles}
         placeholder={timeframe.label}
         onChange={selected => setTimeframe(selected)}
       />
