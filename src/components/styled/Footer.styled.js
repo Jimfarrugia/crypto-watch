@@ -16,6 +16,12 @@ export const FooterStyled = styled.div`
       list-style: none;
       text-align: right;
       padding: 0.5rem 0;
+
+      button {
+        font-size: 0.8rem;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
     }
   }
 `;
