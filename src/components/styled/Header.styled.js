@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../constants";
 
 export const HeaderWrapper = styled.div`
   margin: 0 0 1.5em;
@@ -19,7 +20,7 @@ export const HeaderStyled = styled.header`
   & > h1 > a {
     &:link,
     &:visited {
-      color: ${({ theme }) => theme.color.text.main};
+      color: ${colors.white};
       outline: none;
     }
   }
@@ -49,10 +50,10 @@ export const AuthButton = styled.button`
   right: 0.75em;
   margin: 0.9em 0 0;
   padding: 0.5em 0.75em;
-  color: ${({ theme }) => theme.color.text.main};
+  color: ${colors.white};
   background: none;
   outline: none;
-  border: 0.125rem solid ${({ theme }) => theme.color.text.main};
+  border: 0.125rem solid ${colors.white};
   border-radius: 100%;
   cursor: pointer;
 
@@ -84,7 +85,7 @@ export const AuthImageButton = styled.button`
   padding: 0;
   background: none;
   outline: none;
-  border: 0.125rem solid ${({ theme }) => theme.color.text.main};
+  border: 0.125rem solid ${colors.white};
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
