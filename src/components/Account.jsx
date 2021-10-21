@@ -197,8 +197,8 @@ const Account = () => {
       <h2>My Account</h2>
       <p>
         <ButtonOutlined
-          color="red"
           fullWidth
+          color="error"
           type="button"
           title="Sign Out"
           disabled={isLoading}

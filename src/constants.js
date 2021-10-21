@@ -25,7 +25,7 @@ export const timeframes = [
   { label: "12 Months", value: 365 },
 ];
 
-export const color = {
+export const colors = {
   black: "#0e0b16",
   gray: "#777777",
   grayDark: "#444444",
@@ -41,7 +41,7 @@ export const color = {
   yellow: "#feff01",
 };
 
-const { black, white, purple, purpleBright } = color;
+const { black, white, purple, purpleBright } = colors;
 
 export const selectStyles = {
   control: (styles, { isFocused }) => ({

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AlertStyled = styled.div`
-  background: ${({ theme, background }) => theme.colors[background]};
+  background: ${({ theme, background }) => theme.color[background].dark};
   width: fit-content;
   margin: 0 auto;
   padding: 1em;

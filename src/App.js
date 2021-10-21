@@ -21,11 +21,11 @@ import {
   currencies,
   timeframes,
   coinNavLength,
-  color,
+  colors,
   API_BASE_URL,
 } from "./constants";
 
-const { blue, blueBright } = color;
+const { blue, blueBright } = colors;
 
 function App() {
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);

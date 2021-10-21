@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
   margin: 0 0 1.5em;
   background: linear-gradient(
-    ${({ theme }) => theme.colors.purpleBright},
-    ${({ theme }) => theme.colors.purple}
+    ${({ theme }) => theme.color.main.light},
+    ${({ theme }) => theme.color.main.dark}
   );
 `;
 
@@ -19,7 +19,7 @@ export const HeaderStyled = styled.header`
   & > h1 > a {
     &:link,
     &:visited {
-      color: ${({ theme }) => theme.colors.white};
+      color: ${({ theme }) => theme.color.text.main};
       outline: none;
     }
   }
@@ -49,10 +49,10 @@ export const AuthButton = styled.button`
   right: 0.75em;
   margin: 0.9em 0 0;
   padding: 0.5em 0.75em;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.color.text.main};
   background: none;
   outline: none;
-  border: 0.125rem solid ${({ theme }) => theme.colors.white};
+  border: 0.125rem solid ${({ theme }) => theme.color.text.main};
   border-radius: 100%;
   cursor: pointer;
 
@@ -61,14 +61,14 @@ export const AuthButton = styled.button`
   }
 
   &:hover {
-    color: ${({ theme }) => theme.colors.yellow};
-    border-color: ${({ theme }) => theme.colors.yellow};
+    color: ${({ theme }) => theme.color.highlight};
+    border-color: ${({ theme }) => theme.color.highlight};
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.yellow};
+    border-color: ${({ theme }) => theme.color.highlight};
     & > svg {
-      color: ${({ theme }) => theme.colors.yellow};
+      color: ${({ theme }) => theme.color.highlight};
     }
   }
 `;
@@ -84,18 +84,18 @@ export const AuthImageButton = styled.button`
   padding: 0;
   background: none;
   outline: none;
-  border: 0.125rem solid ${({ theme }) => theme.colors.white};
+  border: 0.125rem solid ${({ theme }) => theme.color.text.main};
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.yellow};
-    border-color: ${({ theme }) => theme.colors.yellow};
+    color: ${({ theme }) => theme.color.highlight};
+    border-color: ${({ theme }) => theme.color.highlight};
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.yellow};
+    border-color: ${({ theme }) => theme.color.highlight};
   }
 
   & > img {

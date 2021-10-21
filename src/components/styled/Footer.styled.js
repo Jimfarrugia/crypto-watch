@@ -7,8 +7,8 @@ export const FooterStyled = styled.div`
     padding: 0.75rem 0 0;
     margin: 0;
     font-size: 0.8rem;
-    color: ${({ theme }) => theme.colors.gray};
-    border-top: 1px solid ${({ theme }) => theme.colors.purple};
+    color: ${({ theme }) => theme.color.text.secondary};
+    border-top: 1px solid ${({ theme }) => theme.color.main.dark};
 
     li {
       display: block;

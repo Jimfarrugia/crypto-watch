@@ -23,22 +23,21 @@ export const DetailsStyled = styled.div`
 
         svg {
           margin-left: -0.125em;
-          color: ${({ theme }) => theme.colors.yellow};
+          color: ${({ theme }) => theme.color.highlight};
 
           path {
             filter: drop-shadow(
-              -0.5em 1em 3em ${({ theme }) => theme.colors.black}
+              -0.5em 1em 3em ${({ theme }) => theme.color.background}
             );
           }
         }
 
         &:hover,
         &:focus {
-          color: ${({ theme }) => theme.colors.purpleBright};
-          border-color: ${({ theme }) => theme.colors.purpleBright};
+          color: ${({ theme }) => theme.color.main.light};
 
           svg {
-            color: ${({ theme }) => theme.colors.purpleBright};
+            color: ${({ theme }) => theme.color.main.light};
           }
         }
       }
@@ -60,6 +59,7 @@ export const DetailsStyled = styled.div`
     font-weight: bold;
     padding: 0;
     margin: 0.5em 0 1em;
-    color: ${({ theme, priceColor }) => theme.colors[priceColor]};
+    color: ${({ theme, priceColor }) =>
+      priceColor ? theme.color[priceColor].light : theme.color.text.main};
   }
 `;

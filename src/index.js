@@ -7,7 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
 import Loader from "./components/Loader";
 import GlobalStyles from "./styles/GlobalStyles";
-import theme from "./styles/theme";
+import { light, dark } from "./styles/theme";
 
 const App = React.lazy(() => import("./App"));
 const SignIn = React.lazy(() => import("./components/SignIn"));
@@ -20,7 +20,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider
+          theme={localStorage.getItem("theme") === "light" ? light : dark}
+        >
           <GlobalStyles />
           <Layout>
             <React.Suspense fallback={<Loader />}>
