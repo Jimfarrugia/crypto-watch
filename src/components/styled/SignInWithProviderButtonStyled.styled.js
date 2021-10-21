@@ -25,11 +25,11 @@ export const SignInWithProviderButtonStyled = styled.button`
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.color.neutral.grayDark};
-    border-color: ${({ theme }) => theme.color.neutral.grayDark};
+    color: ${({ theme }) => theme.color.disabled};
+    border-color: ${({ theme }) => theme.color.disabled};
     svg {
-      color: ${({ theme }) => theme.color.neutral.grayDark};
-      border-color: ${({ theme }) => theme.color.neutral.grayDark};
+      color: ${({ theme }) => theme.color.disabled};
+      border-color: ${({ theme }) => theme.color.disabled};
     }
   }
 

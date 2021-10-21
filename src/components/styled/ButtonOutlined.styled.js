@@ -28,11 +28,11 @@ export const ButtonOutlinedStyled = styled.button`
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.color.neutral.gray.dark};
-    border-color: ${({ theme }) => theme.color.neutral.gray.dark};
+    color: ${({ theme }) => theme.color.disabled};
+    border-color: ${({ theme }) => theme.color.disabled};
     svg {
-      color: ${({ theme }) => theme.color.neutral.gray.dark};
-      border-color: ${({ theme }) => theme.color.neutral.gray.dark};
+      color: ${({ theme }) => theme.color.disabled};
+      border-color: ${({ theme }) => theme.color.disabled};
     }
   }
 `;

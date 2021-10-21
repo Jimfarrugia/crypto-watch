@@ -28,13 +28,6 @@ export const dark = {
     },
     highlight: colors.yellow,
     background: colors.black,
-    neutral: {
-      black: colors.black,
-      white: colors.white,
-      gray: {
-        light: colors.gray,
-        dark: colors.grayDark,
-      },
-    },
+    disabled: colors.grayDark,
   },
 };
