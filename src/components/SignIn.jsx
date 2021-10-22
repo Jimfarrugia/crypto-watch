@@ -41,6 +41,10 @@ const SignIn = () => {
         ? setError("Password is incorrect.")
         : error.code === "auth/user-not-found"
         ? setError("Could not find a user with that email address.")
+        : error.code === "auth/too-many-requests"
+        ? setError(
+            "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
+          )
         : setError("Sign in failed. Please try again.");
       console.error(error);
     }
