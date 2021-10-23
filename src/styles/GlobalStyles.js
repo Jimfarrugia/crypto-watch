@@ -47,6 +47,7 @@ const GlobalStyles = createGlobalStyle`
 	}
 
 	h2 {
+		text-align: center;
 		margin-bottom: 1.125em;
 	}
 
@@ -66,6 +67,9 @@ const GlobalStyles = createGlobalStyle`
 		}
 	}
 
+	p {
+		line-height: 1.35;
+	}
 
 	label {
 		visibility: hidden;
