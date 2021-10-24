@@ -9,6 +9,7 @@ import { API_BASE_URL } from "../constants";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { currencySymbol } from "../helpers";
+import NotificationsList from "./NotificationsList";
 
 // TODO - Should try to move fetch methods to (new) utils file.
 
@@ -18,6 +19,7 @@ const Notifications = () => {
   // const [message, setMessage] = useState(undefined);
   const [threshold, setThreshold] = useState(0);
   // const [isLoading, setIsLoading] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   const [coinData, setCoinData] = useState(undefined);
   const [vsCurrency, setVsCurrency] = useState(undefined);
   const { currentUser } = useAuth();
@@ -63,9 +65,9 @@ const Notifications = () => {
       if (!vsCurrency) payload["vsCurrency"] = "usd";
       const docRef = doc(db, "users", currentUser.uid);
       await setDoc(docRef, payload, { merge: true });
-      setThreshold(0);
-      setType(undefined);
       setCoinData(undefined);
+      setType(undefined);
+      setThreshold(0);
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +79,7 @@ const Notifications = () => {
       const unsubscribe = onSnapshot(docRef, doc => {
         const data = doc.data();
         if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
-        // TODO - Get notifications
+        if (data && data.notifications) setNotifications(data.notifications);
       });
       return unsubscribe;
     }
@@ -167,6 +169,12 @@ const Notifications = () => {
             </div>
           </form>
         </section>
+      )}
+      {notifications && (
+        <NotificationsList
+          notifications={notifications}
+          vsCurrency={vsCurrency}
+        />
       )}
     </NotificationsStyled>
   );
