@@ -44,11 +44,15 @@ export const HeaderStyled = styled.header`
   }
 `;
 
-export const AuthButton = styled.button`
+export const UserNav = styled.nav`
   position: absolute;
   top: 0;
   right: 0.75em;
-  margin: 0.9em 0 0;
+  display: flex;
+`;
+
+export const UserNavButton = styled.button`
+  margin: 0.9em 0 0 1em;
   padding: 0.5em 0.75em;
   color: ${colors.white};
   background: none;
@@ -74,14 +78,11 @@ export const AuthButton = styled.button`
   }
 `;
 
-export const AuthImageButton = styled.button`
+export const UserNavImageButton = styled.button`
   display: block;
   height: 2.575em;
   width: 2.825em;
-  position: absolute;
-  top: 0;
-  right: 0.75em;
-  margin: 0.9em 0 0;
+  margin: 0.9em 0 0 1em;
   padding: 0;
   background: none;
   outline: none;

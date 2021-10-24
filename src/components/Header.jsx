@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSignInAlt, faBell } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import {
   HeaderWrapper,
   HeaderStyled,
-  AuthButton,
-  AuthImageButton,
+  UserNav,
+  UserNavButton,
+  UserNavImageButton,
 } from "./styled/Header.styled";
 
 const Header = () => {
@@ -30,35 +31,51 @@ const Header = () => {
             Crypto Watch
           </Link>
         </h1>
-        {(!currentUser || (currentUser && isEmailPasswordUser)) && (
-          <AuthButton
-            type="button"
-            title={currentUser ? "My Account" : "Sign In"}
-            onClick={e => {
-              currentUser ? history.push("/account") : history.push("/sign-in");
-              e.currentTarget.blur();
-            }}
-          >
-            <FontAwesomeIcon icon={currentUser ? faUser : faSignInAlt} />
-          </AuthButton>
-        )}
-        {currentUser && !isEmailPasswordUser && (
-          <AuthImageButton
-            type="button"
-            title="My Account"
-            onClick={e => {
-              history.push("/account");
-              e.currentTarget.blur();
-            }}
-          >
-            <img
-              src={currentUser.photoURL}
-              alt={`${currentUser.displayName} profile pic`}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-            />
-          </AuthImageButton>
-        )}
+        <UserNav>
+          {currentUser && (
+            <UserNavButton
+              type="button"
+              title="Notifications"
+              onClick={e => {
+                history.push("/notifications");
+                e.currentTarget.blur();
+              }}
+            >
+              <FontAwesomeIcon icon={faBell} />
+            </UserNavButton>
+          )}
+          {(!currentUser || (currentUser && isEmailPasswordUser)) && (
+            <UserNavButton
+              type="button"
+              title={currentUser ? "My Account" : "Sign In"}
+              onClick={e => {
+                currentUser
+                  ? history.push("/account")
+                  : history.push("/sign-in");
+                e.currentTarget.blur();
+              }}
+            >
+              <FontAwesomeIcon icon={currentUser ? faUser : faSignInAlt} />
+            </UserNavButton>
+          )}
+          {currentUser && !isEmailPasswordUser && (
+            <UserNavImageButton
+              type="button"
+              title="My Account"
+              onClick={e => {
+                history.push("/account");
+                e.currentTarget.blur();
+              }}
+            >
+              <img
+                src={currentUser.photoURL}
+                alt={`${currentUser.displayName} profile pic`}
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
+            </UserNavImageButton>
+          )}
+        </UserNav>
       </HeaderStyled>
     </HeaderWrapper>
   );
