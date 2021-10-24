@@ -44,8 +44,7 @@ const CustomSelect = ({ ...props }) => {
     input: styles => ({ ...styles, color: theme.color.main.light }),
     placeholder: styles => ({
       ...styles,
-      color: theme.color.main.light,
-      letterSpacing: "0.025rem",
+      color: theme.color.main.dark,
     }),
     singleValue: styles => ({ ...styles, color: theme.color.main.dark }),
     dropdownIndicator: styles => ({ ...styles, color: theme.color.main.dark }),

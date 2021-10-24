@@ -48,7 +48,11 @@ const GlobalStyles = createGlobalStyle`
 
 	h2 {
 		text-align: center;
-		margin-bottom: 1.125em;
+		margin: 1.125em 0;
+	}
+
+	h4 {
+		margin: 0.25em 0 1em;
 	}
 
 	a {
@@ -83,7 +87,8 @@ const GlobalStyles = createGlobalStyle`
 		appearance: none;
 		box-sizing: border-box;
 			&[type="email"],
-			&[type="password"] {
+			&[type="password"],
+			&[type="number"] {
 				color: ${({ theme }) => theme.color.main.light};
 				width: 100%;
 				background: none;
