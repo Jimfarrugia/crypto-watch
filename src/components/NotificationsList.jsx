@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { doc, setDoc, arrayRemove } from "@firebase/firestore";
 import { NotificationsListStyled } from "./styled/NotificationsList.styled";
-import { currencySymbol, formatPriceNumber } from "../helpers";
+import {
+  currencySymbol,
+  formatPriceNumber,
+  capitalizeFirstLetter,
+} from "../helpers";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 
@@ -29,15 +33,14 @@ const NotificationsList = ({ notifications, vsCurrency }) => {
               <img
                 src={notification.image}
                 alt={`${notification.name} logo`}
-                height="64"
-                width="64"
+                height="32"
+                width="32"
                 loading="lazy"
               />
               <div>
                 <h4>{notification.name}</h4>
                 <p>
-                  {(notification.type === "above" && ">") ||
-                    (notification.type === "below" && "<")}{" "}
+                  <span>{capitalizeFirstLetter(notification.type)} </span>
                   {currencySymbol(vsCurrency)}
                   {formatPriceNumber(notification.threshold)}
                 </p>

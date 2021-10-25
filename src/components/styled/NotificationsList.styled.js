@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const NotificationsListStyled = styled.div`
-  margin-top: 2em;
-  padding-top: 1em;
+  margin-top: 1.75em;
+  padding-top: 2em;
   border-top: 1px solid ${({ theme }) => theme.color.main.dark};
 
   ul,
@@ -13,43 +13,48 @@ export const NotificationsListStyled = styled.div`
   }
 
   ul {
-    max-width: 400px;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+  }
+  @media screen and (max-width: 700px) {
+    ul {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    ul {
+      grid-template-columns: 1fr;
+    }
   }
 
   li {
     display: flex;
-    border-bottom: 1px solid ${({ theme }) => theme.color.main.dark};
-    margin-bottom: 1em;
-    padding-bottom: 1em;
+    border: 1px solid ${({ theme }) => theme.color.main.dark};
+    padding: 1em;
+    border-radius: 0.25em;
+    align-items: center;
 
-    &:last-child {
-      border: none;
-      margin: 0 0 -1em;
-      padding: 0;
+    img {
+      display: block;
+      padding-right: 1em;
     }
-  }
 
-  img {
-    display: block;
-    padding-right: 1em;
-    margin: auto 0;
-  }
+    h4 {
+      line-height: 1.35;
+      margin: 0 0 0.25em;
+    }
 
-  h4 {
-    margin: 0.5em 0;
-  }
+    p {
+      margin: 0;
+      span {
+        font-size: 0.9rem;
+      }
+    }
 
-  p {
-    margin: 0.5em 0;
-  }
-
-  div:nth-child(2) {
-    flex-grow: 1;
-  }
-
-  div:last-child {
-    align-self: center;
+    div:nth-child(2) {
+      flex-grow: 1;
+    }
 
     button {
       color: ${({ theme }) => theme.color.error.dark};
@@ -57,10 +62,10 @@ export const NotificationsListStyled = styled.div`
       cursor: pointer;
       outline: none;
       border: none;
-      padding: 0 0.5em 0 0;
+      padding: 0 0 0 1em;
 
       svg {
-        font-size: 1.75rem;
+        font-size: 24px;
       }
 
       &:hover {
