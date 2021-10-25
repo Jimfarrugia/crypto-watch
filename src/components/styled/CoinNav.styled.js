@@ -16,10 +16,6 @@ export const CoinNavStyled = styled.nav`
     margin: 0;
     list-style-type: none;
 
-    &:first-child {
-      padding-left: 0;
-    }
-
     & > button {
       position: relative;
       display: block;
