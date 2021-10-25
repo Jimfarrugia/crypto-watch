@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { colors } from "../../constants";
 
 export const NotificationsStyled = styled.div`
-  /* Form section */
   & > section {
     display: grid;
     grid-template-columns: max-content auto;
@@ -12,7 +11,6 @@ export const NotificationsStyled = styled.div`
       padding-right: 1em;
       margin: auto 0;
     }
-
     /* No img on small screen */
     @media screen and (max-width: 350px) {
       display: block;
@@ -25,6 +23,11 @@ export const NotificationsStyled = styled.div`
         width: 135px;
         height: auto;
       }
+    }
+
+    h3 {
+      line-height: 1.35;
+      margin-top: 0;
     }
 
     .threshold {

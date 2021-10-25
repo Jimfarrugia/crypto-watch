@@ -115,7 +115,7 @@ const Notifications = () => {
             loading="lazy"
           />
           <form onSubmit={handleNewNotification}>
-            <h4>{coinData.name}</h4>
+            <h3>{coinData.name}</h3>
             <div>
               <Select
                 isSearchable={false}
