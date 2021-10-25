@@ -7,21 +7,21 @@ export const CoinNavStyled = styled.nav`
     padding: 0;
     margin: 0;
     list-style-type: none;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(${({ length }) => length}, 1fr);
+    grid-gap: 0.5em;
   }
 
   ul > li {
-    padding: 0.25em 0.25em 0;
     margin: 0;
     list-style-type: none;
-    position: relative;
 
     &:first-child {
       padding-left: 0;
     }
 
     & > button {
+      position: relative;
       display: block;
       color: ${({ theme }) => theme.color.text.secondary};
       background: none;
@@ -29,7 +29,7 @@ export const CoinNavStyled = styled.nav`
       outline: none;
       cursor: pointer;
       padding: 0;
-      margin: 0;
+      margin: 0 auto;
       text-align: center;
 
       & > img {
@@ -53,20 +53,20 @@ export const CoinNavStyled = styled.nav`
       &:focus > span {
         border-color: ${({ theme }) => theme.color.main.light};
       }
-    }
 
-    // Star
-    & > svg {
-      pointer-events: none;
-      color: ${({ theme }) => theme.color.highlight};
-      position: absolute;
-      top: 0px;
-      right: -2px;
+      // Star
+      & > svg {
+        pointer-events: none;
+        color: ${({ theme }) => theme.color.highlight};
+        position: absolute;
+        top: 0px;
+        right: -2px;
 
-      & > path {
-        filter: drop-shadow(
-          -0.5em 1em 3em ${({ theme }) => theme.color.background}
-        );
+        & > path {
+          filter: drop-shadow(
+            -0.5em 1em 3em ${({ theme }) => theme.color.background}
+          );
+        }
       }
     }
   }

@@ -34,12 +34,11 @@ const CoinNav = ({
   }, [navItems]);
 
   return (
-    <CoinNavStyled>
+    <CoinNavStyled length={navItems.length}>
       <ul>
         {navItems &&
           navItems.map(item => (
             <li key={item.symbol}>
-              {item.isFavorite && <FontAwesomeIcon icon={faStar} />}
               <button
                 type="button"
                 title={item.name}
@@ -48,6 +47,7 @@ const CoinNav = ({
                   e.currentTarget.blur();
                 }}
               >
+                {item.isFavorite && <FontAwesomeIcon icon={faStar} />}
                 <img
                   src={localStorage.getItem(item.id) || item.image}
                   alt={`${item.name} icon`}
