@@ -77,10 +77,6 @@ const Header = () => {
     );
   }, [coinsData]); // eslint-disable-line
 
-  useEffect(() => {
-    console.log(activeNotifications);
-  }, [activeNotifications]);
-
   return (
     <HeaderWrapper>
       <HeaderStyled>
