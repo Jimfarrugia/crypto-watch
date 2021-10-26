@@ -28,6 +28,11 @@ export const light = {
     background: colors.white,
     disabled: colors.gray,
   },
+  font: {
+    main: `"Ubuntu", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+			"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+    mono: `"Ubuntu Mono", "Courier New", monospace`,
+  },
 };
 
 export const dark = {
@@ -57,5 +62,10 @@ export const dark = {
     highlight: colors.yellow,
     background: colors.black,
     disabled: colors.grayDark,
+  },
+  font: {
+    main: `"Ubuntu", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+			"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+    mono: `"Ubuntu Mono", "Courier New", monospace`,
   },
 };
