@@ -60,14 +60,16 @@ export const UserNavButton = styled.button`
   border: 0.125rem solid ${colors.white};
   border-radius: 100%;
   cursor: pointer;
-
-  svg {
-    font-size: 1rem;
-  }
+  position: relative;
 
   &:hover {
     color: ${({ theme }) => theme.color.highlight};
     border-color: ${({ theme }) => theme.color.highlight};
+
+    .counter {
+      background: ${({ theme }) => theme.color.error.light};
+      color: ${({ theme }) => theme.color.text.main};
+    }
   }
 
   &:focus {
@@ -75,6 +77,25 @@ export const UserNavButton = styled.button`
     & > svg {
       color: ${({ theme }) => theme.color.highlight};
     }
+  }
+
+  svg {
+    font-size: 1rem;
+  }
+
+  .counter {
+    display: block;
+    position: absolute;
+    top: -0.25em;
+    right: -0.25em;
+    height: 1.125em;
+    width: 1.125em;
+    padding: 0.125em;
+    border-radius: 100%;
+    background: ${({ theme }) => theme.color.error.dark};
+    font-family: ${({ theme }) => theme.font.mono};
+    font-weight: bold;
+    font-size: 0.8rem;
   }
 `;
 

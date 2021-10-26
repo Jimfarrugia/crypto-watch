@@ -1,6 +1,11 @@
+import { useState, useEffect } from "react";
+import { default as axios } from "axios";
+import { doc, onSnapshot } from "@firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignInAlt, faBell } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
+import { db } from "../firebase";
+import { API_BASE_URL } from "../constants";
 import { useAuth } from "../contexts/AuthContext";
 import {
   HeaderWrapper,
@@ -11,10 +16,70 @@ import {
 } from "./styled/Header.styled";
 
 const Header = () => {
+  const [notifications, setNotifications] = useState([]);
+  const [activeNotifications, setActiveNotifications] = useState([]);
+  const [notificationIds, setNotificationIds] = useState("");
+  const [coinsData, setCoinsData] = useState([]);
+  const [vsCurrency, setVsCurrency] = useState("");
   const { currentUser } = useAuth();
   const history = useHistory();
   const isEmailPasswordUser =
     currentUser && currentUser.providerData[0].providerId === "password";
+
+  const fetchCoinsDataByIds = ids => {
+    axios
+      .get(`${API_BASE_URL}/coins/markets`, {
+        params: {
+          vs_currency: vsCurrency,
+          ids,
+        },
+      })
+      .then(response => {
+        setCoinsData(response.data);
+      })
+      .catch(error => console.error(error));
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      const docRef = doc(db, "users", currentUser.uid);
+      const unsubscribe = onSnapshot(docRef, doc => {
+        const data = doc.data();
+        if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+        if (data && data.notifications) setNotifications(data.notifications);
+      });
+      return unsubscribe;
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    setNotificationIds("");
+    notifications.forEach(notification => {
+      setNotificationIds(prev => `${prev}${prev && ","}${notification.id}`);
+    });
+  }, [notifications]);
+
+  useEffect(() => {
+    if (vsCurrency && notificationIds) fetchCoinsDataByIds(notificationIds);
+  }, [notificationIds, vsCurrency]); // eslint-disable-line
+
+  useEffect(() => {
+    setActiveNotifications(
+      notifications.filter(notification => {
+        const { id, type, threshold } = notification;
+        const coinData = coinsData.find(coin => coin.id === id);
+        return type === "above"
+          ? coinData.current_price >= threshold
+          : type === "below"
+          ? coinData.current_price <= threshold
+          : false;
+      })
+    );
+  }, [coinsData]); // eslint-disable-line
+
+  useEffect(() => {
+    console.log(activeNotifications);
+  }, [activeNotifications]);
 
   return (
     <HeaderWrapper>
@@ -42,6 +107,9 @@ const Header = () => {
               }}
             >
               <FontAwesomeIcon icon={faBell} />
+              {activeNotifications && activeNotifications.length > 0 && (
+                <small className="counter">{activeNotifications.length}</small>
+              )}
             </UserNavButton>
           )}
           {(!currentUser || (currentUser && isEmailPasswordUser)) && (
