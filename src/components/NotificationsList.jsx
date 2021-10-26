@@ -14,6 +14,9 @@ const NotificationsList = ({ notifications, vsCurrency }) => {
   const { currentUser } = useAuth();
   // TODO - Add error/success alerts
 
+  const sortNotifications = array =>
+    array.sort((a, b) => a.name.localeCompare(b.name));
+
   const handleRemoveNotification = async notification => {
     try {
       const payload = { notifications: arrayRemove(notification) };
@@ -28,7 +31,7 @@ const NotificationsList = ({ notifications, vsCurrency }) => {
     <NotificationsListStyled>
       <ul>
         {notifications &&
-          notifications.map((notification, index) => (
+          sortNotifications(notifications).map((notification, index) => (
             <li key={`${index}-${notification.id}`}>
               <img
                 src={notification.image}
