@@ -18,13 +18,22 @@ const NotificationsList = ({ notifications, vsCurrency }) => {
     array.sort((a, b) => a.name.localeCompare(b.name));
 
   const handleRemoveNotification = async notification => {
-    try {
-      const payload = { notifications: arrayRemove(notification) };
-      const docRef = doc(db, "users", currentUser.uid);
-      await setDoc(docRef, payload, { merge: true });
-    } catch (error) {
-      console.error(error);
-    }
+    if (
+      window.confirm(
+        `Are you sure you want to delete this notification?  If you do, you will no longer be notified when ${
+          notification.name
+        } is ${notification.type} ${currencySymbol(
+          vsCurrency
+        )}${formatPriceNumber(notification.threshold)}.`
+      )
+    )
+      try {
+        const payload = { notifications: arrayRemove(notification) };
+        const docRef = doc(db, "users", currentUser.uid);
+        await setDoc(docRef, payload, { merge: true });
+      } catch (error) {
+        console.error(error);
+      }
   };
 
   return (
