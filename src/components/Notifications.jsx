@@ -19,7 +19,7 @@ const Notifications = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [threshold, setThreshold] = useState(0);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [notificationIds, setNotificationIds] = useState([]);
   const [activeNotifications, setActiveNotifications] = useState([]);
@@ -31,7 +31,6 @@ const Notifications = () => {
 
   const fetchCoinDataById = id => {
     setError(undefined);
-    // setIsLoading(true);
     axios
       .get(`${API_BASE_URL}/coins/markets`, {
         params: {
@@ -43,10 +42,8 @@ const Notifications = () => {
         if (!response || !response.data || response.data.length < 1)
           throw new Error(`Unable to find data for "${id}"...`);
         setCoinData(response.data[0]);
-        // setIsLoading(false);
       })
       .catch(error => {
-        // setIsLoading(false);
         setError(error.message);
         console.error(error);
       });
@@ -70,6 +67,7 @@ const Notifications = () => {
 
   const handleNewNotification = async e => {
     e.preventDefault();
+    setIsLoading(true);
     // TODO - validate threshold (must be number >= 0)
     // TODO - validate type (must be "above" or "below")
     try {
@@ -86,9 +84,11 @@ const Notifications = () => {
       setType(undefined);
       setThreshold(0);
       setMessage(`Notification for ${name} was added.`);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
       setError(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -217,7 +217,7 @@ const Notifications = () => {
                 color="error"
                 type="button"
                 title="Cancel"
-                // disabled={isLoading}
+                disabled={isLoading}
                 onClick={() => {
                   setThreshold(undefined);
                   setCoinData(undefined);
@@ -229,7 +229,7 @@ const Notifications = () => {
                 fullWidth
                 type="submit"
                 title="Save Notification"
-                // disabled={isLoading}
+                disabled={isLoading}
               >
                 Save
               </ButtonOutlined>
