@@ -120,10 +120,6 @@ const Notifications = () => {
   }, [notificationIds, vsCurrency]); // eslint-disable-line
 
   useEffect(() => {
-    if (coinData && !localStorage.getItem(coinData.id)) {
-      saveImageToLocalStorage(coinData.id, coinData.image);
-    }
-
     setActiveNotifications(
       notifications.filter(notification => {
         const { id, type, threshold } = notification;
@@ -136,6 +132,12 @@ const Notifications = () => {
       })
     );
   }, [coinsData]); // eslint-disable-line
+
+  useEffect(() => {
+    if (coinData && !localStorage.getItem(coinData.id)) {
+      saveImageToLocalStorage(coinData.id, coinData.image);
+    }
+  }, [coinData]);
 
   useEffect(() => {
     let alertTimeout = setTimeout(() => {
