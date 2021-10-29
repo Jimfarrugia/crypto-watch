@@ -42,7 +42,9 @@ const NotificationsList = ({ notifications, vsCurrency }) => {
           sortNotificationsByName(notifications).map((notification, index) => (
             <li key={`${index}-${notification.id}`}>
               <img
-                src={notification.image}
+                src={
+                  localStorage.getItem(notification.id) || notification.image
+                }
                 alt={`${notification.name} logo`}
                 height="32"
                 width="32"

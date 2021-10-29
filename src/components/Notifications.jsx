@@ -8,7 +8,11 @@ import { NotificationsStyled } from "./styled/Notifications.styled";
 import { API_BASE_URL } from "../constants";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
-import { currencySymbol, formatPriceNumber } from "../helpers";
+import {
+  currencySymbol,
+  formatPriceNumber,
+  saveImageToLocalStorage,
+} from "../helpers";
 import NotificationsList from "./NotificationsList";
 import Alert from "./Alert";
 
@@ -116,6 +120,10 @@ const Notifications = () => {
   }, [notificationIds, vsCurrency]); // eslint-disable-line
 
   useEffect(() => {
+    if (coinData && !localStorage.getItem(coinData.id)) {
+      saveImageToLocalStorage(coinData.id, coinData.image);
+    }
+
     setActiveNotifications(
       notifications.filter(notification => {
         const { id, type, threshold } = notification;
@@ -174,8 +182,8 @@ const Notifications = () => {
       {coinData && (
         <section>
           <img
-            src={coinData.image}
-            alt=""
+            src={localStorage.getItem(coinData.id) || coinData.image}
+            alt={`${coinData.name} logo`}
             height="64"
             width="64"
             loading="lazy"
