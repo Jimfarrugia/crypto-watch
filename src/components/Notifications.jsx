@@ -12,8 +12,6 @@ import { currencySymbol, formatPriceNumber } from "../helpers";
 import NotificationsList from "./NotificationsList";
 import Alert from "./Alert";
 
-// TODO - Should try to move fetch methods to (new) utils file.
-
 const Notifications = () => {
   const [type, setType] = useState(undefined);
   const [error, setError] = useState("");
@@ -142,7 +140,6 @@ const Notifications = () => {
   return (
     <NotificationsStyled>
       <h2>Notifications</h2>
-      {/* // TODO - Use loader */}
       {error && <Alert status="error" text={error} spacing={2} />}
       {message && <Alert status="success" text={message} spacing={2} />}
       {
