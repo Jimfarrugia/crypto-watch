@@ -67,9 +67,11 @@ const Notifications = () => {
 
   const handleNewNotification = async e => {
     e.preventDefault();
+    if (!threshold || typeof +threshold !== "number" || +threshold < 0)
+      return setError("Price is invalid");
+    if (!type || (type !== "above" && type !== "below"))
+      return setError("The type is not set.");
     setIsLoading(true);
-    // TODO - validate threshold (must be number >= 0)
-    // TODO - validate type (must be "above" or "below")
     try {
       const { name, id, image } = coinData;
       const notification = { name, id, image, type, threshold: +threshold };
