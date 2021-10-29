@@ -10,13 +10,14 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { currencySymbol, formatPriceNumber } from "../helpers";
 import NotificationsList from "./NotificationsList";
+import Alert from "./Alert";
 
 // TODO - Should try to move fetch methods to (new) utils file.
 
 const Notifications = () => {
   const [type, setType] = useState(undefined);
-  const [error, setError] = useState(undefined);
-  // const [message, setMessage] = useState(undefined);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [threshold, setThreshold] = useState(0);
   // const [isLoading, setIsLoading] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -71,7 +72,6 @@ const Notifications = () => {
     e.preventDefault();
     // TODO - validate threshold (must be number >= 0)
     // TODO - validate type (must be "above" or "below")
-    // TODO - Add error/success messages
     try {
       const { name, id, image } = coinData;
       const notification = { name, id, image, type, threshold: +threshold };
@@ -85,8 +85,10 @@ const Notifications = () => {
       setCoinData(undefined);
       setType(undefined);
       setThreshold(0);
+      setMessage(`Notification for ${name} was added.`);
     } catch (error) {
       console.error(error);
+      setError(error.message);
     }
   };
 
@@ -127,16 +129,20 @@ const Notifications = () => {
     );
   }, [coinsData]); // eslint-disable-line
 
+  useEffect(() => {
+    let alertTimeout = setTimeout(() => {
+      setError("");
+      setMessage("");
+    }, 5000);
+    return () => clearTimeout(alertTimeout);
+  }, [error, message]);
+
   return (
     <NotificationsStyled>
       <h2>Notifications</h2>
       {/* // TODO - Use loader */}
-      {error && (
-        <p>
-          <strong>{error}</strong>
-          {/* // TODO - replace with Alert component */}
-        </p>
-      )}
+      {error && <Alert status="error" text={error} spacing={2} />}
+      {message && <Alert status="success" text={message} spacing={2} />}
       {
         activeNotifications && activeNotifications.length > 0 && (
           <ul className="activeNotifications">
