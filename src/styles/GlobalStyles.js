@@ -75,10 +75,15 @@ const GlobalStyles = createGlobalStyle`
 		line-height: 1.35;
 	}
 
+	img {
+		font-size: 0.65rem;
+	}
+
 	label {
 		visibility: hidden;
 		display: block;
 		height: 0;
+		width: 0;
 	}
 
 	input {
