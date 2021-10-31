@@ -44,11 +44,15 @@ export const HeaderStyled = styled.header`
   }
 `;
 
-export const AuthButton = styled.button`
+export const UserNav = styled.nav`
   position: absolute;
   top: 0;
   right: 0.75em;
-  margin: 0.9em 0 0;
+  display: flex;
+`;
+
+export const UserNavButton = styled.button`
+  margin: 0.9em 0 0 1em;
   padding: 0.5em 0.75em;
   color: ${colors.white};
   background: none;
@@ -56,14 +60,16 @@ export const AuthButton = styled.button`
   border: 0.125rem solid ${colors.white};
   border-radius: 100%;
   cursor: pointer;
-
-  svg {
-    font-size: 1rem;
-  }
+  position: relative;
 
   &:hover {
     color: ${({ theme }) => theme.color.highlight};
     border-color: ${({ theme }) => theme.color.highlight};
+
+    .counter {
+      background: ${({ theme }) => theme.color.error.light};
+      color: ${({ theme }) => theme.color.text.main};
+    }
   }
 
   &:focus {
@@ -72,16 +78,32 @@ export const AuthButton = styled.button`
       color: ${({ theme }) => theme.color.highlight};
     }
   }
+
+  svg {
+    font-size: 1rem;
+  }
+
+  .counter {
+    display: block;
+    position: absolute;
+    top: -0.25em;
+    right: -0.25em;
+    height: 1.125em;
+    width: 1.125em;
+    padding: 0.125em;
+    border-radius: 100%;
+    background: ${({ theme }) => theme.color.error.dark};
+    font-family: ${({ theme }) => theme.font.mono};
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
 `;
 
-export const AuthImageButton = styled.button`
+export const UserNavImageButton = styled.button`
   display: block;
   height: 2.575em;
   width: 2.825em;
-  position: absolute;
-  top: 0;
-  right: 0.75em;
-  margin: 0.9em 0 0;
+  margin: 0.9em 0 0 1em;
   padding: 0;
   background: none;
   outline: none;

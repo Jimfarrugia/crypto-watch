@@ -9,7 +9,7 @@ export const DetailsStyled = styled.div`
     & > div:first-child {
       position: relative;
       width: fit-content;
-      margin: 0 auto;
+      margin: 3em auto 0;
 
       button {
         display: inline-block;

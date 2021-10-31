@@ -13,6 +13,7 @@ const App = React.lazy(() => import("./App"));
 const SignIn = React.lazy(() => import("./components/SignIn"));
 const SignUp = React.lazy(() => import("./components/SignUp"));
 const Account = React.lazy(() => import("./components/Account"));
+const Notifications = React.lazy(() => import("./components/Notifications"));
 const ResetPassword = React.lazy(() => import("./components/ResetPassword"));
 const PageNotFound = React.lazy(() => import("./components/PageNotFound"));
 
@@ -31,6 +32,8 @@ ReactDOM.render(
                 <Route path="/sign-in" component={SignIn} />
                 <Route path="/sign-up" component={SignUp} />
                 <PrivateRoute path="/account" component={Account} />
+                <Route path="/notifications" component={Notifications} />
+                {/* // TODO - ^ make private */}
                 <Route path="/reset-password" component={ResetPassword} />
                 <Route component={PageNotFound} />
               </Switch>

@@ -30,11 +30,8 @@ function App() {
   const [timeframe, setTimeframe] = useState(timeframes[2]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
-  const [searchTerm, setSearchTerm] = useState(undefined);
   const [coinData, setCoinData] = useState(undefined);
-  const [coinList, setCoinList] = useState(undefined);
   const [coinNavData, setCoinNavData] = useState([]);
-  const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [chartData, setChartData] = useState(undefined);
   const [favorites, setFavorites] = useState([]);
   const { currentUser } = useAuth();
@@ -42,33 +39,6 @@ function App() {
   const theme = useTheme();
 
   axios.defaults.baseURL = API_BASE_URL;
-
-  const fetchCoinList = () => {
-    axios
-      .get(`/coins/list`)
-      .then(response => setCoinList(response.data))
-      .catch(error => {
-        setError(
-          <>
-            <p>Unable to connect to the data server right now.</p>
-            <p>
-              Please{" "}
-              <DiscreetButton
-                text="refresh"
-                onClick={() => window.location.reload()}
-              />{" "}
-              the page.
-            </p>
-            <p>
-              Please note that the data server can handle up to ~50 requests per
-              minute so you may need to wait up to one minute.
-            </p>
-          </>
-        );
-        console.error(error);
-        setIsLoading(false);
-      });
-  };
 
   const fetchCoinDataById = id => {
     setError(undefined);
@@ -136,8 +106,6 @@ function App() {
       });
   };
 
-  useEffect(() => fetchCoinList(), []);
-
   useEffect(() => {
     const fetchCoinNavData = n => {
       axios
@@ -188,35 +156,14 @@ function App() {
         if (data && data.favorites) setFavorites(data.favorites);
         if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
         if (data && data.timeframe) setTimeframe(data.timeframe);
+        // TODO - Get notifications
       });
       return unsubscribe;
     }
   }, [currentUser]);
 
-  const handleSearchInputChange = input => {
-    if (input.match(/[^A-Za-z0-9.!-]/, "g")) {
-      // disallow most symbols
-      return searchTerm;
-    }
-    setSearchTerm(input);
-    if (input.length < 1) {
-      return setSearchSuggestions([]);
-    }
-    const matches = coinList.filter(coin => {
-      let regex = new RegExp(`${input}`, "gi");
-      return coin.name.match(regex); // || coin.symbol.match(regex); //? symbol search isn't working
-    });
-    setSearchSuggestions(
-      matches.map(coin => ({
-        label: coin.name,
-        value: coin.id,
-      }))
-    );
-  };
-
-  const handleSearchChange = option => {
-    setSearchSuggestions([]);
-    fetchCoinDataById(option.value);
+  const handleSearchSubmit = id => {
+    fetchCoinDataById(id);
   };
 
   const handleChangeTimeframe = selectedOption => {
@@ -278,7 +225,7 @@ function App() {
 
   return (
     <>
-      {(coinNavData && coinList && (
+      {(coinNavData && (
         <>
           <CoinNav
             coinNavLength={coinNavLength}
@@ -286,12 +233,7 @@ function App() {
             coinNavData={coinNavData}
             fetchCoinDataById={fetchCoinDataById}
           />
-          <SearchBar
-            searchTerm={searchTerm}
-            searchSuggestions={searchSuggestions}
-            handleSearchChange={handleSearchChange}
-            handleSearchInputChange={handleSearchInputChange}
-          />
+          <SearchBar handleSearchSubmit={handleSearchSubmit} />
         </>
       )) ||
         (isLoading && <Loader />)}
