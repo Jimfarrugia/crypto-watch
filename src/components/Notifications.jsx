@@ -202,8 +202,10 @@ const Notifications = () => {
                 placeholder="Type"
                 onChange={option => setType(option.value)}
               />
-              {/* // TODO - Add hidden label */}
               <div className="threshold">
+                <label htmlFor="threshold">
+                  {vsCurrency.toUpperCase()} Amount
+                </label>
                 <div
                   className="prefix"
                   onClick={() => thresholdRef.current.focus()}
@@ -212,6 +214,7 @@ const Notifications = () => {
                   <span>{vsCurrency ? currencySymbol(vsCurrency) : "$"}</span>
                 </div>
                 <input
+                  id="threshold"
                   type="number"
                   onChange={e => setThreshold(e.target.value)}
                   value={threshold || ""}
