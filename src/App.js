@@ -156,7 +156,6 @@ function App() {
         if (data && data.favorites) setFavorites(data.favorites);
         if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
         if (data && data.timeframe) setTimeframe(data.timeframe);
-        // TODO - Get notifications
       });
       return unsubscribe;
     }
