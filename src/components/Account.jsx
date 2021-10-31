@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
+import { default as axios } from "axios";
 import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
@@ -18,6 +19,8 @@ const Account = () => {
   const passwordRef = useRef();
   const passwordConfirmationRef = useRef();
   const history = useHistory();
+  const [notifications, setNotifications] = useState(undefined);
+  const [prevVsCurrency, setPrevVsCurrency] = useState(undefined);
   const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
   const [timeframe, setTimeframe] = useState(timeframes[2]);
   const [vsCurrencyError, setVsCurrencyError] = useState("");
@@ -44,13 +47,39 @@ const Account = () => {
   const handleChangeUserVsCurrency = async () => {
     setVsCurrencyError("");
     setVsCurrencyMessage("");
+
+    if (prevVsCurrency === vsCurrency)
+      return setVsCurrencyError("You selected the same currency.");
+
     setIsLoading(true);
+
+    const id = currentUser.uid;
+    const payload = {
+      user: currentUser.uid,
+      vsCurrency: vsCurrency,
+    };
+    let notificationsMessage = "";
+    const vsCurrencyMessage = "Success. Your preferred currency was changed";
+
+    if (notifications) {
+      const vsCurrencyValue = await axios
+        .get(
+          `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${prevVsCurrency}/${vsCurrency}.json`
+        )
+        .then(response => response.data[vsCurrency])
+        .catch(error => console.error(error));
+
+      const updatedNotifications = notifications.map(notification => {
+        return {
+          ...notification,
+          threshold: (notification.threshold * vsCurrencyValue).toFixed(2),
+        };
+      });
+      notificationsMessage = " and your notifications were updated.";
+      payload["notifications"] = updatedNotifications;
+    }
+
     try {
-      const id = currentUser.uid;
-      const payload = {
-        user: currentUser.uid,
-        vsCurrency: vsCurrency,
-      };
       const docRef = doc(db, "users", id);
       await setDoc(docRef, payload, { merge: true });
     } catch (e) {
@@ -66,7 +95,12 @@ const Account = () => {
       );
       console.error(e);
     }
-    setVsCurrencyMessage("Success. Your preferred currency was changed.");
+
+    setVsCurrencyMessage(
+      notificationsMessage
+        ? vsCurrencyMessage + notificationsMessage
+        : vsCurrencyMessage + "."
+    );
     setIsLoading(false);
   };
 
@@ -193,8 +227,12 @@ const Account = () => {
       const docRef = doc(db, "users", currentUser.uid);
       const unsubscribe = onSnapshot(docRef, doc => {
         const data = doc.data();
-        if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+        if (data && data.vsCurrency) {
+          setVsCurrency(data.vsCurrency);
+          setPrevVsCurrency(data.vsCurrency);
+        }
         if (data && data.timeframe) setTimeframe(data.timeframe);
+        if (data && data.notifications) setNotifications(data.notifications);
       });
       return unsubscribe;
     }
