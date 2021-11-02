@@ -8,8 +8,7 @@ const GlobalStyles = createGlobalStyle`
 		min-height: 100vh;
 		margin: 0;
 		padding: 0;
-		font-family: "Ubuntu", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-			"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+		font-family: ${({ theme }) => theme.font.main};
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}

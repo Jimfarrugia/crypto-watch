@@ -34,7 +34,7 @@ export const CoinNavStyled = styled.nav`
       }
 
       & > span {
-        font-family: "Ubuntu Mono", "Courier New", monospace;
+        font-family: ${({ theme }) => theme.font.mono};
         display: inline-block;
         padding: 0.25rem 0;
         transition: ease 0.25s;

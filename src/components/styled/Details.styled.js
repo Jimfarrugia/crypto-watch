@@ -52,7 +52,7 @@ export const DetailsStyled = styled.div`
     small {
       font-size: 1rem;
       font-weight: normal;
-      font-family: "Ubuntu Mono", "Courier New", monospace;
+      font-family: ${({ theme }) => theme.font.mono};
     }
   }
 
