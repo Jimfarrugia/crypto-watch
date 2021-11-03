@@ -22,7 +22,7 @@ that it is being compared to. You can also adjust the timeframe of the historica
 
 The current price of the chosen cryptocurrency will appear in red if it's less than it was yesterday or green if it's greater than yesterday's price.
 
-### Update (Oct. 2021):
+### 'Favorites' Update (Oct. 2021):
 You can [log in](https://react-crypto-watcher.netlify.app/sign-in) using email/password or using your Google, Facebook or Twitter account.
 
 Once logged-in you will see a star icon overlayed on a cryptocurrency's logo while viewing it's details.
@@ -32,6 +32,11 @@ You can click the star icon to save the cryptocurrency you are viewing as a favo
 You can remove the favorite by clicking the same star icon again.
 
 Your favorite cryptocurrencies will be listed before any others in the navigation bar so you can view them quickly without having to search for them.
+
+### 'Notifications' Update (Nov. 2021)
+While logged-in, you can setup notifications from the notifications page.
+
+Notifications which have had their thresholds' met will be counted and reflected in the header button.
 
 ## Running the App Locally
 
