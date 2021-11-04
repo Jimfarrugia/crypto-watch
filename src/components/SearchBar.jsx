@@ -26,7 +26,7 @@ const SearchBar = ({ handleSearchSubmit }) => {
     axios
       .get(`${API_BASE_URL}/coins/list`)
       .then(response => setCoinList(response.data))
-      .catch(error => console.error(error)); // TODO - send error up to parent component
+      .catch(error => console.error(error));
   };
 
   const handleSearchInputChange = input => {

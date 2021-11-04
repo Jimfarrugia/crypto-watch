@@ -33,7 +33,6 @@ ReactDOM.render(
                 <Route path="/sign-up" component={SignUp} />
                 <PrivateRoute path="/account" component={Account} />
                 <PrivateRoute path="/notifications" component={Notifications} />
-                {/* // TODO - ^ make private */}
                 <Route path="/reset-password" component={ResetPassword} />
                 <Route component={PageNotFound} />
               </Switch>
