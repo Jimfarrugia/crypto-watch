@@ -34,9 +34,11 @@ You can remove the favorite by clicking the same star icon again.
 Your favorite cryptocurrencies will be listed before any others in the navigation bar so you can view them quickly without having to search for them.
 
 ### 'Notifications' Update (Nov. 2021)
-While logged-in, you can setup notifications from the notifications page.
+While logged-in, you can add or remove notifications from the notifications page.
 
-Notifications which have had their thresholds' met will be counted and reflected in the header button.
+Notifications which have had their thresholds met will be counted and reflected in the header button.
+
+You can see a list of active notifications at the top of the notifications page.
 
 ## Running the App Locally
 
