@@ -47,7 +47,11 @@ const CustomSelect = ({ ...props }) => {
       color: theme.color.main.dark,
     }),
     singleValue: styles => ({ ...styles, color: theme.color.main.dark }),
-    dropdownIndicator: styles => ({ ...styles, color: theme.color.main.dark }),
+    dropdownIndicator: styles => ({
+      ...styles,
+      color: theme.color.main.dark,
+      "&:hover": { color: theme.color.main.dark },
+    }),
     indicatorSeparator: styles => ({
       ...styles,
       backgroundColor: theme.color.main.dark,
