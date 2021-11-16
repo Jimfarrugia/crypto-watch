@@ -43,7 +43,7 @@ export const capitalizeFirstLetter = string =>
 
 // Look for a file format in a url string and
 // return the appropriate data url prefix for the format.
-export const getDataUrlPrefix = url => {
+export const dataUrlPrefix = url => {
   const format = url.match(/.png/gm)
     ? "png"
     : url.match(/.jpeg/gm)
@@ -66,7 +66,7 @@ export const getDataUrlPrefix = url => {
 export const saveImageToLocalStorage = (key, url) => {
   imageToBase64(`${process.env.REACT_APP_CORS_PROXY_URL}${url}`)
     .then(base64 => {
-      const prefix = getDataUrlPrefix(url);
+      const prefix = dataUrlPrefix(url);
       const dataUrl = prefix + base64;
       return localStorage.setItem(key, dataUrl);
     })
