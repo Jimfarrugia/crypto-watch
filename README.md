@@ -2,6 +2,8 @@
 
 View the current and historical price of any cryptocurrency.
 
+Login to save your favorite cryptocurrencies or setup price notifications.
+
 ![Crypto Watch Screen Shot](./screenshot01.png)
 
 ## Live Demo
