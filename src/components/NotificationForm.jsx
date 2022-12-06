@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 import Select from "./Select";
 import ButtonOutlined from "./ButtonOutlined";
 import { NotificationFormStyled } from "./styled/NotificationForm.styled";
-import { API_BASE_URL } from "../constants";
+import { API_BASE_URL, currencies } from "../constants";
 import { currencySymbol, saveImageToLocalStorage } from "../helpers";
 
 const NotificationForm = ({ vsCurrency, setError, setMessage }) => {
@@ -148,6 +148,10 @@ const NotificationForm = ({ vsCurrency, setError, setMessage }) => {
       )}
     </NotificationFormStyled>
   );
+};
+
+NotificationForm.defaultProps = {
+  vsCurrency: currencies[0].value,
 };
 
 export default NotificationForm;
