@@ -8,7 +8,7 @@ Login to save your favorite cryptocurrencies or setup price notifications.
 
 ## Live Demo
 
-[react-crypto-watcher.netlify.app](https://react-crypto-watcher.netlify.app/)
+[crypto-watch.netlify.app](https://crypto-watch.netlify.app/)
 
 ## Description
 
@@ -25,7 +25,7 @@ that it is being compared to. You can also adjust the timeframe of the historica
 The current price of the chosen cryptocurrency will appear in red if it's less than it was yesterday or green if it's greater than yesterday's price.
 
 ### 'Favorites' Update (Oct. 2021):
-You can [log in](https://react-crypto-watcher.netlify.app/sign-in) using email/password or using your Google, Facebook or Twitter account.
+You can [log in](https://crypto-watch.netlify.app/sign-in) using email/password or using your Google, Facebook or Twitter account.
 
 Once logged-in you will see a star icon overlayed on a cryptocurrency's logo while viewing it's details.
 
@@ -53,7 +53,7 @@ You will need Node.js which can be downloaded [here](https://nodejs.org/).
 1. Download or clone this repository.
 
    ```sh
-   git clone https://github.com/Jimfarrugia/cryptocurrency-tracker.git
+   git clone https://github.com/Jimfarrugia/crypto-watch.git
    ```
 
 2. Navigate to the project's root folder and run the following command to install the required NPM packages.
@@ -77,4 +77,4 @@ You will need Node.js which can be downloaded [here](https://nodejs.org/).
 
 Please feel free to submit issues and pull requests via Github if you'd like to contribute.
 
-Any known bugs or publicly planned features can be found and can be found in the [issues page](https://github.com/Jimfarrugia/cryptocurrency-tracker/issues) of this repository.
+Any known bugs or publicly planned features can be found and can be found in the [issues page](https://github.com/Jimfarrugia/crypto-watch/issues) of this repository.
