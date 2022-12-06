@@ -1,4 +1,4 @@
-// To be used during build process
+// To be used during deploy process
 // Create the .env file
 const fs = require('fs')
 fs.writeFileSync('./.env', `REACT_APP_FIREBASE_API_KEY=${process.env.REACT_APP_FIREBASE_API_KEY}\n`)
