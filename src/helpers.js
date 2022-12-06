@@ -64,8 +64,7 @@ export const dataUrlPrefix = url => {
 
 // Convert an image url into a data url and save it to localStorage.
 export const saveImageToLocalStorage = (key, url) => {
-  // imageToBase64(`${process.env.REACT_APP_CORS_PROXY_URL}${url}`)
-  imageToBase64(url)
+  imageToBase64(`${process.env.REACT_APP_CORS_PROXY_URL}${url}`)
     .then(base64 => {
       const prefix = dataUrlPrefix(url);
       const dataUrl = prefix + base64;
