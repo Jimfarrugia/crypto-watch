@@ -1,4 +1,4 @@
-# Cryptocurrency Tracker
+# Crypto Watch
 
 View the current and historical price of any cryptocurrency.
 
