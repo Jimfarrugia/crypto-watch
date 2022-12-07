@@ -45,8 +45,18 @@ export const AuthProvider = ({ children }) => {
 
   const loginWithFacebook = () => signInWithPopup(auth, facebookProvider);
 
-  const signup = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email, password) => {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    user &&
+      setDoc(doc(db, "users", user.uid), {
+        user: user.uid,
+        email: user.email,
+      });
+  };
 
   const login = (email, password) =>
     signInWithEmailAndPassword(auth, email, password);

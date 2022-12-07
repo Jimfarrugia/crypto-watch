@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
 import Alert from "./Alert";
 import { SignUpStyled } from "./styled/SignUp.styled";
 import ButtonOutlined from "./ButtonOutlined";
@@ -24,18 +22,7 @@ const SignUp = () => {
     }
     setLoading(true);
     try {
-      // create user account
-      const { user } = await signup(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      // create user db document
-      if (user) {
-        setDoc(doc(db, "users", user.uid), {
-          user: user.uid,
-          email: user.email,
-        });
-      }
+      await signup(emailRef.current.value, passwordRef.current.value);
       history.push("/");
     } catch (e) {
       e.code === "auth/invalid-email"
