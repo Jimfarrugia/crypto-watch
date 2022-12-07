@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -27,7 +28,18 @@ export const AuthProvider = ({ children }) => {
 
   const facebookProvider = new FacebookAuthProvider();
 
-  const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+  const loginWithGoogle = async () => {
+    const { user } = await signInWithPopup(auth, googleProvider);
+    user &&
+      setDoc(
+        doc(db, "users", user.uid),
+        {
+          user: user.uid,
+          email: user.email,
+        },
+        { merge: true }
+      );
+  };
 
   const loginWithTwitter = () => signInWithPopup(auth, twitterProvider);
 
