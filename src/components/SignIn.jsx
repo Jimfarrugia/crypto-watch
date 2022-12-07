@@ -2,11 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import {
-  faTwitter,
-  faFacebookSquare,
-  faGoogle,
-} from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useAuth } from "../contexts/AuthContext";
 import { capitalizeFirstLetter } from "../helpers";
 import { SignInStyled } from "./styled/SignIn.styled";
@@ -17,13 +13,7 @@ import { SignInWithProviderButtonStyled } from "./styled/SignInWithProviderButto
 const SignIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const {
-    currentUser,
-    login,
-    loginWithGoogle,
-    loginWithTwitter,
-    loginWithFacebook,
-  } = useAuth();
+  const { currentUser, login, loginWithGoogle, loginWithTwitter } = useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -58,8 +48,6 @@ const SignIn = () => {
       const method =
         provider === "google"
           ? await loginWithGoogle()
-          : provider === "facebook"
-          ? await loginWithFacebook()
           : provider === "twitter"
           ? await loginWithTwitter()
           : null;
@@ -88,8 +76,6 @@ const SignIn = () => {
         icon={
           provider === "twitter"
             ? faTwitter
-            : provider === "facebook"
-            ? faFacebookSquare
             : provider === "google"
             ? faGoogle
             : null
@@ -161,9 +147,6 @@ const SignIn = () => {
       )}
       <p>
         <SignInWithProviderButton provider="google" />
-      </p>
-      <p>
-        <SignInWithProviderButton provider="facebook" />
       </p>
       <p>
         <SignInWithProviderButton provider="twitter" />

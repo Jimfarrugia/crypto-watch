@@ -6,7 +6,6 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   TwitterAuthProvider,
-  FacebookAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -25,8 +24,6 @@ export const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
 
   const twitterProvider = new TwitterAuthProvider();
-
-  const facebookProvider = new FacebookAuthProvider();
 
   const loginWithGoogle = async () => {
     const { user } = await signInWithPopup(auth, googleProvider);
@@ -50,8 +47,6 @@ export const AuthProvider = ({ children }) => {
       : (payload["displayName"] = user.displayName);
     user && setDoc(doc(db, "users", user.uid), payload, { merge: true });
   };
-
-  const loginWithFacebook = () => signInWithPopup(auth, facebookProvider);
 
   const signup = async (email, password) => {
     const { user } = await createUserWithEmailAndPassword(
@@ -91,7 +86,6 @@ export const AuthProvider = ({ children }) => {
     logout,
     loginWithGoogle,
     loginWithTwitter,
-    loginWithFacebook,
     resetPassword,
     updateUserEmail,
     updateUserPassword,
