@@ -16,6 +16,11 @@ export const currencies = [
   { label: "NZD", value: "nzd" },
 ];
 
+export const defaultVsCurrency = {
+  label: "USD",
+  value: "usd",
+};
+
 export const timeframes = [
   { label: "7 Days", value: 7 },
   { label: "14 Days", value: 14 },
