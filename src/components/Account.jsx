@@ -4,7 +4,7 @@ import { default as axios } from "axios";
 import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { currencies, timeframes } from "../constants";
+import { currencies, defaultVsCurrency, timeframes } from "../constants";
 import Select from "./Select";
 import DiscreetButton from "./DiscreetButton";
 import Alert from "./Alert";
@@ -21,7 +21,7 @@ const Account = () => {
   const history = useHistory();
   const [notifications, setNotifications] = useState(undefined);
   const [prevVsCurrency, setPrevVsCurrency] = useState(undefined);
-  const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
+  const [vsCurrency, setVsCurrency] = useState(defaultVsCurrency.value);
   const [timeframe, setTimeframe] = useState(timeframes[2]);
   const [vsCurrencyError, setVsCurrencyError] = useState("");
   const [vsCurrencyMessage, setVsCurrencyMessage] = useState("");

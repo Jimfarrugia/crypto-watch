@@ -19,14 +19,14 @@ import Settings from "./components/Settings";
 import DiscreetButton from "./components/DiscreetButton";
 import Loader from "./components/Loader";
 import {
-  currencies,
+  defaultVsCurrency,
   timeframes,
   coinNavLength,
   API_BASE_URL,
 } from "./constants";
 
 function App() {
-  const [vsCurrency, setVsCurrency] = useState(currencies[0].value);
+  const [vsCurrency, setVsCurrency] = useState(defaultVsCurrency.value);
   const [timeframe, setTimeframe] = useState(timeframes[2]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
