@@ -37,39 +37,51 @@ const NotificationsList = ({ notifications, vsCurrency }) => {
 
   return (
     <NotificationsListStyled>
-      <ul>
-        {notifications &&
-          sortNotificationsByName(notifications).map((notification, index) => (
-            <li key={`${index}-${notification.id}`}>
-              <img
-                src={
-                  localStorage.getItem(notification.id) || notification.image
-                }
-                alt={`${notification.name} logo`}
-                height="32"
-                width="32"
-                loading="lazy"
-              />
-              <div>
-                <h4>{notification.name}</h4>
-                <p>
-                  <span>{capitalizeFirstLetter(notification.type)} </span>
-                  {currencySymbol(vsCurrency)}
-                  {formatPriceNumber(notification.threshold)}
-                </p>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  title={`Remove ${notification.name} Notification`}
-                  onClick={() => handleRemoveNotification(notification)}
-                >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </button>
-              </div>
-            </li>
-          ))}
-      </ul>
+      {(notifications.length < 1 && (
+        <span>
+          You do not have any notifications set up.
+          <br />
+          <br />
+          Search for a cryptocurrency to get started.
+        </span>
+      )) || (
+        <ul>
+          {notifications &&
+            sortNotificationsByName(notifications).map(
+              (notification, index) => (
+                <li key={`${index}-${notification.id}`}>
+                  <img
+                    src={
+                      localStorage.getItem(notification.id) ||
+                      notification.image
+                    }
+                    alt={`${notification.name} logo`}
+                    height="32"
+                    width="32"
+                    loading="lazy"
+                  />
+                  <div>
+                    <h4>{notification.name}</h4>
+                    <p>
+                      <span>{capitalizeFirstLetter(notification.type)} </span>
+                      {currencySymbol(vsCurrency)}
+                      {formatPriceNumber(notification.threshold)}
+                    </p>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      title={`Remove ${notification.name} Notification`}
+                      onClick={() => handleRemoveNotification(notification)}
+                    >
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </button>
+                  </div>
+                </li>
+              )
+            )}
+        </ul>
+      )}
     </NotificationsListStyled>
   );
 };
