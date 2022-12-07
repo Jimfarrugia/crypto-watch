@@ -106,33 +106,19 @@ const Notifications = () => {
       <h2>Notifications</h2>
       {error && <Alert status="error" text={error} spacing={2} />}
       {message && <Alert status="success" text={message} spacing={2} />}
-      {
-        activeNotifications && activeNotifications.length > 0 && (
-          <ul className="activeNotifications">
-            {activeNotifications.map(notification => {
-              const { id, name, threshold, type } = notification;
-              return (
-                <li key={`${id}-active`}>
-                  <strong>{name}</strong> is {type} {currencySymbol(vsCurrency)}
-                  {formatPriceNumber(threshold)}!
-                </li>
-              );
-            })}
-          </ul>
-        )
-        /*) || (
-        <>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-            itaque ipsam in ratione, nihil repellat.
-          </p>
-          <p>
-            Ipsa amet consectetur corporis laboriosam, ab optio voluptas neque?
-            Quasi eveniet assumenda et harum excepturi.
-          </p>
-        </>
-      )*/
-      }
+      {activeNotifications && activeNotifications.length > 0 && (
+        <ul className="activeNotifications">
+          {activeNotifications.map(notification => {
+            const { id, name, threshold, type } = notification;
+            return (
+              <li key={`${id}-active`}>
+                <strong>{name}</strong> is {type} {currencySymbol(vsCurrency)}
+                {formatPriceNumber(threshold)}!
+              </li>
+            );
+          })}
+        </ul>
+      )}
       <h3>Add a notification:</h3>
       <NotificationForm
         vsCurrency={vsCurrency}
