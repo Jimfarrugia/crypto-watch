@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 import Select from "./Select";
 import ButtonOutlined from "./ButtonOutlined";
 import { NotificationFormStyled } from "./styled/NotificationForm.styled";
-import { API_BASE_URL, currencies } from "../constants";
+import { API_BASE_URL } from "../constants";
 import { currencySymbol, saveImageToLocalStorage } from "../helpers";
 
 const NotificationForm = ({ vsCurrency, setError, setMessage }) => {
@@ -54,7 +54,6 @@ const NotificationForm = ({ vsCurrency, setError, setMessage }) => {
         user: currentUser.uid,
         notifications: arrayUnion(notification),
       };
-      if (!vsCurrency) payload["vsCurrency"] = "usd";
       const docRef = doc(db, "users", currentUser.uid);
       await setDoc(docRef, payload, { merge: true });
       setCoinData(undefined);
@@ -148,10 +147,6 @@ const NotificationForm = ({ vsCurrency, setError, setMessage }) => {
       )}
     </NotificationFormStyled>
   );
-};
-
-NotificationForm.defaultProps = {
-  vsCurrency: currencies[0].value,
 };
 
 export default NotificationForm;

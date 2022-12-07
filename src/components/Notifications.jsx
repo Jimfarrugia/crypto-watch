@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { default as axios } from "axios";
-import { doc, onSnapshot } from "@firebase/firestore";
+import { setDoc, doc, onSnapshot } from "@firebase/firestore";
 import { NotificationsStyled } from "./styled/Notifications.styled";
-import { API_BASE_URL } from "../constants";
+import { API_BASE_URL, defaultVsCurrency } from "../constants";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { currencySymbol, formatPriceNumber } from "../helpers";
@@ -34,17 +34,39 @@ const Notifications = () => {
       .catch(error => console.error(error));
   };
 
+  const changeUserVsCurrencyToDefault = useCallback(async () => {
+    try {
+      const id = currentUser.uid;
+      const payload = {
+        user: currentUser.uid,
+        vsCurrency: defaultVsCurrency.value,
+      };
+      const docRef = doc(db, "users", id);
+      await setDoc(docRef, payload, { merge: true });
+      setVsCurrency(defaultVsCurrency.value);
+      setMessage(
+        `Your preferred currency has been set to the default (${defaultVsCurrency.label}).  You can change it any time in your account settings.`
+      );
+    } catch (e) {
+      console.error(e);
+      setError(
+        "We were unable to set a default currency to use for notifications.  Please choose your preferred currency in account settings in order to use notifications."
+      );
+    }
+  }, [currentUser]);
+
   useEffect(() => {
     if (currentUser) {
       const docRef = doc(db, "users", currentUser.uid);
       const unsubscribe = onSnapshot(docRef, doc => {
         const data = doc.data();
         if (data && data.vsCurrency) setVsCurrency(data.vsCurrency);
+        if (data && !data.vsCurrency) changeUserVsCurrencyToDefault();
         if (data && data.notifications) setNotifications(data.notifications);
       });
       return unsubscribe;
     }
-  }, [currentUser]);
+  }, [currentUser, changeUserVsCurrencyToDefault]);
 
   useEffect(() => {
     setNotificationIds("");
@@ -75,7 +97,7 @@ const Notifications = () => {
     let alertTimeout = setTimeout(() => {
       setError("");
       setMessage("");
-    }, 5000);
+    }, 10000);
     return () => clearTimeout(alertTimeout);
   }, [error, message]);
 
