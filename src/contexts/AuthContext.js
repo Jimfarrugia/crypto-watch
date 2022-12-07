@@ -36,12 +36,20 @@ export const AuthProvider = ({ children }) => {
         {
           user: user.uid,
           email: user.email,
+          authProvider: "google",
         },
         { merge: true }
       );
   };
 
-  const loginWithTwitter = () => signInWithPopup(auth, twitterProvider);
+  const loginWithTwitter = async () => {
+    const { user } = await signInWithPopup(auth, twitterProvider);
+    const payload = { user: user.uid, authProvider: "twitter" };
+    user.email
+      ? (payload["email"] = user.email)
+      : (payload["displayName"] = user.displayName);
+    user && setDoc(doc(db, "users", user.uid), payload, { merge: true });
+  };
 
   const loginWithFacebook = () => signInWithPopup(auth, facebookProvider);
 
